@@ -30,7 +30,7 @@
                 <input type="password" v-model="password" placeholder="パスワード" >
               </div>
               <div class="signup-form-box-form-submit">
-                <button @click="setAxiosDefaults" type="submit">登録する</button>
+                <button @click="signUp" type="submit">登録する</button>
               </div>
             </form>
           </div>
@@ -50,9 +50,6 @@ export default{
     }
   },
   methods:{ 
-    submit: function() {
-       this.errors=[]
-    },
     getCsrfToken: function(){
       if (!(axios.defaults.headers.common['X-CSRF-Token'])) {
         return (
@@ -69,6 +66,27 @@ export default{
       axios.defaults.headers.common['X-CSRF-Token'] = this.getCsrfToken();
       axios.defaults.headers.common['Accept'] = 'application/json';
       console.log(axios.defaults.headers.common['X-CSRF-Token']);
+    },
+    updateCsrfToken: function(csrf_token){
+      axios.defaults.headers.common['X-CSRF-Token'] = csrf_token;
+    },
+    signUp: function(event){
+      event.preventDefault()
+      this.setAxiosDefaults();
+      return (axios.post('/users', {
+        user: {
+          name: this.name,
+          email: this.email,
+          nickname:this.nickname,
+          password: this.password,
+        }
+      })
+      .then(response => {
+          console.log('success');
+          this.updateCsrfToken(response.data.csrf_token);
+          return (response)
+        })
+      )
     }
   }
 }
