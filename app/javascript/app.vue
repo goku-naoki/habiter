@@ -70,6 +70,21 @@ export default{
     updateCsrfToken: function(csrf_token){
       axios.defaults.headers.common['X-CSRF-Token'] = csrf_token;
     },
+    logIn:function(){
+      return (axios.post('/users/sign_in', {
+        user: {
+          email: this.email,
+          password: this.password,
+        }
+      })
+        .then(response => {
+          console.log('success');
+          this.updateCsrfToken(response.data.csrf_token);
+          return (response)
+        })
+
+      )
+    },
     signUp: function(event){
       event.preventDefault()
       this.setAxiosDefaults();
@@ -82,9 +97,10 @@ export default{
         }
       })
       .then(response => {
-          console.log('success');
+          console.log(response.data.result.user);
           this.updateCsrfToken(response.data.csrf_token);
-          return (response)
+          this.logIn()
+          // return (response)
         })
       )
     }

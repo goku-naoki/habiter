@@ -7,6 +7,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     super do
+      binding.pry
       if request.format.json?
         render :json => {
           'status' => 'ok',
