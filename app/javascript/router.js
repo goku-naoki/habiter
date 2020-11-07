@@ -14,7 +14,8 @@ const router = new Router({
       name: 'SignupForm',
       component: SignUp,
       meta: {
-        isPublic: true
+        isPublic: true,
+        isSignIn: true
       }
     },
     { path: '/',
@@ -29,23 +30,32 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   const isPublic=to.matched.some(page => page.meta.isPublic)
-  if (isPublic){
-      next()
-   }
-  else {
-    axios
-      .get('/api/v1/users/check_auth.json')
-      .then(response => {
+  const isSignIn=to.matched.some(page => page.meta.isSignIn)
+  axios
+    .get('/api/v1/users/check_auth.json')
+    .then(response => {
+      if(isSignIn){
+        if(response.data.auth) {
+          next('/')
+            }
+        else{
+          next()
+          }
+      }
+      else if(isPublic){
+        next()
+      }
+      else {
         if(response.data.auth) {
           next()
-             }
+            }
         else{
           next('/user/signup')
           }
-      })
-      
-   
-  }    
+      }    
+
+    })
+  
 })
 
 export default router

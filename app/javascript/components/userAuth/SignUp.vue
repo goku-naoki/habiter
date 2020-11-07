@@ -80,6 +80,7 @@ export default{
         .then(response => {
           console.log('success');
           this.updateCsrfToken(response.data.csrf_token);
+          this.$router.push({path: '/'});
           return (response)
         })
 

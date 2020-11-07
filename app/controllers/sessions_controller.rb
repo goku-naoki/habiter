@@ -6,7 +6,7 @@ class SessionsController < Devise::SessionsController
 
   def create
     @user = current_user
-    binding.pry
+  
     super do
       if request.format.json?
         render :json => {
