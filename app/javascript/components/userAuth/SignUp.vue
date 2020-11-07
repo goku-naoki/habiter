@@ -6,7 +6,7 @@
         <div class="signup-form-box">
           <h2 class="signup-form-box-title">Habiter</h2>
           <p class="signup-form-box-desc">
-            登録してMGKの写真や動画をチェックしよう
+            習慣形成を行って、最高な毎日を
           </p>
           <div class="signup-form-box-form">
             <form >
@@ -24,7 +24,7 @@
                 </ul>
               </div>
               <div class="signup-form-box-form-email">
-                <input type="email" v-model="email" placeholder="携帯電話番号またはメールアドレス" >
+                <input type="email" v-model="email" placeholder="メールアドレス" >
               </div>
               <div class="signup-form-box-form-fullname">
                 <input type="text" v-model="nickname" placeholder="ニックネーム" >
@@ -37,6 +37,10 @@
               </div>
             </form>
           </div>
+        </div>
+         <div class="signup-form-login">
+          <p>アカウントをお待ちですか？</p>
+          <router-link to="/user/signin">ログインする</router-link>
         </div>
       </div>
 </template>
@@ -119,10 +123,12 @@ input{
 }
 .signup-form{
   width:100%;
-  padding-top:30px;
+  height:100vh;
+  padding-top:100px;
   &-box{
-    width:350px;
+    width:38%;
     border: 1px solid rgba(var(--b6a,219,219,219),1);
+    border-radius: 2%;
     background:white;
     margin:0 auto;
     margin-bottom:10px;
@@ -207,7 +213,7 @@ input{
       &-submit{
         button{
             border: 1px solid transparent;
-            background-color: #0095f6;
+            background-color:#34acbc;
             width:100%;
             height:32px;
             color:white;
@@ -221,9 +227,10 @@ input{
   }
   &-login{
     display:flex;
-    width:350px;
+    width:38%;
     height:60px;
     border: 1px solid rgba(var(--b6a,219,219,219),1);
+    border-radius: 2%;
     background:white;
     margin:0 auto;
     display:flex;
@@ -234,7 +241,7 @@ input{
       margin-right:5px
     }
     a{
-      color: #0095f6;
+      color: #34acbc;
       font-weight: bold;
     }
   }

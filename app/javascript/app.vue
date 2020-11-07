@@ -46,7 +46,6 @@ body{
 
 a{
   text-decoration: none;
-  color:#404040;
 }
 ul{
   list-style: none;

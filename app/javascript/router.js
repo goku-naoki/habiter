@@ -5,14 +5,23 @@ import axios from 'axios';
 
 //components
 import SignUp  from "./components/userAuth/SignUp.vue"
+import SignIn  from "./components/userAuth/SignIn.vue"
 import HabitIndex from './components/habits/HabitIndex.vue'
 
 Vue.use(Router)
 const router = new Router({
   routes: [
     { path: '/user/signup', 
-      name: 'SignupForm',
+      name: 'SignUp',
       component: SignUp,
+      meta: {
+        isPublic: true,
+        isSignIn: true
+      }
+    },
+    { path: '/user/signin', 
+      name: 'SignIn',
+      component: SignIn,
       meta: {
         isPublic: true,
         isSignIn: true
