@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApiController
-  before_action :set_employee, only: [:show]
+  
 
   # ActiveRecordのレコードが見つからなければ404 not foundを応答する
   rescue_from ActiveRecord::RecordNotFound do |exception|

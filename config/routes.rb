@@ -9,6 +9,7 @@ Rails.application.routes.draw do
           get "check_auth"
         end
       end
+      resources :habits
     end
   end
  

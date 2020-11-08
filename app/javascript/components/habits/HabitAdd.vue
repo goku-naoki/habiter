@@ -5,7 +5,7 @@
         <div class="habit-add__header__inner-left">
           キャンセル
         </div>
-        <input class="habit-add__header__inner-right" type="submit" value="保存">
+        <input class="habit-add__header__inner-right" @click="addHabit" type="submit" value="保存">
       </div>
     </div>
     <div class="habit-add__form">
@@ -59,6 +59,47 @@ import axios from 'axios';
 
 
 export default{
+  data(){
+    return{
+      name:"",
+      errors:[],
+    }
+  },
+  methods:{
+     getCsrfToken: function(){
+      if (!(axios.defaults.headers.common['X-CSRF-Token'])) {
+        return (
+          document.getElementsByName('csrf-token')[0].getAttribute('content')
+        )
+        } 
+      else {
+        return (  
+          axios.defaults.headers.common['X-CSRF-Token']
+        )
+      }
+    },
+    setAxiosDefaults: function(){
+      axios.defaults.headers.common['X-CSRF-Token'] = this.getCsrfToken();
+      axios.defaults.headers.common['Accept'] = 'application/json';
+      console.log(axios.defaults.headers.common['X-CSRF-Token']);
+    },
+    addHabit:function(event){
+      event.preventDefault()
+      this.setAxiosDefaults();
+      return (axios.post('/api/v1/habits', {
+        habit: {
+          name: this.name,
+        }
+      })
+      .then(response => {
+          debugger
+
+           this.$router.push({path: '/'});
+          // return (response)
+        })
+      )
+    }
+  }
 
  
 }
