@@ -1,39 +1,39 @@
 <template>
-    <div class="login-form">
-        <div class="login-form-box">
-          <h2 class="login-form-box-title">Habiter</h2>
-           <div class="form-error" v-if="errors.length != 0">
-            <ul v-for="e in errors" :key="e">
-              <li><font color="red">{{ e }}</font></li>
-            </ul>
-          </div>
-          <div class="login-form-box-form">
-            <form >   
-              <div class="login-form-box-form-email">
-                <input v-model="email" type="text" placeholder="email">
-              </div>
-              <div class="login-form-box-form-password">
-                <input v-model="password" type="password" placeholder="password">
-              </div>
-              <div class="login-form-box-form-submit">
-                <button @click="signIn" type="submit">ログイン</button>
-              </div>
-              <div class="login-form-box-form-another">
-                <div></div>
-                <p>または</p>
-                <div></div>
-              </div>
-              <div class="login-form-box-form-facebook">
-                <a href="#">Facebookでログイン</a>
-              </div>
-            </form>
-          </div>
+  <div class="login-form">
+      <div class="login-form-box">
+        <h2 class="login-form-box-title">Habiter</h2>
+          <div class="form-error" v-if="errors.length != 0">
+          <ul v-for="e in errors" :key="e">
+            <li><font color="red">{{ e }}</font></li>
+          </ul>
         </div>
-        <div class="login-form-signup">
-          <p>アカウントをお待ちでないですか？</p>
-          <router-link to="/user/signup">登録する</router-link>
+        <div class="login-form-box-form">
+          <form >   
+            <div class="login-form-box-form-email">
+              <input v-model="email" type="text" placeholder="email">
+            </div>
+            <div class="login-form-box-form-password">
+              <input v-model="password" type="password" placeholder="password">
+            </div>
+            <div class="login-form-box-form-submit">
+              <button @click="signIn" type="submit">ログイン</button>
+            </div>
+            <div class="login-form-box-form-another">
+              <div></div>
+              <p>または</p>
+              <div></div>
+            </div>
+            <div class="login-form-box-form-facebook">
+              <a href="#">Facebookでログイン</a>
+            </div>
+          </form>
         </div>
       </div>
+      <div class="login-form-signup">
+        <p>アカウントをお待ちでないですか？</p>
+        <router-link to="/user/signup">登録する</router-link>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -109,6 +109,7 @@ input{
   &-box{
     width:38%;
     border: 1px solid rgba(var(--b6a,219,219,219),1);
+    border-radius: 10px;
     background:white;
     margin:0 auto;
     margin-bottom:10px;
@@ -185,6 +186,7 @@ input{
     width:38%;
     height:60px;
     border: 1px solid rgba(var(--b6a,219,219,219),1);
+    border-radius: 10px;
     background:white;
     margin:0 auto;
     display:flex;

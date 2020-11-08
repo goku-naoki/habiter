@@ -1,48 +1,45 @@
 <template>
-  <!-- <div class="div">
-
-  </div> -->
-    <div class="signup-form">
-        <div class="signup-form-box">
-          <h2 class="signup-form-box-title">Habiter</h2>
-          <p class="signup-form-box-desc">
-            習慣形成を行って、最高な毎日を
-          </p>
-          <div class="signup-form-box-form">
-            <form >
-              <div class="signup-form-box-form-facebook">
-                <a href="#">Facebookでログイン</a>
-              </div> 
-              <div class="signup-form-box-form-another">
-                <div></div>
-                <p>または</p>
-                <div></div>
-              </div>  
-              <div class="form-error" v-if="errors.length != 0">
-                <ul v-for="e in errors" :key="e">
-                  <li><font color="red">{{ e }}</font></li>
-                </ul>
-              </div>
-              <div class="signup-form-box-form-email">
-                <input type="email" v-model="email" placeholder="メールアドレス" >
-              </div>
-              <div class="signup-form-box-form-fullname">
-                <input type="text" v-model="nickname" placeholder="ニックネーム" >
-              </div>
-              <div class="signup-form-box-form-password">
-                <input type="password" v-model="password" placeholder="パスワード" >
-              </div>
-              <div class="signup-form-box-form-submit">
-                <button @click="signUp" type="submit">登録する</button>
-              </div>
-            </form>
-          </div>
-        </div>
-         <div class="signup-form-login">
-          <p>アカウントをお待ちですか？</p>
-          <router-link to="/user/signin">ログインする</router-link>
+  <div class="signup-form">
+      <div class="signup-form-box">
+        <h2 class="signup-form-box-title">Habiter</h2>
+        <p class="signup-form-box-desc">
+          習慣形成を行って、最高な毎日を
+        </p>
+        <div class="signup-form-box-form">
+          <form >
+            <div class="signup-form-box-form-facebook">
+              <a href="#">Facebookでログイン</a>
+            </div> 
+            <div class="signup-form-box-form-another">
+              <div></div>
+              <p>または</p>
+              <div></div>
+            </div>  
+            <div class="form-error" v-if="errors.length != 0">
+              <ul v-for="e in errors" :key="e">
+                <li><font color="red">{{ e }}</font></li>
+              </ul>
+            </div>
+            <div class="signup-form-box-form-email">
+              <input type="email" v-model="email" placeholder="メールアドレス" >
+            </div>
+            <div class="signup-form-box-form-fullname">
+              <input type="text" v-model="nickname" placeholder="ニックネーム" >
+            </div>
+            <div class="signup-form-box-form-password">
+              <input type="password" v-model="password" placeholder="パスワード" >
+            </div>
+            <div class="signup-form-box-form-submit">
+              <button @click="signUp" type="submit">登録する</button>
+            </div>
+          </form>
         </div>
       </div>
+        <div class="signup-form-login">
+        <p>アカウントをお待ちですか？</p>
+        <router-link to="/user/signin">ログインする</router-link>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -128,7 +125,7 @@ input{
   &-box{
     width:38%;
     border: 1px solid rgba(var(--b6a,219,219,219),1);
-    border-radius: 2%;
+    border-radius: 10px;
     background:white;
     margin:0 auto;
     margin-bottom:10px;
@@ -230,7 +227,7 @@ input{
     width:38%;
     height:60px;
     border: 1px solid rgba(var(--b6a,219,219,219),1);
-    border-radius: 2%;
+    border-radius: 10px;
     background:white;
     margin:0 auto;
     display:flex;

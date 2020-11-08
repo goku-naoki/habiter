@@ -6,7 +6,7 @@ import axios from 'axios';
 //components
 import SignUp  from "./components/userAuth/SignUp.vue"
 import SignIn  from "./components/userAuth/SignIn.vue"
-import HabitIndex from './components/habits/HabitIndex.vue'
+  import HabitIndex from './components/habits/HabitIndex.vue'
 
 Vue.use(Router)
 const router = new Router({
@@ -40,6 +40,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const isPublic=to.matched.some(page => page.meta.isPublic)
   const isSignIn=to.matched.some(page => page.meta.isSignIn)
+
   axios
     .get('/api/v1/users/check_auth.json')
     .then(response => {
@@ -59,12 +60,11 @@ router.beforeEach((to, from, next) => {
           next()
             }
         else{
-          next('/user/signup')
+          next('/user/signin')
           }
       }    
 
     })
-  
 })
 
 export default router
