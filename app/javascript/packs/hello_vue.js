@@ -8,6 +8,11 @@
 import Vue from 'vue'
 import App from '../app.vue'
 import router from '../router.js'
+import Vuetify from "vuetify"; // 追加
+import "vuetify/dist/vuetify.min.css"; // 追加
+
+Vue.use(Vuetify); // 追加
+const vuetify = new Vuetify(); // 追加
 
 document.addEventListener('DOMContentLoaded', () => {
   const el = document.body.appendChild(document.createElement('hello'))

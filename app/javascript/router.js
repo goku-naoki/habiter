@@ -6,7 +6,8 @@ import axios from 'axios';
 //components
 import SignUp  from "./components/userAuth/SignUp.vue"
 import SignIn  from "./components/userAuth/SignIn.vue"
-  import HabitIndex from './components/habits/HabitIndex.vue'
+import HabitIndex from './components/habits/HabitIndex.vue'
+import HabitAdd from './components/habits/HabitAdd.vue'
 
 Vue.use(Router)
 const router = new Router({
@@ -30,6 +31,10 @@ const router = new Router({
     { path: '/',
     name: 'HabitIndex',
     component: HabitIndex
+    },
+    { path: '/habit/new',
+    name: 'HabitAdd',
+    component: HabitAdd
     },
    
   ]
