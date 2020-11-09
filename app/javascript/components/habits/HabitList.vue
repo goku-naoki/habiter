@@ -1,36 +1,12 @@
 <template>
   <div class="habit-list">
     <ul class="habit-list__box">
-      <li class="habit-list__box__item">
+      <li class="habit-list__box__item" v-for="habit in habits" :key="habit.id">
         <div class="habit-list__box__item-left">
           <v-icon>mdi-checkbox-blank-circle-outline</v-icon>
         </div>
         <div class="habit-list__box__item-rigth">
-          <p>ランニング</p>
-        </div>
-      </li>
-      <li class="habit-list__box__item">
-        <div class="habit-list__box__item-left">
-          <v-icon>mdi-checkbox-blank-circle-outline</v-icon>
-        </div>
-        <div class="habit-list__box__item-rigth">
-          <p>瞑想</p>
-        </div>
-      </li>
-      <li class="habit-list__box__item">
-        <div class="habit-list__box__item-left">
-          <v-icon>mdi-checkbox-blank-circle-outline</v-icon>
-        </div>
-        <div class="habit-list__box__item-rigth">
-          <p>読書</p>
-        </div>
-      </li>
-      <li class="habit-list__box__item">
-        <div class="habit-list__box__item-left">
-          <v-icon>mdi-checkbox-blank-circle-outline</v-icon>
-        </div>
-        <div class="habit-list__box__item-rigth">
-          <p>Gym</p>
+          <p>{{habit.name}}</p>
         </div>
       </li>
     </ul>
@@ -42,6 +18,9 @@ import axios from 'axios';
 
 
 export default{
+  props:{
+    habits:Array
+  }
 
  
 }

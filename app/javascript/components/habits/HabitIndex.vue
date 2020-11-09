@@ -1,7 +1,7 @@
 <template>
   <div class='habit-index'>
     <IndexHeader/>
-    <HabitList/>
+    <HabitList :habits="habits" />
   </div>
 </template>
 
@@ -14,15 +14,14 @@ export default{
 
   data(){
     return{
-
+      habits:[]
     }
   },
   created(){
     axios
-      .get('/api/v1/posts.json')
+      .get('/api/v1/habits')
       .then(response => {
-        this.posts = response.data
-        this.isLoading=false
+        this.habits = response.data
       })
   },
   components:{
