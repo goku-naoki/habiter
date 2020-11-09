@@ -2,9 +2,9 @@
   <form class="habit-add">
     <div class="habit-add__header">
       <div class="habit-add__header__inner">
-        <div class="habit-add__header__inner-left">
-          キャンセル
-        </div>
+        <router-link to="/">
+            キャンセル
+        </router-link>
         <input class="habit-add__header__inner-right" @click="addHabit" type="submit" value="保存">
       </div>
     </div>
@@ -123,6 +123,9 @@ export default{
         display: flex;
         justify-content: space-between;
         align-items: center;
+        a{
+          color:#34acbc;
+        }
       }
     }
     &__form{
