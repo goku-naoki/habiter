@@ -6,13 +6,17 @@ class Api::V1::HabitsController < ApiController
   end
 
   def index
-    habits=Habit.where(user_id:current_user.id)
+   
+    habits=current_user.habits
     render json: habits
   end
 
   def create
     @habit=Habit.new(habit_params)
     if @habit.save
+      
+      HabitUser.create(user_id:current_user.id,
+                        habit_id:@habit.id)
       render json: @habit
     else
 
@@ -23,6 +27,6 @@ class Api::V1::HabitsController < ApiController
   private
 
   def habit_params
-    params.require(:habit).permit(:name).merge(user_id: current_user.id)
+    params.require(:habit).permit(:name)
   end
 end
