@@ -3,7 +3,8 @@
     <div class="index-header__inner">
       <div class="index-header__inner-left">
         <p class="index-header__inner-left__data">
-          {{date| moment}}
+          <template v-if="date==today">今日</template>
+          <template v-else>{{date| moment}}</template>
         </p>
       </div>
       <div class="index-header__inner-right">
@@ -26,13 +27,21 @@ import moment from 'moment';
 
 export default{
   data(){
+    const today=new Date
     return{
-      date:"今日"
+      date:today,
+      today:today,
     }
   },
   methods:{
     hoge:function(){
       console.log("hoge")
+    }
+  },
+  computed:{
+    getDate(){
+      console.log(this.$store.state.selectedDate)
+      return this.$store.state.selectedDate
     }
   },
   watch:{
@@ -48,7 +57,7 @@ export default{
 
   },
   created(){
-
+    
   },
 
   components : {

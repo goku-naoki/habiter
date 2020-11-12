@@ -1,7 +1,7 @@
 <template>
   <li class="habit-list__box__item">
     <div class="habit-list__box__item-left">
-      <v-icon v-if="habit.habit_dones.length !=0 || isDone" @click="doneHabit(habit, $event)">mdi-checkbox-marked-circle</v-icon>
+      <v-icon v-if=" isDone" @click="doneHabit(habit, $event)">mdi-checkbox-marked-circle</v-icon>
       <v-icon v-else @click="doneHabit(habit,$event)"> mdi-checkbox-blank-circle-outline</v-icon>
     </div>
     <div class="habit-list__box__item-rigth">
@@ -12,7 +12,7 @@
 
 <script>
 import axios from 'axios';
-
+import moment from 'moment';
 
 export default{
 
@@ -57,21 +57,44 @@ export default{
       })
       .then(response => {
         console.log(habit.habit_dones)
+        debugger
         this.isDone=true
-
-          //  this.$router.push({path: '/'});
-          // return (response)
+        this.habit.habit_dones.push(response.data)  //配列の値も更新しないと、chackできやん
         })
       )
+    },
+    checkDone:function(date){
+      const habit_dones=this.habit.habit_dones
+      if(habit_dones.lenght!=0){
+        habit_dones.forEach((done)=>{
+        const selected_date=this.moment(date)
+          if(done.done_date==selected_date){
+            this.isDone=true
+          }else{
+            this.isDone=false
+          }
+        })
+      }
+    },
+     moment: function (date) {
+      return moment(date).format('YYYY-MM-DD');
     }
   },
   computed:{
     selected_date(){
-      this.$store.state.selectedDate
+      return this.$store.state.selectedDate
+    }
+  },
+  watch: {
+    selected_date(date) {
+     this.checkDone(date)
     }
   }
-
- 
+  ,created(){
+    const date=this.$store.state.selectedDate;
+    
+    this.checkDone(date)
+  }
 }
 </script>
 

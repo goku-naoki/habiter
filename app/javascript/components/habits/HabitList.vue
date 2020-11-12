@@ -16,6 +16,9 @@ export default{
   },
   components:{
     Habit
+  },
+  methods:{
+    chackStart
   }
 }
 </script>
