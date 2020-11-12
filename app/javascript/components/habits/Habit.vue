@@ -1,9 +1,13 @@
 <template>
-  <div class="habit-list">
-    <ul class="habit-list__box">
-      
-    </ul>
-  </div>
+  <li class="habit-list__box__item" v-for="habit in habits" :key="habit.id">
+        <div class="habit-list__box__item-left">
+          <v-icon v-if="habit.habit_dones.length==0" @click="doneHabit(habit.id, $event)">mdi-checkbox-blank-circle-outline</v-icon>
+          <v-icon v-else @click="doneHabit(habit,$event)">mdi-checkbox-marked-circle</v-icon>
+        </div>
+        <div class="habit-list__box__item-rigth">
+          <p>{{habit.name}}</p>
+        </div>
+  </li>
 </template>
 
 <script>

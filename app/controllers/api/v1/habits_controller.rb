@@ -8,7 +8,7 @@ class Api::V1::HabitsController < ApiController
   def index
    
     habits=current_user.habits
-    render json: habits
+    render json: habits, each_serializer: HabitSerializer
   end
 
   def create
