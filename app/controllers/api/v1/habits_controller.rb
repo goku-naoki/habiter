@@ -12,11 +12,13 @@ class Api::V1::HabitsController < ApiController
   end
 
   def create
-    @habit=Habit.new(habit_params)
+    binding.pry
+    @habit=Habit.new(name:habit_params[:name])
     if @habit.save
       
       HabitUser.create(user_id:current_user.id,
-                        habit_id:@habit.id)
+                       habit_id:@habit.id,
+                       start_date:habit_params[:start_date])
       render json: @habit
     else
 
@@ -27,6 +29,6 @@ class Api::V1::HabitsController < ApiController
   private
 
   def habit_params
-    params.require(:habit).permit(:name)
+    params.require(:habit).permit(:name,:start_date)
   end
 end

@@ -19,34 +19,8 @@
             <p>開始日</p>
           </div>
           <div class="habit-add__form__detail__item-right">
-            <input type="text"  value="2020/11/1" >
-          </div>
-        </div>
-        <div class="habit-add__form__detail__item">
-          <div class="habit-add__form__detail__item-left">
-            <v-icon>mdi-calendar-range</v-icon>
-            <p>開始日</p>
-          </div>
-          <div class="habit-add__form__detail__item-right">
-            <input type="text"  value="2020/11/1" >
-          </div>
-        </div>
-        <div class="habit-add__form__detail__item">
-          <div class="habit-add__form__detail__item-left">
-            <v-icon>mdi-calendar-range</v-icon>
-            <p>開始日</p>
-          </div>
-          <div class="habit-add__form__detail__item-right">
-            <input type="text"  value="2020/11/1" >
-          </div>
-        </div>
-        <div class="habit-add__form__detail__item">
-          <div class="habit-add__form__detail__item-left">
-            <v-icon>mdi-calendar-range</v-icon>
-            <p>開始日</p>
-          </div>
-          <div class="habit-add__form__detail__item-right">
-            <input type="text"  value="2020/11/1" >
+            <!-- <input type="text"  value="2020/11/1" > -->
+            <Datepicker  v-model="date" placeholder="日付" ></Datepicker>
           </div>
         </div>
       </div>
@@ -56,12 +30,14 @@
 
 <script>
 import axios from 'axios';
+import Datepicker from 'vuejs-datepicker';
 
 
 export default{
   data(){
     return{
       name:"",
+      date:"",
       errors:[],
     }
   },
@@ -89,6 +65,7 @@ export default{
       return (axios.post('/api/v1/habits', {
         habit: {
           name: this.name,
+          start_date: this.date
         }
       })
       .then(response => {
@@ -99,6 +76,9 @@ export default{
         })
       )
     }
+  },
+  components : {
+    Datepicker
   }
 
  
@@ -161,13 +141,22 @@ export default{
             }
           }
           &-right{
-            input{
-              text-align:right;
-            }
+            width:110px;
           }
         }
       }
     }
   }
   
+</style>
+
+<style>
+.vdp-datepicker input{
+  width:110px;
+  outline: none;
+}
+.vdp-datepicker__calendar{
+  left:-200px;
+  top:38px;
+}
 </style>
