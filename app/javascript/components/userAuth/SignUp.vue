@@ -44,6 +44,8 @@
 
 <script>
 import axios from 'axios';
+import Signin from '../..//mixins/signin'
+import Csrf from '../..//mixins/csrf'
 export default{
   data(){
     return{
@@ -54,42 +56,6 @@ export default{
     }
   },
   methods:{ 
-    getCsrfToken: function(){
-      if (!(axios.defaults.headers.common['X-CSRF-Token'])) {
-        return (
-          document.getElementsByName('csrf-token')[0].getAttribute('content')
-        )
-        } 
-      else {
-        return (  
-          axios.defaults.headers.common['X-CSRF-Token']
-        )
-      }
-    },
-    setAxiosDefaults: function(){
-      axios.defaults.headers.common['X-CSRF-Token'] = this.getCsrfToken();
-      axios.defaults.headers.common['Accept'] = 'application/json';
-      console.log(axios.defaults.headers.common['X-CSRF-Token']);
-    },
-    updateCsrfToken: function(csrf_token){
-      axios.defaults.headers.common['X-CSRF-Token'] = csrf_token;
-    },
-    logIn:function(){
-      return (axios.post('/users/sign_in', {
-        user: {
-          email: this.email,
-          password: this.password,
-        }
-      })
-        .then(response => {
-          console.log('success');
-          this.updateCsrfToken(response.data.csrf_token);
-          this.$router.push({path: '/'});
-          return (response)
-        })
-
-      )
-    },
     signUp: function(event){
       event.preventDefault()
       this.setAxiosDefaults();
@@ -102,14 +68,16 @@ export default{
         }
       })
       .then(response => {
-          console.log(response.data.result.user);
           this.updateCsrfToken(response.data.csrf_token);
           this.logIn()
-          // return (response)
         })
       )
     }
-  }
+  },
+  mixins:[
+    Csrf,
+    Signin
+    ],
 }
 </script>
 

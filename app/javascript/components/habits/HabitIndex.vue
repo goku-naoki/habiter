@@ -49,15 +49,10 @@ export default{
   watch: {
     selected_date(date){
      this.habits=this.checkHabits(this.allHabits,date)
-     console.log(this.habits)
     }
   }
  
   
-  // created(){
-  //   console.log(this.habits)
-  //   this.checkHabits()
-  // }
   
  
 }

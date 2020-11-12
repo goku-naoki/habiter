@@ -13,7 +13,7 @@
 <script>
 import axios from 'axios';
 import moment from 'moment';
-
+import Csrf from '../..//mixins/csrf'
 export default{
 
   data(){
@@ -27,23 +27,6 @@ export default{
     habit:Object
   },
   methods:{
-     getCsrfToken: function(){
-      if (!(axios.defaults.headers.common['X-CSRF-Token'])) {
-        return (
-          document.getElementsByName('csrf-token')[0].getAttribute('content')
-        )
-        } 
-      else {
-        return (  
-          axios.defaults.headers.common['X-CSRF-Token']
-        )
-      }
-    },
-    setAxiosDefaults: function(){
-      axios.defaults.headers.common['X-CSRF-Token'] = this.getCsrfToken();
-      axios.defaults.headers.common['Accept'] = 'application/json';
-      console.log(axios.defaults.headers.common['X-CSRF-Token']);
-    },
     doneHabit:function(habit,event){
       console.log(this.done_date)
       this.habit_id=habit.id
@@ -94,7 +77,8 @@ export default{
     const date=this.$store.state.selectedDate;
     
     this.checkDone(date)
-  }
+  },
+  mixins:[Csrf],
 }
 </script>
 

@@ -16,7 +16,7 @@
               <input v-model="password" type="password" placeholder="password">
             </div>
             <div class="login-form-box-form-submit">
-              <button @click="signIn" type="submit">ログイン</button>
+              <button @click="logIn" type="submit">ログイン</button>
             </div>
             <div class="login-form-box-form-another">
               <div></div>
@@ -38,7 +38,8 @@
 
 <script>
 import axios from 'axios';
-
+import Signin from '../..//mixins/signin'
+import Csrf from '../..//mixins/csrf'
 
 export default{
 
@@ -53,45 +54,12 @@ export default{
    
   },
   methods: {
-    getCsrfToken: function(){
-      if (!(axios.defaults.headers.common['X-CSRF-Token'])) {
-        return (
-          document.getElementsByName('csrf-token')[0].getAttribute('content')
-        )
-        } 
-      else {
-        return (  
-          axios.defaults.headers.common['X-CSRF-Token']
-        )
-      }
-    },
-    setAxiosDefaults: function(){
-      axios.defaults.headers.common['X-CSRF-Token'] = this.getCsrfToken();
-      axios.defaults.headers.common['Accept'] = 'application/json';
-      console.log(axios.defaults.headers.common['X-CSRF-Token']);
-    },
-    updateCsrfToken: function(csrf_token){
-      axios.defaults.headers.common['X-CSRF-Token'] = csrf_token;
-    },
-    signIn:function(event){
-      event.preventDefault()
-      this.setAxiosDefaults();
-      return (axios.post('/users/sign_in', {
-        user: {
-          email: this.email,
-          password: this.password,
-        }
-      })
-        .then(response => {
-          console.log('success');
-          this.updateCsrfToken(response.data.csrf_token);
-          this.$router.push({path: '/'});
-          return (response)
-        })
 
-      )
-    },
-  }
+  },
+   mixins:[
+    Csrf,
+    Signin
+    ],
 
 }
 </script>
