@@ -9,7 +9,11 @@ Rails.application.routes.draw do
           get "check_auth"
         end
       end
-      resources :habits
+      resources :habits do
+        collection do
+          post "habit_done"
+        end
+      end
     end
   end
  
