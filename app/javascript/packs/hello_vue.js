@@ -8,8 +8,13 @@
 import Vue from 'vue'
 import App from '../app.vue'
 import router from '../router.js'
-import Vuetify from "vuetify"; // 追加
+import Vuex from 'vuex'
+import store from '../store';
+
+import Vuetify from "vuetify"; //以下２つvuetify用
 import "vuetify/dist/vuetify.min.css"; // 追加
+
+Vue.use(Vuex);
 
 Vue.use(Vuetify); // 追加
 const vuetify = new Vuetify(); // 追加
@@ -19,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     el,
     router: router,
+    store:store,
     render: h => h(App)
   })
 

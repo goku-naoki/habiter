@@ -36,8 +36,9 @@ export default{
     }
   },
   watch:{
-    date:function(newVal,oldVal){
-      console.log(newVal)
+    date:function(newDate,oldVal){
+      this.$store.commit("setDate", newDate)
+      console.log(this.$store.state.selectedDate)
     }
   },
   filters:{
