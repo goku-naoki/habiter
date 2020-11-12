@@ -14,12 +14,12 @@ export default{
   props:{
     habits:Array
   },
+
   components:{
     Habit
   },
-  methods:{
-    chackStart
-  }
+  
+  
 }
 </script>
 
