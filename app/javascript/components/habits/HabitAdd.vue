@@ -19,11 +19,8 @@
             <p>開始日</p>
           </div>
           <div class="habit-add__form__detail__item-right">
-            <!-- <input type="text"  value="2020/11/1" > -->
-           
             <Datepicker  id="day" v-model="date"  ></Datepicker>
             <label v-show="date==0" for="day"><span>日付</span></label>
-            
           </div>
         </div>
       </div>

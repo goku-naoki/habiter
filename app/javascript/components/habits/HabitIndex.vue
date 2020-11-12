@@ -1,10 +1,7 @@
 <template>
   <div class='habit-index'>
     <IndexHeader/>
-    <template v-if="habits!=null">
-      <HabitList :habits="habits" />
-    </template>
-    
+    <HabitList v-if="habits!=null" :habits="habits" />
   </div>
 </template>
 

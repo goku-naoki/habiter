@@ -12,7 +12,6 @@ class Api::V1::HabitsController < ApiController
   end
 
   def create
-   
     @habit=Habit.new(name:habit_params[:name])
     if @habit.save
       

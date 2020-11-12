@@ -1,12 +1,12 @@
 <template>
-  <li class="habit-list__box__item" v-for="habit in habits" :key="habit.id">
-        <div class="habit-list__box__item-left">
-          <v-icon v-if="habit.habit_dones.length==0" @click="doneHabit(habit.id, $event)">mdi-checkbox-blank-circle-outline</v-icon>
-          <v-icon v-else @click="doneHabit(habit,$event)">mdi-checkbox-marked-circle</v-icon>
-        </div>
-        <div class="habit-list__box__item-rigth">
-          <p>{{habit.name}}</p>
-        </div>
+  <li class="habit-list__box__item">
+    <div class="habit-list__box__item-left">
+      <v-icon v-if="habit.habit_dones.length !=0 || isDone" @click="doneHabit(habit, $event)">mdi-checkbox-marked-circle</v-icon>
+      <v-icon v-else @click="doneHabit(habit,$event)"> mdi-checkbox-blank-circle-outline</v-icon>
+    </div>
+    <div class="habit-list__box__item-rigth">
+      <p>{{habit.name}}</p>
+    </div>
   </li>
 </template>
 
@@ -20,10 +20,11 @@ export default{
     return{
       done_date:this.selected_date,
       habit_id:0,
+      isDone:false
     }
   },
   props:{
-    habits:Array
+    habit:Object
   },
   methods:{
      getCsrfToken: function(){
@@ -56,7 +57,7 @@ export default{
       })
       .then(response => {
         console.log(habit.habit_dones)
-       
+        this.isDone=true
 
           //  this.$router.push({path: '/'});
           // return (response)
@@ -76,24 +77,16 @@ export default{
 
 
 <style scoped lang="scss">
-  .habit-list{
+  .habit-list__box__item{
     width:100%;
-    &__box{
-      width:95%;
-      margin:0 auto;
-      background: white;
-      &__item{
-        width:100%;
-        height:70px;
-        display:flex;
-        align-items: center;
-        border-bottom:1px solid rgba(0, 0, 0, 0.1);
-        &-left{
-          margin-right:2%;
-          button{
-            color:#34acbc;
-          }
-        }
+    height:70px;
+    display:flex;
+    align-items: center;
+    border-bottom:1px solid rgba(0, 0, 0, 0.1);
+    &-left{
+      margin-right:2%;
+      button{
+        color:#34acbc;
       }
     }
   }
