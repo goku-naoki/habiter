@@ -17,14 +17,13 @@ import axios from 'axios';
 export default{
   data(){
     return{
-      user:{},
-      isLogin:false
+   
     }
   },
-  // components:{
-  //   Header,
-  //   Footer
-  // },
+  created(){
+    
+  }
+ 
 }
 
 </script>
