@@ -20,7 +20,10 @@
           </div>
           <div class="habit-add__form__detail__item-right">
             <!-- <input type="text"  value="2020/11/1" > -->
-            <Datepicker  v-model="date" placeholder="日付" ></Datepicker>
+           
+            <Datepicker  id="day" v-model="date"  ></Datepicker>
+            <label v-show="date==0" for="day"><span>日付</span></label>
+            
           </div>
         </div>
       </div>
@@ -37,7 +40,7 @@ export default{
   data(){
     return{
       name:"",
-      date:"",
+      date:0,
       errors:[],
     }
   },
@@ -142,6 +145,13 @@ export default{
           }
           &-right{
             width:110px;
+            position: relative;
+            span{
+              position: absolute;
+              top:0;
+              right:0;
+              opacity:0.6;
+            }
           }
         }
       }
@@ -153,6 +163,7 @@ export default{
 <style>
 .vdp-datepicker input{
   width:110px;
+  color: #404040;
   outline: none;
 }
 .vdp-datepicker__calendar{
