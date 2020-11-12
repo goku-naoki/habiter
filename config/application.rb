@@ -10,6 +10,7 @@ module Habiter
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
+    config.time_zone = 'Tokyo'
 
     config.generators do |g|
       g.stylesheets false

@@ -3,19 +3,17 @@
     <div class="index-header__inner">
       <div class="index-header__inner-left">
         <p class="index-header__inner-left__data">
-          今日
+          {{date| moment}}
         </p>
       </div>
       <div class="index-header__inner-right">
-        <a class="index-header__inner-right_calender">
+        <label for="select-date" class="index-header__inner-right_calender">
           <v-icon>mdi-calendar-range</v-icon>
-        </a>
-       
+        </label>
+       <Datepicker  id="select-date" v-model="date"></Datepicker>
         <router-link to="/habit/new">
            <v-icon>mdi-pencil-plus-outline</v-icon>
         </router-link>
-         
-       
       </div>
     </div>
   </div>
@@ -23,10 +21,38 @@
 
 <script>
 import axios from 'axios';
-
+import Datepicker from 'vuejs-datepicker';
+import moment from 'moment';
 
 export default{
+  data(){
+    return{
+      date:"今日"
+    }
+  },
+  methods:{
+    hoge:function(){
+      console.log("hoge")
+    }
+  },
+  watch:{
+    date:function(newVal,oldVal){
+      console.log(newVal)
+    }
+  },
+  filters:{
+    moment: function (date) {
+      return moment(date).format('M月D日');
+    }
 
+  },
+  created(){
+
+  },
+
+  components : {
+    Datepicker
+  }
  
 }
 </script>
@@ -53,7 +79,8 @@ export default{
     &-right{
       display:flex;
       align-items: center;
-      a{
+      position:relative;
+      label{
         height:40px;
         width:40px;
         display: flex;
@@ -70,4 +97,22 @@ export default{
   }
 }
 
+</style>
+
+<style lang="scss">
+.index-header{
+  .vdp-datepicker{
+    position: static;
+    input{
+      width:0px;
+      height:0;
+      outline: none;
+    }
+    .vdp-datepicker__calendar{
+      left: -220px;
+      top: 60px;
+    }
+  } 
+  
+}
 </style>

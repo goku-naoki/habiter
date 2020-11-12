@@ -160,14 +160,16 @@ export default{
   
 </style>
 
-<style>
-.vdp-datepicker input{
-  width:110px;
-  color: #404040;
-  outline: none;
-}
-.vdp-datepicker__calendar{
-  left:-200px;
-  top:38px;
+<style lang="scss">
+.habit-add{
+  .vdp-datepicker input{
+    width:110px;
+    color: #404040;
+    outline: none;
+  }
+  .vdp-datepicker__calendar{
+    left:-200px;
+    top:38px;
+  }
 }
 </style>

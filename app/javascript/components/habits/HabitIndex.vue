@@ -29,8 +29,10 @@ export default{
   },
   components:{
     IndexHeader,
-    HabitList
-  }
+    HabitList,
+  
+  },
+  
  
 }
 </script>
