@@ -51,9 +51,5 @@ export default{
      this.habits=this.checkHabits(this.allHabits,date)
     }
   }
- 
-  
-  
- 
 }
 </script>

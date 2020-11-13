@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :habits do
         collection do
           post "habit_done"
+          delete "habit_undo"
         end
       end
     end

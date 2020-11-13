@@ -19,10 +19,8 @@ export default{
     Habit
   },
   
-  
 }
 </script>
-
 
 <style scoped lang="scss">
   .habit-list{

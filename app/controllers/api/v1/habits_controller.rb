@@ -34,6 +34,13 @@ class Api::V1::HabitsController < ApiController
     end
   end
 
+  def habit_undo
+    habit_done=HabitDone.find_by(habit_id:habit_done_params[:habit_id],
+                                done_date:habit_done_params[:done_date])
+    habit_done.destroy
+    render json: habit_done
+                                        
+  end
 
   private
 

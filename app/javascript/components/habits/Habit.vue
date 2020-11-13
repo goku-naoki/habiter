@@ -1,7 +1,7 @@
 <template>
   <li class="habit-list__box__item">
     <div class="habit-list__box__item-left">
-      <v-icon v-if=" isDone" @click="doneHabit(habit, $event)">mdi-checkbox-marked-circle</v-icon>
+      <v-icon v-if=" isDone" @click="undoHabit(habit, $event)">mdi-checkbox-marked-circle</v-icon>
       <v-icon v-else @click="doneHabit(habit,$event)"> mdi-checkbox-blank-circle-outline</v-icon>
     </div>
     <div class="habit-list__box__item-rigth">
@@ -43,8 +43,27 @@ export default{
         })
       )
     },
+    undoHabit(habit,event){
+      this.habit_id=habit.id
+      const habit_done= {
+          habit_id: this.habit_id,
+          done_date:this.$store.state.selectedDate
+        }
+      event.preventDefault()
+      this.setAxiosDefaults();
+      return (axios.delete("/api/v1/habits/habit_undo", {
+        data: {habit_done: habit_done}
+      })
+      .then(response => {
+        this.isDone=false
+        const undo_index=this.habit.habit_dones.indexOf(response.data)
+        this.habit.habit_dones.splice(undo_index,1)  //配列の値も更新しないと、chackできやん
+        })
+      )
+    },
     checkDone:function(date){
       const habit_dones=this.habit.habit_dones
+      
       if(habit_dones.lenght!=0){
         habit_dones.forEach((done)=>{
         const selected_date=this.moment(date)
@@ -67,12 +86,11 @@ export default{
   },
   watch: {
     selected_date(date) {
-     this.checkDone(date)
+    this.checkDone(date)
     }
   }
   ,created(){
-    const date=this.$store.state.selectedDate;
-    
+    const date=this.selected_date;
     this.checkDone(date)
   },
   mixins:[Csrf],
