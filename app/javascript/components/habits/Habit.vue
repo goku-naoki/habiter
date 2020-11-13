@@ -28,7 +28,6 @@ export default{
   },
   methods:{
     doneHabit:function(habit,event){
-      console.log(this.done_date)
       this.habit_id=habit.id
       event.preventDefault()
       this.setAxiosDefaults();
@@ -39,8 +38,6 @@ export default{
         }
       })
       .then(response => {
-        console.log(habit.habit_dones)
-        debugger
         this.isDone=true
         this.habit.habit_dones.push(response.data)  //配列の値も更新しないと、chackできやん
         })
@@ -81,7 +78,6 @@ export default{
   mixins:[Csrf],
 }
 </script>
-
 
 <style scoped lang="scss">
   .habit-list__box__item{

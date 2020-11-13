@@ -3,7 +3,7 @@
     <div class="index-header__inner">
       <div class="index-header__inner-left">
         <p class="index-header__inner-left__data">
-          <template v-if="date==today">今日</template>
+          <template v-if="isToday">今日</template>
           <template v-else>{{date| moment}}</template>
         </p>
       </div>
@@ -31,23 +31,36 @@ export default{
     return{
       date:today,
       today:today,
+      isToday:false
     }
   },
   methods:{
     hoge:function(){
       console.log("hoge")
+    },
+    checkToday(){
+      const today=this.beauty(this.today)
+      const date=this.beauty(this.date)
+      if(today==date){
+        this.isToday=true
+      }else{
+        this.isToday=false
+      }
+    },
+    beauty: function (date) {
+      return moment(date).format('YYYY-MM-DD');
     }
   },
   computed:{
-    getDate(){
-      console.log(this.$store.state.selectedDate)
+    selected_date(){
       return this.$store.state.selectedDate
     }
   },
-  watch:{
-    date:function(newDate,oldVal){
-      this.$store.commit("setDate", newDate)
-      console.log(this.$store.state.selectedDate)
+  watch: {
+    date:function(date){
+      this.$store.commit("setDate", date)
+      console.log(date,this.today)
+      this.checkToday()
     }
   },
   filters:{
@@ -57,7 +70,8 @@ export default{
 
   },
   created(){
-    
+   
+    this.checkToday()
   },
 
   components : {

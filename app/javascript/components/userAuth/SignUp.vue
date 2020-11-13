@@ -69,7 +69,7 @@ export default{
       })
       .then(response => {
           this.updateCsrfToken(response.data.csrf_token);
-          this.logIn()
+          this.logIn(event)
         })
       )
     }
