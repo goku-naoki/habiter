@@ -56,6 +56,8 @@ export default{
       })
       .then(response => {
         this.isDone=false
+        // let result=this.habit.habit_dones.filter(cur=> cur!=response.data)
+        // this.habit.habit_dones=result
         const undo_index=this.habit.habit_dones.indexOf(response.data)
         this.habit.habit_dones.splice(undo_index,1)  //配列の値も更新しないと、chackできやん
         })

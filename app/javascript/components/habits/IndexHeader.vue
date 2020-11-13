@@ -1,5 +1,5 @@
 <template>
-  <div class="index-header">
+  <!-- <div class="index-header">
     <div class="index-header__inner">
       <div class="index-header__inner-left">
         <p class="index-header__inner-left__data">
@@ -17,7 +17,11 @@
         </router-link>
       </div>
     </div>
-  </div>
+  </div> -->
+   <form class="new-message">
+          <input class="input-text" placeholder="type a message" type="text">
+          <input class="submit-btn" type="submit" value="Send">
+  </form>
 </template>
 
 <script>
@@ -33,7 +37,7 @@ export default{
     }
   },
   methods:{
-    
+
     checkToday(){
       const today=this.moment(new Date)
       const date=this.moment(this.date)
@@ -49,22 +53,23 @@ export default{
     }
   },
   computed:{
+
     selected_date(){
       return this.$store.state.selectedDate
     }
   },
   watch: {
+
     date:function(date){
       this.$store.commit("setDate", date)
-      console.log(date,this.today)
       this.checkToday()
     }
   },
   filters:{
+
     beautyDate: function (date) {
       return moment(date).format('M月D日');
     }
-
   },
   created(){
    
@@ -72,6 +77,7 @@ export default{
   },
 
   components : {
+
     Datepicker
   }
  
