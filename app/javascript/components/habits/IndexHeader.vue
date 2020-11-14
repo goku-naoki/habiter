@@ -1,5 +1,5 @@
 <template>
-  <!-- <div class="index-header">
+  <div class="index-header">
     <div class="index-header__inner">
       <div class="index-header__inner-left">
         <p class="index-header__inner-left__data">
@@ -17,11 +17,7 @@
         </router-link>
       </div>
     </div>
-  </div> -->
-   <form class="new-message">
-          <input class="input-text" placeholder="type a message" type="text">
-          <input class="submit-btn" type="submit" value="Send">
-  </form>
+  </div>
 </template>
 
 <script>
@@ -77,7 +73,7 @@ export default{
   },
 
   components : {
-
+    
     Datepicker
   }
  

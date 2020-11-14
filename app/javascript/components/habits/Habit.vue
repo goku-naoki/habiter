@@ -44,6 +44,7 @@ export default{
       )
     },
     undoHabit(habit,event){
+      debugger
       this.habit_id=habit.id
       const habit_done= {
           habit_id: this.habit_id,
