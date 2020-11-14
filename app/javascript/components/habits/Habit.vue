@@ -17,10 +17,12 @@ import Csrf from '../..//mixins/csrf'
 export default{
 
   data(){
+    
+ 
     return{
       done_date:this.selected_date,
-      habit_id:0,
-      isDone:false
+      isDone:false,
+      habitUser:{}
     }
   },
   props:{
@@ -28,26 +30,26 @@ export default{
   },
   methods:{
     doneHabit:function(habit,event){
-      this.habit_id=habit.id
+   
       event.preventDefault()
       this.setAxiosDefaults();
       return (axios.post("/api/v1/habits/habit_done", {
         habit_done: {
-          habit_id: this.habit_id,
+          habit_user_id: this.habitUser.id,
           done_date:this.$store.state.selectedDate
         }
       })
       .then(response => {
         this.isDone=true
-        this.habit.habit_dones.push(response.data)  //配列の値も更新しないと、chackできやん
+        this.habitUser.habit_dones.push(response.data) //配列の値も更新しないと、chackできやん
         })
       )
     },
     undoHabit(habit,event){
-      debugger
-      this.habit_id=habit.id
+      
+      
       const habit_done= {
-          habit_id: this.habit_id,
+          habit_user_id: this.habitUser.id,
           done_date:this.$store.state.selectedDate
         }
       event.preventDefault()
@@ -59,13 +61,14 @@ export default{
         this.isDone=false
         // let result=this.habit.habit_dones.filter(cur=> cur!=response.data)
         // this.habit.habit_dones=result
-        const undo_index=this.habit.habit_dones.indexOf(response.data)
-        this.habit.habit_dones.splice(undo_index,1)  //配列の値も更新しないと、chackできやん
+        const undo_index=this.habitUser.habit_dones.indexOf(response.data)
+        this.habitUser.habit_dones.splice(undo_index,1)  //配列の値も更新しないと、chackできやん
         })
       )
     },
     checkDone:function(date){
-      const habit_dones=this.habit.habit_dones
+     
+      const habit_dones=this.habitUser.habit_dones
       
       if(habit_dones.lenght!=0){
         habit_dones.forEach((done)=>{
@@ -85,6 +88,13 @@ export default{
   computed:{
     selected_date(){
       return this.$store.state.selectedDate
+    },
+    current_user(){
+      return this.$store.state.currentUser
+    },
+    get_habit_user(){
+         const habitUser=this.habit.habit_users.find(cur=>cur.user_id==this.current_user.user.id)//仮置き！！！！！！！１
+         this.habitUser=habitUser
     }
   },
   watch: {
@@ -94,7 +104,9 @@ export default{
   }
   ,created(){
     const date=this.selected_date;
-    this.checkDone(date)
+    this.get_habit_user
+    debugger
+    // this.checkDone(date)
   },
   mixins:[Csrf],
 }

@@ -22,8 +22,15 @@ export default{
   },
   created(){
     
-  }
+    axios
+    .get("api/v1/users/get_user")
+    .then(response => {
+       this.$store.commit("setCurrentUser", response.data)
+       console.log(this.$store.state.currentUser)
+    })
  
+  }
+
 }
 
 </script>

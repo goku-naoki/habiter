@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :users do
         collection do
           get "check_auth"
+          get "get_user"
         end
       end
       resources :habits do

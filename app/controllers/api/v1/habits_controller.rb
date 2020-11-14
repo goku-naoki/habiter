@@ -8,7 +8,7 @@ class Api::V1::HabitsController < ApiController
   def index
    
     habits=current_user.habits
-    render json: habits, each_serializer: HabitSerializer
+    render json: habits,include: { habit_users: [:habit_dones] },each_serializer: HabitSerializer
   end
 
   def create
@@ -28,18 +28,17 @@ class Api::V1::HabitsController < ApiController
   def habit_done
     habit_done=HabitDone.new(habit_done_params)
     if habit_done.save
-      render json: habit_done
+      render json: habit_done,serializer: HabitDoneSerializer
     else
 
     end
   end
 
   def habit_undo
-    habit_done=HabitDone.find_by(habit_id:habit_done_params[:habit_id],
+    habit_done=HabitDone.find_by(habit_user_id:habit_done_params[:habit_user_id],
                                 done_date:habit_done_params[:done_date])
     habit_done.destroy
-    render json: habit_done
-                                        
+    render json: habit_done                      
   end
 
   private
@@ -49,6 +48,6 @@ class Api::V1::HabitsController < ApiController
   end
 
   def habit_done_params
-    params.require(:habit_done).permit(:habit_id,:done_date).merge(user_id:current_user.id)
+    params.require(:habit_done).permit(:habit_user_id,:done_date)
   end
 end
