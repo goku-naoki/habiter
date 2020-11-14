@@ -3,8 +3,8 @@
     <div class="index-header__inner">
       <div class="index-header__inner-left">
         <p class="index-header__inner-left__data">
-          <template v-if="date==today">今日</template>
-          <template v-else>{{date| moment}}</template>
+          <template v-if="isToday">今日</template>
+          <template v-else>{{date| beautyDate}}</template>
         </p>
       </div>
       <div class="index-header__inner-right">
@@ -27,40 +27,53 @@ import moment from 'moment';
 
 export default{
   data(){
-    const today=new Date
     return{
-      date:today,
-      today:today,
+      date:this.selected_date,
+      isToday:false
     }
   },
   methods:{
-    hoge:function(){
-      console.log("hoge")
+
+    checkToday(){
+      const today=this.moment(new Date)
+      const date=this.moment(this.date)
+
+        if(today==date){
+          this.isToday=true
+        }else{
+          this.isToday=false
+        }
+    },
+    moment: function (date) {
+      return moment(date).format('YYYY-MM-DD');
     }
   },
   computed:{
-    getDate(){
-      console.log(this.$store.state.selectedDate)
+
+    selected_date(){
       return this.$store.state.selectedDate
     }
   },
-  watch:{
-    date:function(newDate,oldVal){
-      this.$store.commit("setDate", newDate)
-      console.log(this.$store.state.selectedDate)
+  watch: {
+
+    date:function(date){
+      this.$store.commit("setDate", date)
+      this.checkToday()
     }
   },
   filters:{
-    moment: function (date) {
+
+    beautyDate: function (date) {
       return moment(date).format('M月D日');
     }
-
   },
   created(){
-    
+   
+    this.checkToday()
   },
 
   components : {
+    
     Datepicker
   }
  

@@ -1,7 +1,7 @@
 <template>
   <li class="habit-list__box__item">
     <div class="habit-list__box__item-left">
-      <v-icon v-if=" isDone" @click="doneHabit(habit, $event)">mdi-checkbox-marked-circle</v-icon>
+      <v-icon v-if=" isDone" @click="undoHabit(habit, $event)">mdi-checkbox-marked-circle</v-icon>
       <v-icon v-else @click="doneHabit(habit,$event)"> mdi-checkbox-blank-circle-outline</v-icon>
     </div>
     <div class="habit-list__box__item-rigth">
@@ -13,7 +13,7 @@
 <script>
 import axios from 'axios';
 import moment from 'moment';
-
+import Csrf from '../..//mixins/csrf'
 export default{
 
   data(){
@@ -27,25 +27,7 @@ export default{
     habit:Object
   },
   methods:{
-     getCsrfToken: function(){
-      if (!(axios.defaults.headers.common['X-CSRF-Token'])) {
-        return (
-          document.getElementsByName('csrf-token')[0].getAttribute('content')
-        )
-        } 
-      else {
-        return (  
-          axios.defaults.headers.common['X-CSRF-Token']
-        )
-      }
-    },
-    setAxiosDefaults: function(){
-      axios.defaults.headers.common['X-CSRF-Token'] = this.getCsrfToken();
-      axios.defaults.headers.common['Accept'] = 'application/json';
-      console.log(axios.defaults.headers.common['X-CSRF-Token']);
-    },
     doneHabit:function(habit,event){
-      console.log(this.done_date)
       this.habit_id=habit.id
       event.preventDefault()
       this.setAxiosDefaults();
@@ -56,15 +38,35 @@ export default{
         }
       })
       .then(response => {
-        console.log(habit.habit_dones)
-        debugger
         this.isDone=true
         this.habit.habit_dones.push(response.data)  //配列の値も更新しないと、chackできやん
         })
       )
     },
+    undoHabit(habit,event){
+      debugger
+      this.habit_id=habit.id
+      const habit_done= {
+          habit_id: this.habit_id,
+          done_date:this.$store.state.selectedDate
+        }
+      event.preventDefault()
+      this.setAxiosDefaults();
+      return (axios.delete("/api/v1/habits/habit_undo", {
+        data: {habit_done: habit_done}
+      })
+      .then(response => {
+        this.isDone=false
+        // let result=this.habit.habit_dones.filter(cur=> cur!=response.data)
+        // this.habit.habit_dones=result
+        const undo_index=this.habit.habit_dones.indexOf(response.data)
+        this.habit.habit_dones.splice(undo_index,1)  //配列の値も更新しないと、chackできやん
+        })
+      )
+    },
     checkDone:function(date){
       const habit_dones=this.habit.habit_dones
+      
       if(habit_dones.lenght!=0){
         habit_dones.forEach((done)=>{
         const selected_date=this.moment(date)
@@ -87,17 +89,16 @@ export default{
   },
   watch: {
     selected_date(date) {
-     this.checkDone(date)
+    this.checkDone(date)
     }
   }
   ,created(){
-    const date=this.$store.state.selectedDate;
-    
+    const date=this.selected_date;
     this.checkDone(date)
-  }
+  },
+  mixins:[Csrf],
 }
 </script>
-
 
 <style scoped lang="scss">
   .habit-list__box__item{

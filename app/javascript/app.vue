@@ -36,7 +36,7 @@ export default{
   padding:0;
 }
 html{
-  font-size:62.5%;
+  font-size:62.5% !important;
 }
 body{
   font-family: "Montserrat","游ゴシック",YuGothic,"ヒラギノ角ゴ ProN W3","Hiragino Kaku Gothic ProN","メイリオ",Meiryo,sans-serif;
