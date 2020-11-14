@@ -8,6 +8,7 @@ import SignUp  from "./components/userAuth/SignUp.vue"
 import SignIn  from "./components/userAuth/SignIn.vue"
 import HabitIndex from './components/habits/HabitIndex.vue'
 import HabitAdd from './components/habits/HabitAdd.vue'
+import HabitDetail from './components/habits/HabitDetail.vue'
 
 Vue.use(Router)
 const router = new Router({
@@ -35,6 +36,10 @@ const router = new Router({
     { path: '/habit/new',
     name: 'HabitAdd',
     component: HabitAdd
+    },
+    { path: '/habit/detail',
+    name: 'HabitDetail',
+    component: HabitDetail
     },
    
   ]

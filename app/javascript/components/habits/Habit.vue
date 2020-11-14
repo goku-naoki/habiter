@@ -113,5 +113,10 @@ export default{
         color:#34acbc;
       }
     }
+    &-right{
+      height: 100%;
+      line-height: 70px;
+      width: 100%;
+    }
   }
 </style>

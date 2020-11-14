@@ -15,7 +15,8 @@ class SessionsController < Devise::SessionsController
           'result' => {
             'user' => {
               'id' => @user.id,
-              'email' => @user.email
+              'email' => @user.email,
+              'nickname'=>@user.nickname,
             }
           }
         } and return

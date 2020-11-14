@@ -3,6 +3,7 @@ class CreateHabitDones < ActiveRecord::Migration[6.0]
     create_table :habit_dones do |t|
 
       t.date :done_date
+      t.references :habit_user, foreign_key: true
       t.references :user, foreign_key: true
       t.references :habit, foreign_key: true
       t.timestamps
