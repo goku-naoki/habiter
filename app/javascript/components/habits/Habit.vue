@@ -47,7 +47,7 @@ export default{
     },
     undoHabit(habit,event){
       
-      
+      const that=this
       const habit_done= {
           habit_user_id: this.habitUser.id,
           done_date:this.$store.state.selectedDate
@@ -61,8 +61,8 @@ export default{
         this.isDone=false
         // let result=this.habit.habit_dones.filter(cur=> cur!=response.data)
         // this.habit.habit_dones=result
-        const undo_index=this.habitUser.habit_dones.indexOf(response.data)
-        this.habitUser.habit_dones.splice(undo_index,1)  //配列の値も更新しないと、chackできやん
+        const undo_index=that.habitUser.habit_dones.indexOf(response.data)
+        that.habitUser.habit_dones.splice(undo_index,1)  //配列の値も更新しないと、chackできやん
         })
       )
     },
@@ -105,8 +105,7 @@ export default{
   ,created(){
     const date=this.selected_date;
     this.get_habit_user
-    debugger
-    // this.checkDone(date)
+    this.checkDone(date)
   },
   mixins:[Csrf],
 }
