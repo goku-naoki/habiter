@@ -4,8 +4,10 @@
       <v-icon v-if=" isDone" @click="undoHabit(habit, $event)">mdi-checkbox-marked-circle</v-icon>
       <v-icon v-else @click="doneHabit(habit,$event)"> mdi-checkbox-blank-circle-outline</v-icon>
     </div>
-    <div class="habit-list__box__item-rigth">
-      <p>{{habit.name}}</p>
+    <div class="habit-list__box__item-right">
+      <router-link :to="{ name: 'HabitDetail', params: { id: habitUser.id } } ">
+        <p>{{habit.name}}</p>
+      </router-link>
     </div>
   </li>
 </template>
@@ -128,6 +130,9 @@ export default{
       height: 100%;
       line-height: 70px;
       width: 100%;
+      a{
+        color: #404040;
+      }
     }
   }
 </style>

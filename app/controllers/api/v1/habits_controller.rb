@@ -6,10 +6,15 @@ class Api::V1::HabitsController < ApiController
   end
 
   def index
-   
     habits=current_user.habits
     render json: habits,include: { habit_users: [:habit_dones] },each_serializer: HabitSerializer
   end
+
+  def show
+    habit_user=HabitUser.find(params[:id])
+    render json: habit_user,serializer: HabitUserSerializer
+  end
+
 
   def create
     @habit=Habit.new(name:habit_params[:name])

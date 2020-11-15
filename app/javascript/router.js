@@ -30,17 +30,21 @@ const router = new Router({
       }
     },
     { path: '/',
-    name: 'HabitIndex',
-    component: HabitIndex
+      name: 'HabitIndex',
+      component: HabitIndex
     },
     { path: '/habit/new',
-    name: 'HabitAdd',
-    component: HabitAdd
+      name: 'HabitAdd',
+      component: HabitAdd
     },
-    { path: '/habit/detail',
-    name: 'HabitDetail',
-    component: HabitDetail
+    { path: '/habit/:id(\\d+)',
+      name: 'HabitDetail',
+      component: HabitDetail,
+      props:routes =>({
+        id: Number(routes.params.id)  //型をけっていできないので指定する
+      })
     },
+
    
   ]
  
