@@ -1,11 +1,10 @@
 <template>
-  <div @click="hoge">
-    dddd
-  </div>
+  <DetailHeader :habit="habitUser.habit"/>
 </template>
 
 <script>
 import axios from 'axios';
+import DetailHeader from './DetailHeader'
 // import moment from 'moment';
 // import Csrf from '../..//mixins/csrf'
 export default{
@@ -24,6 +23,9 @@ export default{
       .then(response => {
         this.habitUser=response.data
       })
+  },
+  components:{
+    DetailHeader
   }
 }
 

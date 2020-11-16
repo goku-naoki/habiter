@@ -8,7 +8,7 @@ import SignUp  from "./components/userAuth/SignUp.vue"
 import SignIn  from "./components/userAuth/SignIn.vue"
 import HabitIndex from './components/habits/HabitIndex.vue'
 import HabitAdd from './components/habits/HabitAdd.vue'
-import HabitDetail from './components/habits/HabitDetail.vue'
+import HabitDetail from './components/detail/HabitDetail.vue'
 
 Vue.use(Router)
 const router = new Router({
