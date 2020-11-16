@@ -6,7 +6,7 @@
           <v-icon>mdi-arrow-left-bold</v-icon>
         </router-link>
         <p class="detail-header__inner-left__name">
-          {{habit.name}}
+          {{name}}
         </p>
       </div>
       <div class="detail-header__inner-right">
@@ -22,9 +22,28 @@ import axios from 'axios';
 // import moment from 'moment';
 // import Csrf from '../..//mixins/csrf'
 export default{
+  data(){
+    return{
+      name:""
+    }
+  },
   props:{
       habit:Object
     },
+  computed:{
+    habitName(){
+      return this.habit.name
+    }
+  },
+  watch:{
+    habit(val){
+      this.name=val.name  //propsの取得に時間がかかる？？？？
+    }
+  },
+  created(){
+    
+   
+  }
   
 }
 

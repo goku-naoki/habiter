@@ -10,6 +10,7 @@
 
 <script>
 import axios from 'axios';
+import 'normalize.css'
 // import Header from './components/globals/Header' 
 // import Footer from './components/globals/Footer' 
 
@@ -60,6 +61,7 @@ ul{
 img{
   vertical-align: bottom;
 }
+
 
 
 

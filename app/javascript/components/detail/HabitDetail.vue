@@ -1,17 +1,24 @@
 <template>
-  <DetailHeader :habit="habitUser.habit"/>
+  <div>
+    <DetailHeader :habit="habitUser.habit"/>
+    <HabitProgress :habit-user="habitUser"/>
+  </div>
+  
 </template>
 
 <script>
 import axios from 'axios';
 import DetailHeader from './DetailHeader'
+import HabitProgress from './HabitProgress'
 // import moment from 'moment';
 // import Csrf from '../..//mixins/csrf'
 export default{
   data(){
     console.log('hoge')
     return{
-      habitUser:{}
+      habitUser:{
+        
+      }
     }
   },
   props:{
@@ -25,7 +32,8 @@ export default{
       })
   },
   components:{
-    DetailHeader
+    DetailHeader,
+    HabitProgress
   }
 }
 
