@@ -38,10 +38,11 @@ export default{
     
       event.preventDefault()
       this.setAxiosDefaults();
+     
       return (axios.post("/api/v1/habits/habit_done", {
         habit_done: {
           habit_user_id: this.habitUser.id,
-          done_date:this.$store.state.selectedDate
+          done_date:this.$store.state.selectedDate.getTime()/1000
         }
       })
       .then(response => {
@@ -55,7 +56,7 @@ export default{
       const that=this
       const habit_done= {
           habit_user_id: this.habitUser.id,
-          done_date:this.$store.state.selectedDate
+          done_date:this.$store.state.selectedDate.getTime()/1000
         }
       event.preventDefault()
       this.setAxiosDefaults();

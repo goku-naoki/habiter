@@ -46,10 +46,24 @@ export default{
 
     }
   },
+  methods:{
+    checkCont(arr){
+      arr.sort((a,b)=>{
+        if(a.done_date>b.done_date){
+          return -1
+        }else{
+          1
+        }
+      })
+      debugger
+    }
+  },
   watch:{
     habitUser(val){
+      debugger
       this.times=val.habit_dones.length
       this.startDate=val.start_date
+      this.checkCont(val.habit_dones)
     }
   }
 

@@ -31,7 +31,10 @@ class Api::V1::HabitsController < ApiController
   end
 
   def habit_done
-    habit_done=HabitDone.new(habit_done_params)
+    
+    habit_done=HabitDone.new(habit_user_id:habit_done_params[:habit_user_id],
+                             done_date:Time.at(habit_done_params[:done_date]))
+                             #jsとrailsで時間が違うの変換する
     if habit_done.save
       render json: habit_done,serializer: HabitDoneSerializer
     else
@@ -41,7 +44,7 @@ class Api::V1::HabitsController < ApiController
 
   def habit_undo
     habit_done=HabitDone.find_by(habit_user_id:habit_done_params[:habit_user_id],
-                                done_date:habit_done_params[:done_date])
+                                 done_date:Time.at(habit_done_params[:done_date]))
     habit_done.destroy
     render json: habit_done                      
   end
