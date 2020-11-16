@@ -22,7 +22,7 @@ class Api::V1::HabitsController < ApiController
       
       HabitUser.create(user_id:current_user.id,
                        habit_id:@habit.id,
-                       start_date:habit_params[:start_date])
+                       start_date:Time.at(habit_params[:start_date]))
 
       render json: @habit
     else
