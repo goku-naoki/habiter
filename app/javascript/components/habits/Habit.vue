@@ -24,7 +24,10 @@ export default{
     return{
       done_date:this.selected_date,
       isDone:false,
-      habitUser:{}
+      habitUser:{
+     
+
+      }
     }
   },
   props:{
@@ -32,7 +35,7 @@ export default{
   },
   methods:{
     doneHabit:function(habit,event){
-   
+    
       event.preventDefault()
       this.setAxiosDefaults();
       return (axios.post("/api/v1/habits/habit_done", {
@@ -61,25 +64,21 @@ export default{
       })
       .then(response => {
         this.isDone=false
-        // let result=this.habit.habit_dones.filter(cur=> cur!=response.data)
-        // this.habit.habit_dones=result
-        const undo_index=that.habitUser.habit_dones.indexOf(response.data)
-        that.habitUser.habit_dones.splice(undo_index,1)  //配列の値も更新しないと、chackできやん
+
+        that.habitUser.habit_dones=that.habitUser.habit_dones.filter((cur)=>{
+          cur.done_date!=response.data.done_date
+        })
         })
       )
     },
     checkDone:function(date){
-     
+    
       const habit_dones=this.habitUser.habit_dones
-      
+      const that=this
       if(habit_dones.lenght!=0){
-        habit_dones.forEach((done)=>{
-        const selected_date=this.moment(date)
-          if(done.done_date==selected_date){
-            this.isDone=true
-          }else{
-            this.isDone=false
-          }
+        this.isDone=habit_dones.some((done)=>{
+          let selected_date=that.moment(date)
+          return done.done_date==selected_date
         })
       }
     },
@@ -95,8 +94,8 @@ export default{
       return this.$store.state.currentUser
     },
     get_habit_user(){
-         const habitUser=this.habit.habit_users.find(cur=>cur.user_id==this.current_user.user.id)//仮置き！！！！！！！１
-         this.habitUser=habitUser
+        const habitUser=this.habit.habit_users.find(cur=>cur.user_id==this.current_user.id)
+        this.habitUser=habitUser
     }
   },
   watch: {

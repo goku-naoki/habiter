@@ -21,7 +21,7 @@ export default{
     }
   },
   created(){
-    
+    console.log(1)
     axios
     .get("api/v1/users/get_user")
     .then(response => {

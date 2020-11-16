@@ -12,7 +12,7 @@ export default {
       })
         .then(response => {
           this.updateCsrfToken(response.data.csrf_token);
-          this.$store.commit("setCurrentUser",response.data.result.user)
+          this.$store.commit("setCurrentUser",response.data.result)
           this.$router.push({path: '/'});
         })
 

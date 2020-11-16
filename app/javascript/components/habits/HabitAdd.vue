@@ -53,10 +53,9 @@ export default{
         }
       })
       .then(response => {
-          debugger
 
            this.$router.push({path: '/'});
-          // return (response)
+         
         })
       )
     }
