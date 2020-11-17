@@ -1,22 +1,22 @@
 <template>
   <div class="habit-progress">
     <ul class="habit-progress__list">
-      <li class="habit-progress__list__item">
+      <li class="habit-progress__list__item" v-for="detail in details" :key="detail.id">
         <div class="habit-progress__list__item__inner">
           <div class="habit-progress__list__item__inner-left">
-           <v-icon>mdi-fire</v-icon>
+           <v-icon :class="`icon-${detail.id}`">{{detail.icon}}</v-icon>
           </div>
           <div class="habit-progress__list__item__inner-right">
             <p class="habit-progress__list__item__inner-right__detail" >
-              {{times}}
+              {{detail.value}}
             </p>
             <p class="habit-progress__list__item__inner-right__title">
-              達成
+             {{detail.title}}
             </p>
           </div>
         </div>
       </li>
-      <li class="habit-progress__list__item">
+      <!-- <li class="habit-progress__list__item">
         <div class="habit-progress__list__item__inner">
           <div class="habit-progress__list__item__inner-left">
            <v-icon>mdi-fire</v-icon>
@@ -47,7 +47,20 @@
         </div>
       </li>
       <li class="habit-progress__list__item">
-      </li>
+        <div class="habit-progress__list__item__inner">
+          <div class="habit-progress__list__item__inner-left">
+           <v-icon>mdi-fire</v-icon>
+          </div>
+          <div class="habit-progress__list__item__inner-right">
+            <p class="habit-progress__list__item__inner-right__detail" >
+              {{monthLate}}%
+            </p>
+            <p class="habit-progress__list__item__inner-right__title">
+              今月達成度
+            </p>
+          </div>
+        </div>
+      </li> -->
     </ul>
   </div>
 
@@ -60,11 +73,20 @@ import moment from 'moment';
 
 export default{
   data(){
+    const today=new Date()
     return{
+      icon:'mdi-dots-horizontal-circle',
       times:0,
       startDate:0,
-      countiTimes:0
-      
+      countiTimes:0,
+      monthLate:0,
+      today:today,
+      details:[
+        {icon:'mdi-fire',value:0,title:"達成",id:0},
+        {icon:'mdi-clock-start',value:0,title:"開始",id:1},
+        {icon:'mdi-cached',value:0,title:"連続",id:2},
+        {icon:'mdi-check-all',value:0,title:"今月達成",id:3},
+      ]
     }
   },
   props:{
@@ -76,6 +98,34 @@ export default{
   methods:{
     checkCont(arr){
       let result=[]
+      this.sortDone(arr)
+      if(arr[0].done_date==this.moment(this.today)){
+        result=arr.filter((cur,index)=>{
+         return Math.floor((this.today - new Date(cur.done_date))/86400000)==index
+       })
+      }
+     return `${result.length}日`
+    },
+    getRate:function(arr){
+       let resultAr=[]
+       this.sortDone(arr)
+       resultAr=arr.filter((cur)=>{
+        //  if(this.momentMonth(new Date(cur.done_date))!=this.momentMonth(this.today)){
+           
+        //  }
+         return this.momentMonth(new Date(cur.done_date))==this.momentMonth(this.today)
+       })
+      
+       const lastDate=this.getLastDate(this.today)
+    
+       return `${Math.round((resultAr.length/lastDate*100) * 10) / 10}%`
+    },
+    getLastDate:function(date){
+        
+      const lastDate=new Date(date.getFullYear(),date.getMonth()+1,0).getDate()
+      return lastDate
+    },
+    sortDone:function(arr){
       arr.sort((a,b)=>{
         if(a.done_date>b.done_date){
           return -1
@@ -83,17 +133,12 @@ export default{
           1
         }
       })
-      const today=new Date()
-      if(arr[0].done_date==this.moment(today)){
-        result=arr.filter((cur,index)=>{
-         return Math.floor((today - new Date(cur.done_date))/86400000)==index
-       })
-      }
-      debugger
-     return result.length
     },
      moment: function (date) {
       return moment(date).format('YYYY-MM-DD');
+    },
+    momentMonth:function (date) {
+      return moment(date).format('YYYY-MM');
     },
     beauty:function(date){
       return moment(date).format('M月D日');
@@ -102,11 +147,12 @@ export default{
   watch:{
     habitUser(val){
   
-      this.times=val.habit_dones.length
-      this.startDate=this.beauty(val.start_date)
+      this.details[0].value=val.habit_dones.length
+      this.details[1].value=this.beauty(val.start_date)
 
       if(val.habit_dones.lenght!=0){
-        this.countiTimes=this.checkCont(val.habit_dones)
+        this.details[2].value=this.checkCont(val.habit_dones)
+        this.details[3].value=this.getRate(val.habit_dones)
       }
     }
   }
@@ -139,10 +185,15 @@ export default{
           align-items: center;
           margin:0 auto;
           &-left{
-            margin-right:15px;
+            margin-right:10px;
             i{
-              font-size:4rem;
+              color: #34acbc;
+              font-size:3rem;
             }
+            .icon-0{
+              color:red;
+            }
+
           }
           &-right{
            display: flex;
