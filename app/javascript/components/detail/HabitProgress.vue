@@ -55,12 +55,24 @@ export default{
           1
         }
       })
-      debugger
+      const today=new Date()
+      if(arr[0].done_date==this.moment(today)){
+       let result=arr.filter((cur,index)=>{
+           debugger
+         return Math.floor((today - new Date(cur.done_date))/86400000)==index
+        
+       })
+       
+      }
+     
+    },
+     moment: function (date) {
+      return moment(date).format('YYYY-MM-DD');
     }
   },
   watch:{
     habitUser(val){
-      debugger
+  
       this.times=val.habit_dones.length
       this.startDate=val.start_date
       this.checkCont(val.habit_dones)
