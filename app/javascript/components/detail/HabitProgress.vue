@@ -17,12 +17,37 @@
         </div>
       </li>
       <li class="habit-progress__list__item">
+        <div class="habit-progress__list__item__inner">
+          <div class="habit-progress__list__item__inner-left">
+           <v-icon>mdi-fire</v-icon>
+          </div>
+          <div class="habit-progress__list__item__inner-right">
+            <p class="habit-progress__list__item__inner-right__detail" >
+              {{startDate}}
+            </p>
+            <p class="habit-progress__list__item__inner-right__title">
+              開始
+            </p>
+          </div>
+        </div>
+      </li>
+      <li class="habit-progress__list__item">
+        <div class="habit-progress__list__item__inner">
+          <div class="habit-progress__list__item__inner-left">
+           <v-icon>mdi-fire</v-icon>
+          </div>
+          <div class="habit-progress__list__item__inner-right">
+            <p class="habit-progress__list__item__inner-right__detail" >
+              {{countiTimes}}
+            </p>
+            <p class="habit-progress__list__item__inner-right__title">
+              連続
+            </p>
+          </div>
+        </div>
       </li>
       <li class="habit-progress__list__item">
       </li>
-      <li class="habit-progress__list__item">
-      </li>
-
     </ul>
   </div>
 
@@ -37,7 +62,9 @@ export default{
   data(){
     return{
       times:0,
-      startDate:0
+      startDate:0,
+      countiTimes:0
+      
     }
   },
   props:{
@@ -48,6 +75,7 @@ export default{
   },
   methods:{
     checkCont(arr){
+      let result=[]
       arr.sort((a,b)=>{
         if(a.done_date>b.done_date){
           return -1
@@ -57,25 +85,29 @@ export default{
       })
       const today=new Date()
       if(arr[0].done_date==this.moment(today)){
-       let result=arr.filter((cur,index)=>{
-           debugger
+        result=arr.filter((cur,index)=>{
          return Math.floor((today - new Date(cur.done_date))/86400000)==index
-        
        })
-       
       }
-     
+      debugger
+     return result.length
     },
      moment: function (date) {
       return moment(date).format('YYYY-MM-DD');
+    },
+    beauty:function(date){
+      return moment(date).format('M月D日');
     }
   },
   watch:{
     habitUser(val){
   
       this.times=val.habit_dones.length
-      this.startDate=val.start_date
-      this.checkCont(val.habit_dones)
+      this.startDate=this.beauty(val.start_date)
+
+      if(val.habit_dones.lenght!=0){
+        this.countiTimes=this.checkCont(val.habit_dones)
+      }
     }
   }
 
