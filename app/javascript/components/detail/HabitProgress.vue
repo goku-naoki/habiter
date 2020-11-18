@@ -16,55 +16,8 @@
           </div>
         </div>
       </li>
-      <!-- <li class="habit-progress__list__item">
-        <div class="habit-progress__list__item__inner">
-          <div class="habit-progress__list__item__inner-left">
-           <v-icon>mdi-fire</v-icon>
-          </div>
-          <div class="habit-progress__list__item__inner-right">
-            <p class="habit-progress__list__item__inner-right__detail" >
-              {{startDate}}
-            </p>
-            <p class="habit-progress__list__item__inner-right__title">
-              開始
-            </p>
-          </div>
-        </div>
-      </li>
-      <li class="habit-progress__list__item">
-        <div class="habit-progress__list__item__inner">
-          <div class="habit-progress__list__item__inner-left">
-           <v-icon>mdi-fire</v-icon>
-          </div>
-          <div class="habit-progress__list__item__inner-right">
-            <p class="habit-progress__list__item__inner-right__detail" >
-              {{countiTimes}}
-            </p>
-            <p class="habit-progress__list__item__inner-right__title">
-              連続
-            </p>
-          </div>
-        </div>
-      </li>
-      <li class="habit-progress__list__item">
-        <div class="habit-progress__list__item__inner">
-          <div class="habit-progress__list__item__inner-left">
-           <v-icon>mdi-fire</v-icon>
-          </div>
-          <div class="habit-progress__list__item__inner-right">
-            <p class="habit-progress__list__item__inner-right__detail" >
-              {{monthLate}}%
-            </p>
-            <p class="habit-progress__list__item__inner-right__title">
-              今月達成度
-            </p>
-          </div>
-        </div>
-      </li> -->
     </ul>
   </div>
-
-  
 </template>
 
 <script>
@@ -90,10 +43,7 @@ export default{
     }
   },
   props:{
-    habitUser:{
-     
-
-    }
+    habitUser:{}
   },
   methods:{
     checkCont(arr){
@@ -144,6 +94,7 @@ export default{
       return moment(date).format('M月D日');
     }
   },
+  
   watch:{
     habitUser(val){
   

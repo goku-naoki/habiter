@@ -2,6 +2,7 @@
   <div>
     <DetailHeader :habit="habitUser.habit"/>
     <HabitProgress :habit-user="habitUser"/>
+    <HabitCalender :habit-user="habitUser"/>
   </div>
   
 </template>
@@ -10,6 +11,7 @@
 import axios from 'axios';
 import DetailHeader from './DetailHeader'
 import HabitProgress from './HabitProgress'
+import HabitCalender from './HabitCalender'
 // import moment from 'moment';
 // import Csrf from '../..//mixins/csrf'
 export default{
@@ -33,7 +35,8 @@ export default{
   },
   components:{
     DetailHeader,
-    HabitProgress
+    HabitProgress,
+    HabitCalender
   }
 }
 

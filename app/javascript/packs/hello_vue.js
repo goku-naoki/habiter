@@ -14,10 +14,16 @@ import store from '../store';
 import Vuetify from "vuetify"; //以下２つvuetify用
 import "vuetify/dist/vuetify.min.css"; // 追加
 
+import VCalendar from 'v-calendar'
+
 Vue.use(Vuex);
 
 Vue.use(Vuetify); // 追加
 const vuetify = new Vuetify(); // 追加
+
+Vue.use(VCalendar) 
+Vue.config.productionTip = false
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const el = document.body.appendChild(document.createElement('hello'))
