@@ -116,8 +116,7 @@ export default{
   .habit-progress{
     width:95%;
     margin:0 auto;
-    border-bottom:1px solid rgba(0, 0, 0, 0.1);
-   overflow:scroll;
+    overflow:scroll;
     &__list{
       width:200vw;
       height:100px;
