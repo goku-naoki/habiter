@@ -132,6 +132,7 @@ export default{
       width: 100%;
       a{
         color: #404040;
+        font-size:1.4rem;
       }
     }
   }

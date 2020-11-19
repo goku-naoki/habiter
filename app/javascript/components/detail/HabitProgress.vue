@@ -17,7 +17,7 @@
         </div>
       </li>
     </ul>
-  </div>
+  </div> 
 </template>
 
 <script>
@@ -122,6 +122,7 @@ export default{
   .habit-progress{
     width:95%;
     margin:0 auto;
+    margin-bottom:30px;
     overflow:scroll;
     &__list{
       height:100px;
