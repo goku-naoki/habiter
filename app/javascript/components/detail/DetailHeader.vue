@@ -10,8 +10,8 @@
         </p>
       </div>
       <div class="detail-header__inner-right">
-        <v-icon>mdi-dots-horizontal-circle</v-icon>
-        <div class="detail-header__modal">
+        <v-icon @click="toggleModal">mdi-dots-horizontal-circle</v-icon>
+        <div class="detail-header__modal" v-if="isTouched">
           <ul class="detail-header__modal__list">
             <li class="detail-header__modal__list__item">
               <router-link to="/">
@@ -35,6 +35,7 @@
             </li>
           </ul>
         </div>
+        <div @click="toggleModal" v-if="isTouched" class="modal-wrapper"></div>
       </div>
     </div>
   </div>
@@ -46,12 +47,22 @@ import axios from 'axios';
 export default{
   data(){
     return{
-      name:""
+      name:"",
+      isTouched:false
     }
   },
   props:{
       habit:Object
     },
+  methods:{
+    toggleModal(){
+      if(!this.isTouched){
+        this.isTouched=true
+      }else{
+        this.isTouched=false
+      }
+    }
+  },
   computed:{
     habitName(){
       return this.habit.name
@@ -102,7 +113,7 @@ export default{
         display:flex;
         align-items: center;
         position:relative;
-        i{
+        button{
           color:#34acbc;
         }
         .detail-header__modal{
@@ -110,6 +121,7 @@ export default{
           position:absolute;
           right:0;
           top:50px;
+          z-index:2;
           background:white;
           box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
           border-radius:5px;
@@ -137,6 +149,14 @@ export default{
               }
             }
           }
+        }
+        .modal-wrapper{
+          position:fixed;
+          top:0;
+          left:0;
+          width:100%;
+          height:100%;
+          z-index:1;
         }
       }
     }
