@@ -7,7 +7,7 @@
            <v-icon :class="`icon-${detail.id}`">{{detail.icon}}</v-icon>
           </div>
           <div class="habit-progress__list__item__inner-right">
-            <p class="habit-progress__list__item__inner-right__detail" >
+            <p class="habit-progress__list__item__inner-right__detail" v-if="detail.value!=-1" >
               {{detail.value}}
             </p>
             <p class="habit-progress__list__item__inner-right__title">
@@ -35,10 +35,10 @@ export default{
       monthLate:0,
       today:today,
       details:[
-        {icon:'mdi-fire',value:0,title:"達成",id:0},
-        {icon:'mdi-clock-start',value:0,title:"開始",id:1},
-        {icon:'mdi-cached',value:0,title:"連続",id:2},
-        {icon:'mdi-check-all',value:0,title:"今月達成",id:3},
+        {icon:'mdi-fire',value:-1,title:"達成",id:0},
+        {icon:'mdi-clock-start',value:-1,title:"開始",id:1},
+        {icon:'mdi-cached',value:-1,title:"連続",id:2},
+        {icon:'mdi-check-all',value:-1,title:"今月達成",id:3},
       ]
     }
   },
@@ -98,12 +98,18 @@ export default{
   watch:{
     habitUser(val){
   
-      this.details[0].value=val.habit_dones.length
+      
       this.details[1].value=this.beauty(val.start_date)
 
-      if(val.habit_dones.lenght!=0){
+      if(val.habit_dones.length!=0){
+       
+        this.details[0].value=val.habit_dones.length
         this.details[2].value=this.checkCont(val.habit_dones)
         this.details[3].value=this.getRate(val.habit_dones)
+      }else{
+        this.details[0].value=0
+        this.details[2].value=0
+        this.details[3].value=0
       }
     }
   }
