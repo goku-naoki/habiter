@@ -10,6 +10,7 @@
 
 <script>
 import axios from 'axios';
+import 'normalize.css'
 // import Header from './components/globals/Header' 
 // import Footer from './components/globals/Footer' 
 
@@ -21,9 +22,16 @@ export default{
     }
   },
   created(){
-    
-  }
+    console.log(1)
+    axios
+    .get("api/v1/users/get_user")
+    .then(response => {
+       this.$store.commit("setCurrentUser", response.data)
+       console.log(this.$store.state.currentUser)
+    })
  
+  }
+
 }
 
 </script>
@@ -53,6 +61,7 @@ ul{
 img{
   vertical-align: bottom;
 }
+
 
 
 

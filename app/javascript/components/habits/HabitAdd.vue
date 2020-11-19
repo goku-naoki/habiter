@@ -49,14 +49,13 @@ export default{
       return (axios.post('/api/v1/habits', {
         habit: {
           name: this.name,
-          start_date: this.date
+          start_date: this.date.getTime()/1000
         }
       })
       .then(response => {
-          debugger
 
            this.$router.push({path: '/'});
-          // return (response)
+         
         })
       )
     }

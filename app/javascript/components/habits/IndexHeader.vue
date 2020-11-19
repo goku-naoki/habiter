@@ -68,7 +68,7 @@ export default{
     }
   },
   created(){
-   
+    this.date=this.selected_date
     this.checkToday()
   },
 

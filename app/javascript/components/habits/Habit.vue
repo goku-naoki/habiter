@@ -4,8 +4,10 @@
       <v-icon v-if=" isDone" @click="undoHabit(habit, $event)">mdi-checkbox-marked-circle</v-icon>
       <v-icon v-else @click="doneHabit(habit,$event)"> mdi-checkbox-blank-circle-outline</v-icon>
     </div>
-    <div class="habit-list__box__item-rigth">
-      <p>{{habit.name}}</p>
+    <div class="habit-list__box__item-right">
+      <router-link :to="{ name: 'HabitDetail', params: { id: habitUser.id } } ">
+        <p>{{habit.name}}</p>
+      </router-link>
     </div>
   </li>
 </template>
@@ -17,10 +19,15 @@ import Csrf from '../..//mixins/csrf'
 export default{
 
   data(){
+    
+ 
     return{
       done_date:this.selected_date,
-      habit_id:0,
-      isDone:false
+      isDone:false,
+      habitUser:{
+     
+
+      }
     }
   },
   props:{
@@ -28,27 +35,28 @@ export default{
   },
   methods:{
     doneHabit:function(habit,event){
-      this.habit_id=habit.id
+    
       event.preventDefault()
       this.setAxiosDefaults();
+     
       return (axios.post("/api/v1/habits/habit_done", {
         habit_done: {
-          habit_id: this.habit_id,
-          done_date:this.$store.state.selectedDate
+          habit_user_id: this.habitUser.id,
+          done_date:this.$store.state.selectedDate.getTime()/1000
         }
       })
       .then(response => {
         this.isDone=true
-        this.habit.habit_dones.push(response.data)  //配列の値も更新しないと、chackできやん
+        this.habitUser.habit_dones.push(response.data) //配列の値も更新しないと、chackできやん
         })
       )
     },
     undoHabit(habit,event){
-      debugger
-      this.habit_id=habit.id
+      
+      const that=this
       const habit_done= {
-          habit_id: this.habit_id,
-          done_date:this.$store.state.selectedDate
+          habit_user_id: this.habitUser.id,
+          done_date:this.$store.state.selectedDate.getTime()/1000
         }
       event.preventDefault()
       this.setAxiosDefaults();
@@ -57,24 +65,21 @@ export default{
       })
       .then(response => {
         this.isDone=false
-        // let result=this.habit.habit_dones.filter(cur=> cur!=response.data)
-        // this.habit.habit_dones=result
-        const undo_index=this.habit.habit_dones.indexOf(response.data)
-        this.habit.habit_dones.splice(undo_index,1)  //配列の値も更新しないと、chackできやん
+
+        that.habitUser.habit_dones=that.habitUser.habit_dones.filter((cur)=>{
+          cur.done_date!=response.data.done_date
+        })
         })
       )
     },
     checkDone:function(date){
-      const habit_dones=this.habit.habit_dones
-      
+    
+      const habit_dones=this.habitUser.habit_dones
+      const that=this
       if(habit_dones.lenght!=0){
-        habit_dones.forEach((done)=>{
-        const selected_date=this.moment(date)
-          if(done.done_date==selected_date){
-            this.isDone=true
-          }else{
-            this.isDone=false
-          }
+        this.isDone=habit_dones.some((done)=>{
+          let selected_date=that.moment(date)
+          return done.done_date==selected_date
         })
       }
     },
@@ -85,6 +90,13 @@ export default{
   computed:{
     selected_date(){
       return this.$store.state.selectedDate
+    },
+    current_user(){
+      return this.$store.state.currentUser
+    },
+    get_habit_user(){
+        const habitUser=this.habit.habit_users.find(cur=>cur.user_id==this.current_user.id)
+        this.habitUser=habitUser
     }
   },
   watch: {
@@ -94,6 +106,7 @@ export default{
   }
   ,created(){
     const date=this.selected_date;
+    this.get_habit_user
     this.checkDone(date)
   },
   mixins:[Csrf],
@@ -111,6 +124,14 @@ export default{
       margin-right:2%;
       button{
         color:#34acbc;
+      }
+    }
+    &-right{
+      height: 100%;
+      line-height: 70px;
+      width: 100%;
+      a{
+        color: #404040;
       }
     }
   }

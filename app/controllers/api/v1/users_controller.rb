@@ -11,4 +11,10 @@ class Api::V1::UsersController < ApiController
       render :json => { auth:'login'}
     end
   end
+
+  def get_user
+    if user_signed_in?
+      render :json => { user:current_user}
+    end
+  end
 end

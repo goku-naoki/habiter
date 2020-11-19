@@ -7,11 +7,17 @@ const store = () => {
     return new Vuex.Store({
         state: {
             selectedDate:day,
+            currentUser:{},
         },
         mutations: {
             setDate(state, val) {
                 state.selectedDate = val
             },
+            setCurrentUser(state, val) {
+                
+               state.currentUser = val.user  //userまで指定しないと、computed上手く取得出来ない
+               //sign時とappでのvalの指定深さが違った
+          }, 
         },
         actions: {
         }
@@ -19,4 +25,3 @@ const store = () => {
 }
 
 export default store
-
