@@ -143,6 +143,8 @@ export default{
           &-left{
             margin-right:10px;
             i{
+              position: static;
+              z-index: 0;
               color: #34acbc;
               font-size:3rem;
             }
