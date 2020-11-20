@@ -17,7 +17,7 @@
         </div>
       </li>
     </ul>
-  </div>
+  </div> 
 </template>
 
 <script>
@@ -122,9 +122,9 @@ export default{
   .habit-progress{
     width:95%;
     margin:0 auto;
+    margin-bottom:30px;
     overflow:scroll;
     &__list{
-      width:200vw;
       height:100px;
       display: flex;
       align-items: center;
@@ -133,7 +133,10 @@ export default{
         height:70px;
         background:rgba(0, 0, 0, 0.1);
         border-radius: 4px;;
-        margin-right:20px;
+        flex-shrink: 0;
+        &:not(:last-child){
+          margin-right:20px;
+        }
         &__inner{
           width:90%;
           height:100%;
@@ -143,6 +146,8 @@ export default{
           &-left{
             margin-right:10px;
             i{
+              position: static;
+              z-index: 0;
               color: #34acbc;
               font-size:3rem;
             }
@@ -169,5 +174,13 @@ export default{
       }
     }
     
+  }
+  @media screen and (min-width: 1118px) {
+
+    .habit-progress__list{
+      width:100%;
+      margin:0 auto;
+      justify-content: space-between;
+    }
   }
 </style>

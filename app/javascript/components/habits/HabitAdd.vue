@@ -77,6 +77,7 @@ export default{
       width:100%;
       height:50px;
       margin-bottom:20px;
+      font-size:1.4rem;
       background:white;
       color:#34acbc;
       &__inner{
@@ -105,6 +106,7 @@ export default{
           width:95%;
           margin:0 auto;
           padding:10px 0;
+          font-size:1.6rem;
         }
       }
       &__detail{
@@ -117,9 +119,11 @@ export default{
           display:flex;
           justify-content:space-between;
           align-items: center;
+          font-size: 1.4rem;
           border-bottom:1px solid #fafafa;
           &-left{
             display: flex;
+            align-items: center;
             i{
               margin-right:15px;
             }

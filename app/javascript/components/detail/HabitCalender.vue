@@ -94,7 +94,7 @@ export default {
     --day-content-height : 60px;
     --day-content-bg-color-hover: rgba(204,214,224,0); 
     --day-content-dark-bg-color-hover: rgba(114,129,151,0); 
-   --day-content-bg-color-focus: rgba(204,214,224,0);
+    --day-content-bg-color-focus: rgba(204,214,224,0);
     --day-content-dark-bg-color-focus: rgba(114,129,151,0);
   }
   .vc-cursor-pointer{

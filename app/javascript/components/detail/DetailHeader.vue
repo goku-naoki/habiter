@@ -10,7 +10,32 @@
         </p>
       </div>
       <div class="detail-header__inner-right">
-        <v-icon>mdi-dots-horizontal-circle</v-icon>
+        <v-icon @click="toggleModal">mdi-dots-horizontal-circle</v-icon>
+        <div class="detail-header__modal" v-if="isTouched">
+          <ul class="detail-header__modal__list">
+            <li class="detail-header__modal__list__item">
+              <router-link to="/">
+                <p class="detail-header__modal__list__item-left">
+                  編集
+                </p>
+                <div class="detail-header__modal__list__item-right">
+                  <v-icon> mdi-grease-pencil</v-icon>
+                </div>
+              </router-link>
+            </li>
+            <!-- <li class="detail-header__modal__list__item">
+              <router-link to="/">
+                <p class="detail-header__modal__list__item-left">
+                  履歴
+                </p>
+                <div class="detail-header__modal__list__item-right">
+                  <v-icon> mdi-view-split-vertical</v-icon>
+                </div>
+              </router-link>
+            </li> -->
+          </ul>
+        </div>
+        <div @click="toggleModal" v-if="isTouched" class="modal-wrapper"></div>
       </div>
     </div>
   </div>
@@ -19,17 +44,25 @@
 <script>
 import axios from 'axios';
 
-// import moment from 'moment';
-// import Csrf from '../..//mixins/csrf'
 export default{
   data(){
     return{
-      name:""
+      name:"",
+      isTouched:false
     }
   },
   props:{
       habit:Object
     },
+  methods:{
+    toggleModal(){
+      if(!this.isTouched){
+        this.isTouched=true
+      }else{
+        this.isTouched=false
+      }
+    }
+  },
   computed:{
     habitName(){
       return this.habit.name
@@ -42,7 +75,6 @@ export default{
   },
   created(){
     
-   
   }
   
 }
@@ -81,8 +113,50 @@ export default{
         display:flex;
         align-items: center;
         position:relative;
-        i{
+        button{
           color:#34acbc;
+        }
+        .detail-header__modal{
+          width:200px;
+          position:absolute;
+          right:0;
+          top:50px;
+          z-index:2;
+          background:white;
+          box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+          border-radius:5px;
+          &__list{
+            width:90%;
+            margin:0 auto;
+            &__item{
+              height:36px;
+               &:not(:last-child){
+                border-bottom:rgba(0, 0, 0, 0.1) solid 1px;
+                }
+              a{
+                height:100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color:#404040;
+                .detail-header__modal__list__item-left{
+                  font-size:1.2rem;
+                }
+                i{
+                  color:#404040;
+                }
+
+              }
+            }
+          }
+        }
+        .modal-wrapper{
+          position:fixed;
+          top:0;
+          left:0;
+          width:100%;
+          height:100%;
+          z-index:1;
         }
       }
     }

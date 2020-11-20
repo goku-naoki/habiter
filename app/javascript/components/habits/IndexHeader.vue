@@ -2,7 +2,7 @@
   <div class="index-header">
     <div class="index-header__inner">
       <div class="index-header__inner-left">
-        <p class="index-header__inner-left__data">
+        <p class="index-header__inner-left__date">
           <template v-if="isToday">今日</template>
           <template v-else>{{date| beautyDate}}</template>
         </p>
@@ -98,6 +98,10 @@ export default{
     &-left{
       display:flex;
       align-items: center;
+      &__date{
+        font-size:1.8rem;
+        font-weight:500;
+      }
     }
     &-right{
       display:flex;
