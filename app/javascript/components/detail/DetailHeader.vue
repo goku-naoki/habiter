@@ -23,7 +23,7 @@
                 </div>
               </router-link>
             </li>
-            <li class="detail-header__modal__list__item">
+            <!-- <li class="detail-header__modal__list__item">
               <router-link to="/">
                 <p class="detail-header__modal__list__item-left">
                   履歴
@@ -32,7 +32,7 @@
                   <v-icon> mdi-view-split-vertical</v-icon>
                 </div>
               </router-link>
-            </li>
+            </li> -->
           </ul>
         </div>
         <div @click="toggleModal" v-if="isTouched" class="modal-wrapper"></div>
