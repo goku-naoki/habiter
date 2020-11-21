@@ -19,9 +19,8 @@ export default{
     },
   methods:{
     editHabit:function(val){
-    
       this.setAxiosDefaults();
-      return (axios.post('/api/v1/habits', {
+      return (axios.patch(`/api/v1/habits/${this.id}`, {
         habit: {
           name: val.name,
           start_date: val.date.getTime()/1000

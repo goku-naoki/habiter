@@ -5,7 +5,7 @@
         <router-link to="/">
             キャンセル
         </router-link>
-        <input class="habit-add__header__inner-right" @click="addHabit" type="submit" value="保存">
+        <input class="habit-add__header__inner-right" @click="submit" type="submit" value="保存">
       </div>
     </div>
     <div class="habit-add__form">
@@ -50,8 +50,7 @@ export default{
     }
   },
   methods:{
-    addHabit:function(event){
-
+    submit:function(event){
       const habit={name:this.name,date:this.date}
       this.$emit('submit',habit)
     }

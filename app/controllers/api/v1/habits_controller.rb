@@ -30,6 +30,22 @@ class Api::V1::HabitsController < ApiController
     end
   end
 
+  def update
+    binding.pry
+    @habit_user=HabitUser.find(params[:id])
+    @habit=@habit_user.habit
+    unless @habit_user.habit.name==habit_params[:name]
+      @habit=Habit.create(name:habit_params[:name])
+    end
+    
+    @habit_user.update(
+      habit_id:@habit.id,
+      start_date:Time.at(habit_params[:start_date])
+    )
+
+    render json: @habit_user,serializer: HabitUserSerializer
+  
+  end
   def habit_done
     
     habit_done=HabitDone.new(habit_user_id:habit_done_params[:habit_user_id],

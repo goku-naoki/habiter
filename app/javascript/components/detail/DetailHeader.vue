@@ -14,7 +14,7 @@
         <div class="detail-header__modal" v-if="isTouched">
           <ul class="detail-header__modal__list">
             <li class="detail-header__modal__list__item">
-             <router-link :to="{ name: 'HabitEdit', params: { id: advhabitUser.id } } ">
+             <router-link :to="{ name: 'HabitEdit', params: { id: habitUser.id } } ">
                 <p class="detail-header__modal__list__item-left">
                   編集
                 </p>
