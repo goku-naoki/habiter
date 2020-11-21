@@ -1,5 +1,9 @@
 <template>
-  <HabitForm :habitUser="habitUser" @submit="editHabit"/>
+  <HabitForm :habitUser="habitUser" @submit="editHabit">
+    <router-link :to="{ name: 'HabitDetail', params: { id:id } } ">
+      キャンセル
+    </router-link>
+  </HabitForm>
 </template>
 
 <script>
@@ -10,7 +14,6 @@ import HabitForm from './HabitForm'
 export default{
   data(){
     return{
-      habit:{},
       habitUser:{}
     }
   },

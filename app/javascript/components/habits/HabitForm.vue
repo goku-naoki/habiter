@@ -2,9 +2,7 @@
   <form class="habit-add">
     <div class="habit-add__header">
       <div class="habit-add__header__inner">
-        <router-link to="/">
-            キャンセル
-        </router-link>
+        <slot></slot>
         <input class="habit-add__header__inner-right" @click="submit" type="submit" value="保存">
       </div>
     </div>

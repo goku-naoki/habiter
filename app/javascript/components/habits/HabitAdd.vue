@@ -1,5 +1,7 @@
 <template>
-  <HabitForm :habit-user="habitUser" @submit="addHabit"/>
+  <HabitForm :habit-user="habitUser" @submit="addHabit">
+    <router-link to="/">キャンセル</router-link>
+  </HabitForm>
 </template>
 
 <script>
