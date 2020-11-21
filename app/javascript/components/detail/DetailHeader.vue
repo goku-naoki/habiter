@@ -14,7 +14,7 @@
         <div class="detail-header__modal" v-if="isTouched">
           <ul class="detail-header__modal__list">
             <li class="detail-header__modal__list__item">
-              <router-link to="/">
+             <router-link :to="{ name: 'HabitEdit', params: { id: advhabitUser.id } } ">
                 <p class="detail-header__modal__list__item-left">
                   編集
                 </p>
@@ -52,7 +52,7 @@ export default{
     }
   },
   props:{
-      habit:Object
+      habitUser:Object
     },
   methods:{
     toggleModal(){
@@ -69,8 +69,8 @@ export default{
     }
   },
   watch:{
-    habit(val){
-      this.name=val.name  //propsの取得に時間がかかる？？？？
+    habitUser(val){
+      this.name=val.habit.name  //propsの取得に時間がかかる？？？？
     }
   },
   created(){

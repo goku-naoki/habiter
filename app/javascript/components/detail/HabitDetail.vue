@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DetailHeader :habit="habitUser.habit"/>
+    <DetailHeader :habit-user="habitUser"/>
     <HabitProgress :habit-user="habitUser"/>
     <HabitCalender :habit-user="habitUser"/>
   </div>
