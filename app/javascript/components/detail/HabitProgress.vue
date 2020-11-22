@@ -19,7 +19,6 @@
     </ul>
   </div> 
 </template>
-
 <script>
 import axios from 'axios';
 import moment from 'moment';
@@ -44,15 +43,18 @@ export default{
     checkCont(arr){
       let result=[]
       this.sortDone(arr)
+
       //todayを含んでいれば
-     
       if(arr.some(cur=>cur.done_date==this.moment(this.today))){
-         debugger
-        result=arr.filter((cur,index)=>{
-         return Math.floor((this.today - new Date(cur.done_date))/86400000)==index
-       })
-      }
     
+        //まず、本日以降のdoneは除外
+        result=arr.filter((cur,index)=>{
+            return this.today>=new Date(cur.done_date)
+        })
+        .filter((cur,index)=>{
+          return Math.floor((this.today - new Date(cur.done_date))/86400000)==index
+        })
+      }
      return `${result.length}日`
     },
     getRate:function(arr){
