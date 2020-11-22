@@ -27,8 +27,6 @@ export default{
       })
       .then(response => {
         this.$emit('added',response.data)
-          //  this.$router.push({path: '/'});
-         
         })
       )
     },

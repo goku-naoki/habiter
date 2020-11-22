@@ -13,6 +13,7 @@ import HabitDetail from './components/detail/HabitDetail.vue'
 
 Vue.use(Router)
 const router = new Router({
+  mode: 'history',
   routes: [
     { path: '/user/signup', 
       name: 'SignUp',
