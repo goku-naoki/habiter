@@ -1,7 +1,7 @@
 <template>
   <div class="habit-list">
     <ul class="habit-list__box" >
-      <Habit :habit="habit" v-for="habit in habits" :key="habit.id" />
+      <Habit :habitUser="habit" v-for="habit in habits" :key="habit.id" />
     </ul>
   </div>
 </template>

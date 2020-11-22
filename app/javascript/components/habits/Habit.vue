@@ -1,12 +1,12 @@
 <template>
   <li class="habit-list__box__item">
     <div class="habit-list__box__item-left">
-      <v-icon v-if=" isDone" @click="undoHabit(habit, $event)">mdi-checkbox-marked-circle</v-icon>
-      <v-icon v-else @click="doneHabit(habit,$event)"> mdi-checkbox-blank-circle-outline</v-icon>
+      <v-icon v-if=" isDone" @click="undoHabit(habitUser, $event)">mdi-checkbox-marked-circle</v-icon>
+      <v-icon v-else @click="doneHabit(habitUser,$event)"> mdi-checkbox-blank-circle-outline</v-icon>
     </div>
     <div class="habit-list__box__item-right">
       <router-link :to="{ name: 'HabitDetail', params: { id: habitUser.id } } ">
-        <p>{{habit.name}}</p>
+        <p>{{habitUser.habit.name}}</p>
       </router-link>
     </div>
   </li>
@@ -24,14 +24,14 @@ export default{
     return{
       done_date:this.selected_date,
       isDone:false,
-      habitUser:{
+      // habitUser:{
      
 
-      }
+      // }
     }
   },
   props:{
-    habit:Object
+    habitUser:Object
   },
   methods:{
     doneHabit:function(habit,event){
@@ -94,10 +94,10 @@ export default{
     current_user(){
       return this.$store.state.currentUser
     },
-    get_habit_user(){
-        const habitUser=this.habit.habit_users.find(cur=>cur.user_id==this.current_user.id)
-        this.habitUser=habitUser
-    }
+    // get_habit_user(){
+    //     const habitUser=this.habit.habit_users.find(cur=>cur.user_id==this.current_user.id)
+    //     this.habitUser=habitUser
+    // }
   },
   watch: {
     selected_date(date) {
@@ -106,7 +106,7 @@ export default{
   }
   ,created(){
     const date=this.selected_date;
-    this.get_habit_user
+    // this.get_habit_user
     this.checkDone(date)
   },
   mixins:[Csrf],

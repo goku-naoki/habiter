@@ -36,7 +36,7 @@ export default{
   methods:{
     checkHabits(habits,date){
       let result=habits.filter((cur)=>{
-       return new Date(cur.habit_users[0].start_date)<=date
+       return new Date(cur.start_date)<=date
       })
      return result
     },

@@ -6,8 +6,9 @@ class Api::V1::HabitsController < ApiController
   end
 
   def index
-    habits=current_user.habits
-    render json: habits,include: { habit_users: [:habit_dones] },each_serializer: HabitSerializer
+    
+    habit_users=current_user.habit_users
+    render json: habit_users,each_serializer: HabitUserSerializer
   end
 
   def show
@@ -24,7 +25,7 @@ class Api::V1::HabitsController < ApiController
                        habit_id:@habit.id,
                        start_date:Time.at(habit_params[:start_date]))
 
-      render json: @habit,include: { habit_users: [:habit_dones] },serializer: HabitSerializer
+      render json: @habit_user,serializer: HabitUserSerializer
     else
 
     end
