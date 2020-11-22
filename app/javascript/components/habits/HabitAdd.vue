@@ -1,6 +1,6 @@
 <template>
-  <HabitForm :habit-user="habitUser" @submit="addHabit">
-    <router-link to="/">キャンセル</router-link>
+  <HabitForm :habit-user="habitUser" @submit="addHabit" @cancel="cancel">
+   
   </HabitForm>
 </template>
 
@@ -26,13 +26,17 @@ export default{
         }
       })
       .then(response => {
-
-           this.$router.push({path: '/'});
+        this.$emit('added',response.data)
+          //  this.$router.push({path: '/'});
          
         })
       )
+    },
+    cancel(){
+      this.$emit('cancel')
     }
   },
+  
   mixins:[Csrf],
   
   components:{

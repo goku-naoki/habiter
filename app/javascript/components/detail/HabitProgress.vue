@@ -52,7 +52,7 @@ export default{
          return Math.floor((this.today - new Date(cur.done_date))/86400000)==index
        })
       }
-       debugger
+    
      return `${result.length}日`
     },
     getRate:function(arr){

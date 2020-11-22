@@ -1,8 +1,5 @@
 <template>
-  <HabitForm :habitUser="habitUser" @submit="editHabit">
-    <router-link :to="{ name: 'HabitDetail', params: { id:id } } ">
-      キャンセル
-    </router-link>
+  <HabitForm :habit-user="habitUser" @submit="editHabit" @cancel="cancel">
   </HabitForm>
 </template>
 
@@ -22,19 +19,24 @@ export default{
     },
   methods:{
     editHabit:function(val){
+     
       this.setAxiosDefaults();
       return (axios.patch(`/api/v1/habits/${this.id}`, {
         habit: {
           name: val.name,
-          start_date: val.date.getTime()/1000
+          start_date: new Date(val.date).getTime()/1000
         }
       })
       .then(response => {
-
-           this.$router.push({path: '/'});
+       
+        this.$emit('updated',response.data)
+          //  this.$router.push({path: '/'});
          
         })
       )
+    },
+    cancel(){
+      this.$emit('cancel')
     }
   },
   created(){

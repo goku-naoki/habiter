@@ -1,6 +1,6 @@
 <template>
   <div class='habit-index'>
-    <IndexHeader/>
+    <IndexHeader @added="added"/>
     <HabitList v-if="habits!=null" :habits="habits" />
   </div>
 </template>
@@ -39,6 +39,9 @@ export default{
        return new Date(cur.habit_users[0].start_date)<=date
       })
      return result
+    },
+    added(response){
+      this.allHabits.push(response)
     }
   },
   computed:{
@@ -49,6 +52,9 @@ export default{
   watch: {
     selected_date(date){
      this.habits=this.checkHabits(this.allHabits,date)
+    },
+    allHabits(val){
+      this.habits=this.checkHabits(this.allHabits,this.selected_date)
     }
   }
 }

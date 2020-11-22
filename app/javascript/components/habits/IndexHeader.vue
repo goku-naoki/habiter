@@ -11,10 +11,12 @@
         <label for="select-date" class="index-header__inner-right_calender">
           <v-icon>mdi-calendar-range</v-icon>
         </label>
-       <Datepicker  id="select-date" v-model="date"></Datepicker>
-        <router-link to="/habit/new">
-           <v-icon>mdi-pencil-plus-outline</v-icon>
-        </router-link>
+        <Datepicker  id="select-date" v-model="date"></Datepicker>
+        <!-- <router-link to="#"> -->
+        <v-icon @click="toggleForm">mdi-pencil-plus-outline</v-icon>
+        <HabitAdd v-if="isFormTouched" @cancel="toggleForm" @added="added"/>
+        <div @click="toggleForm" v-if="isFormTouched" class="modal-wrapper"></div>
+        <!-- </router-link> -->
       </div>
     </div>
   </div>
@@ -24,12 +26,14 @@
 import axios from 'axios';
 import Datepicker from 'vuejs-datepicker';
 import moment from 'moment';
+import HabitAdd from './HabitAdd'
 
 export default{
   data(){
     return{
       date:this.selected_date,
-      isToday:false
+      isToday:false,
+      isFormTouched:false
     }
   },
   methods:{
@@ -46,6 +50,17 @@ export default{
     },
     moment: function (date) {
       return moment(date).format('YYYY-MM-DD');
+    },
+    toggleForm(){
+      if(!this.isFormTouched){
+        this.isFormTouched=true
+      }else{
+        this.isFormTouched=false
+      }
+    },
+    added(response){
+      this.toggleForm()
+      this.$emit('added',response)
     }
   },
   computed:{
@@ -73,7 +88,7 @@ export default{
   },
 
   components : {
-    
+    HabitAdd,
     Datepicker
   }
  
@@ -120,6 +135,15 @@ export default{
            color:white;
         }
       }
+      .modal-wrapper{
+          position:fixed;
+          top:0;
+          left:0;
+          width:100%;
+          height:100%;
+          z-index:1;
+          background:rgba(0,0,0,0.6)
+      }
     }
   }
 }
@@ -134,6 +158,11 @@ export default{
       width:0px;
       height:0;
       outline: none;
+    }
+    #day{
+      height: 100%;
+      width: 100%;
+      display: block;
     }
     .vdp-datepicker__calendar{
       left: -220px;

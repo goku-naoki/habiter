@@ -2,7 +2,7 @@
   <form class="habit-add">
     <div class="habit-add__header">
       <div class="habit-add__header__inner">
-        <slot></slot>
+        <p @click="cancel">キャンセル</p>
         <input class="habit-add__header__inner-right" @click="submit" type="submit" value="保存">
       </div>
     </div>
@@ -17,7 +17,7 @@
             <p>開始日</p>
           </div>
           <div class="habit-add__form__detail__item-right">
-            <Datepicker  id="day" v-model="date"  ></Datepicker>
+            <Datepicker  id="day" v-model="date"></Datepicker>
             <label v-show="date==0" for="day"><span>日付</span></label>
           </div>
         </div>
@@ -44,13 +44,15 @@ export default{
         name:String,
       },
       start_date:Date
-
     }
   },
   methods:{
     submit:function(event){
       const habit={name:this.name,date:this.date}
       this.$emit('submit',habit)
+    },
+    cancel(){
+      this.$emit('cancel')
     }
   },
   watch:{
@@ -71,7 +73,15 @@ export default{
 
 <style scoped lang="scss">
   .habit-add{
+    width:50vw;
+    height:50vh;
+    position:fixed;
+    top: 40%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    z-index:100;
     background:#fafafa;
+    border-radius: 5px; //なぜか上だけ効かないのでheaderの上に
     &__header{
       width:100%;
       height:50px;
@@ -79,6 +89,8 @@ export default{
       font-size:1.4rem;
       background:white;
       color:#34acbc;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 5px 5px 0 0;
       &__inner{
         width:95%;
         height:100%;
@@ -87,7 +99,7 @@ export default{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        a{
+        p{
           color:#34acbc;
         }
       }

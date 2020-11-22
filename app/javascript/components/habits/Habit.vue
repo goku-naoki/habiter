@@ -73,7 +73,7 @@ export default{
       )
     },
     checkDone:function(date){
-    
+   
       const habit_dones=this.habitUser.habit_dones
       const that=this
       if(habit_dones.lenght!=0){
