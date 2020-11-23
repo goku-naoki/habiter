@@ -2,25 +2,31 @@
   <div class="my-habits">
     <div class="my-habits__inner">
       <p class="my-habits__inner-title">
-        習慣
+        Habits
       </p>
-      <div class="my-habits__inner__list">
-       
-      </div>
+      <ul class="my-habits__inner__list">
+        <MyHabit :habit-user="habitUser" v-for="habitUser in user.habit_users" :key="habitUser.id"/>
+      </ul>
     </div>
   </div>
 </template>
 
+
 <script>
 import axios from 'axios';
-
+import MyHabit from './MyHabit'
 export default{
 
    props:{
-    user:Object
+    user:{
+      habit_users:Array
+    }
   },
   
 
+components:{
+  MyHabit
+}
 
   
 
@@ -37,7 +43,15 @@ export default{
       width:95%;
       height: 100%;;
       margin:0 auto;
-      background:pink;
+      &-title{
+        font-size:1.8rem;
+        margin-bottom:20px;
+      }
+      &__list{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap:wrap;
+      }
     }
   }
 
