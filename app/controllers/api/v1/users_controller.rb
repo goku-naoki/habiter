@@ -6,6 +6,11 @@ class Api::V1::UsersController < ApiController
     render json: { error: '404 not found' }, status: 404
   end
 
+  def show
+    @user=User.find(params[:id])
+    render json: @user,serializer: UserSerializer
+  end
+
   def check_auth
     if user_signed_in?
       render :json => { auth:'login'}
