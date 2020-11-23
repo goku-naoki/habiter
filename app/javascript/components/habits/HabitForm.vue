@@ -22,6 +22,8 @@
           </div>
         </div>
       </div>
+      <!-- 削除様 -->
+      <slot></slot>
     </div>
   </form>
 </template>
@@ -124,6 +126,7 @@ export default{
       &__detail{
         width:100%;
         background:white;
+        margin-bottom:40px;
         &__item{
           width:95%;
           height:50px;

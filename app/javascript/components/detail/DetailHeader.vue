@@ -36,7 +36,9 @@
         <div @click="toggleModal()" v-if="isModalTouched" class="modal-wrapper"></div>
       </div>
     </div>
-  <HabitEdit :id="habitUser.id" v-if="isFormTouched" @cancel="toggleForm" @updated="updated"/>
+  <HabitEdit :id="habitUser.id" v-if="isFormTouched" @cancel="toggleForm" @updated="updated">
+   
+  </HabitEdit>
   <div @click="toggleForm" v-if="isFormTouched" class="modal-edit-wrapper"></div>
   </div>
 </template>
@@ -44,6 +46,7 @@
 <script>
 import axios from 'axios';
 import HabitEdit from '../habits/HabitEdit'
+
 
 export default{
   data(){
@@ -92,6 +95,7 @@ export default{
   },
   components : {
     HabitEdit,
+   
     
   }
   

@@ -1,5 +1,6 @@
 <template>
   <HabitForm :habit-user="habitUser" @submit="editHabit" @cancel="cancel">
+    <HabitDelete :id="id"/>
   </HabitForm>
 </template>
 
@@ -7,6 +8,7 @@
 import axios from 'axios';
 import Csrf from '../..//mixins/csrf'
 import HabitForm from './HabitForm'
+import HabitDelete from './HabitDelete'
 
 export default{
   data(){
@@ -48,7 +50,8 @@ export default{
   },
 
   components:{
-    HabitForm
+    HabitForm,
+     HabitDelete
   },
    mixins:[Csrf],
 

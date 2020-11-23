@@ -46,6 +46,12 @@ class Api::V1::HabitsController < ApiController
     render json: @habit_user,serializer: HabitUserSerializer
   
   end
+
+  def destroy
+    @habit_user=HabitUser.find(params[:id])
+    @habit_user.destroy
+    render json: @habit_user,serializer: HabitUserSerializer
+  end
   def habit_done
     
     habit_done=HabitDone.new(habit_user_id:habit_done_params[:habit_user_id],
