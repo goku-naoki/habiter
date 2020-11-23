@@ -48,6 +48,7 @@ export default{
   },
   methods:{
     submit:function(event){
+      event.preventDefault()
       const habit={name:this.name,date:this.date}
       this.$emit('submit',habit)
     },
