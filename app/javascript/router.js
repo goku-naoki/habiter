@@ -8,10 +8,12 @@ import SignUp  from "./components/userAuth/SignUp.vue"
 import SignIn  from "./components/userAuth/SignIn.vue"
 import HabitIndex from './components/habits/HabitIndex.vue'
 import HabitAdd from './components/habits/HabitAdd.vue'
+import HabitEdit from './components/habits/HabitEdit.vue'
 import HabitDetail from './components/detail/HabitDetail.vue'
 
 Vue.use(Router)
 const router = new Router({
+  mode: 'history',
   routes: [
     { path: '/user/signup', 
       name: 'SignUp',
@@ -37,6 +39,13 @@ const router = new Router({
       name: 'HabitAdd',
       component: HabitAdd
     },
+    { path: '/habit/:id(\\d+)/edit',
+      name: 'HabitEdit',
+      component: HabitEdit,
+      props:routes =>({
+        id: Number(routes.params.id)  //型をけっていできないので指定する
+      })
+    },
     { path: '/habit/:id(\\d+)',
       name: 'HabitDetail',
       component: HabitDetail,
@@ -44,6 +53,7 @@ const router = new Router({
         id: Number(routes.params.id)  //型をけっていできないので指定する
       })
     },
+    
 
    
   ]

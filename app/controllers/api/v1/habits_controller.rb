@@ -6,8 +6,9 @@ class Api::V1::HabitsController < ApiController
   end
 
   def index
-    habits=current_user.habits
-    render json: habits,include: { habit_users: [:habit_dones] },each_serializer: HabitSerializer
+    
+    habit_users=current_user.habit_users
+    render json: habit_users,each_serializer: HabitUserSerializer
   end
 
   def show
@@ -20,16 +21,37 @@ class Api::V1::HabitsController < ApiController
     @habit=Habit.new(name:habit_params[:name])
     if @habit.save
       
-      HabitUser.create(user_id:current_user.id,
+      @habit_user=HabitUser.create(user_id:current_user.id,
                        habit_id:@habit.id,
                        start_date:Time.at(habit_params[:start_date]))
 
-      render json: @habit
+      render json: @habit_user,serializer: HabitUserSerializer
     else
 
     end
   end
 
+  def update
+    @habit_user=HabitUser.find(params[:id])
+    @habit=@habit_user.habit
+    unless @habit_user.habit.name==habit_params[:name]
+      @habit=Habit.create(name:habit_params[:name])
+    end
+
+    @habit_user.update(
+      habit_id:@habit.id,
+      start_date:Time.at(habit_params[:start_date])
+    )
+
+    render json: @habit_user,serializer: HabitUserSerializer
+  
+  end
+
+  def destroy
+    @habit_user=HabitUser.find(params[:id])
+    @habit_user.destroy
+    render json: @habit_user,serializer: HabitUserSerializer
+  end
   def habit_done
     
     habit_done=HabitDone.new(habit_user_id:habit_done_params[:habit_user_id],

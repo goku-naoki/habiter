@@ -19,7 +19,6 @@
     </ul>
   </div> 
 </template>
-
 <script>
 import axios from 'axios';
 import moment from 'moment';
@@ -28,11 +27,6 @@ export default{
   data(){
     const today=new Date()
     return{
-      icon:'mdi-dots-horizontal-circle',
-      times:0,
-      startDate:0,
-      countiTimes:0,
-      monthLate:0,
       today:today,
       details:[
         {icon:'mdi-fire',value:-1,title:"達成",id:0},
@@ -49,10 +43,17 @@ export default{
     checkCont(arr){
       let result=[]
       this.sortDone(arr)
-      if(arr[0].done_date==this.moment(this.today)){
+
+      //todayを含んでいれば
+      if(arr.some(cur=>cur.done_date==this.moment(this.today))){
+    
+        //まず、本日以降のdoneは除外
         result=arr.filter((cur,index)=>{
-         return Math.floor((this.today - new Date(cur.done_date))/86400000)==index
-       })
+            return this.today>=new Date(cur.done_date)
+        })
+        .filter((cur,index)=>{
+          return Math.floor((this.today - new Date(cur.done_date))/86400000)==index
+        })
       }
      return `${result.length}日`
     },

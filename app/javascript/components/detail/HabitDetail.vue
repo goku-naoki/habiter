@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DetailHeader :habit="habitUser.habit"/>
+    <DetailHeader :habit-user="habitUser" @updated="updated"/>
     <HabitProgress :habit-user="habitUser"/>
     <HabitCalender :habit-user="habitUser"/>
   </div>
@@ -12,20 +12,26 @@ import axios from 'axios';
 import DetailHeader from './DetailHeader'
 import HabitProgress from './HabitProgress'
 import HabitCalender from './HabitCalender'
-// import moment from 'moment';
-// import Csrf from '../..//mixins/csrf'
+
 export default{
   data(){
     console.log('hoge')
     return{
       habitUser:{
         
-      }
+      },
     }
   },
   props:{
       id:Number
     },
+  methods:{
+    updated(response){
+     
+      this.habitUser=response
+  
+    }
+  },
   created(){
     axios
       .get(`/api/v1/habits/${this.id}`)

@@ -10,18 +10,16 @@
         </p>
       </div>
       <div class="detail-header__inner-right">
-        <v-icon @click="toggleModal">mdi-dots-horizontal-circle</v-icon>
-        <div class="detail-header__modal" v-if="isTouched">
+        <v-icon @click="toggleModal()">mdi-dots-horizontal-circle</v-icon>
+        <div class="detail-header__modal" v-if="isModalTouched">
           <ul class="detail-header__modal__list">
-            <li class="detail-header__modal__list__item">
-              <router-link to="/">
+            <li class="detail-header__modal__list__item" @click="toggleForm" >
                 <p class="detail-header__modal__list__item-left">
                   編集
                 </p>
                 <div class="detail-header__modal__list__item-right">
                   <v-icon> mdi-grease-pencil</v-icon>
                 </div>
-              </router-link>
             </li>
             <!-- <li class="detail-header__modal__list__item">
               <router-link to="/">
@@ -35,32 +33,51 @@
             </li> -->
           </ul>
         </div>
-        <div @click="toggleModal" v-if="isTouched" class="modal-wrapper"></div>
+        <div @click="toggleModal()" v-if="isModalTouched" class="modal-wrapper"></div>
       </div>
     </div>
+  <HabitEdit :id="habitUser.id" v-if="isFormTouched" @cancel="toggleForm" @updated="updated">
+   
+  </HabitEdit>
+  <div @click="toggleForm" v-if="isFormTouched" class="modal-edit-wrapper"></div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import HabitEdit from '../habits/HabitEdit'
+
 
 export default{
   data(){
     return{
       name:"",
-      isTouched:false
+      isModalTouched:false,
+      isFormTouched:false
     }
   },
   props:{
-      habit:Object
+      habitUser:Object
     },
   methods:{
     toggleModal(){
-      if(!this.isTouched){
-        this.isTouched=true
+      if(!this.isModalTouched){
+        this.isModalTouched=true
       }else{
-        this.isTouched=false
+        this.isModalTouched=false
       }
+    },
+    toggleForm(){
+      if(!this.isFormTouched){
+        this. toggleModal()
+        this.isFormTouched=true
+      }else{
+        this.isFormTouched=false
+      }
+    },
+    updated(response){
+      this.toggleForm()
+      this.$emit('updated',response)
     }
   },
   computed:{
@@ -69,11 +86,16 @@ export default{
     }
   },
   watch:{
-    habit(val){
-      this.name=val.name  //propsの取得に時間がかかる？？？？
+    habitUser(val){
+      this.name=val.habit.name  //propsの取得に時間がかかる？？？？
     }
   },
   created(){
+    
+  },
+  components : {
+    HabitEdit,
+   
     
   }
   
@@ -130,15 +152,20 @@ export default{
             margin:0 auto;
             &__item{
               height:36px;
+              height:100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              color:#404040;
                &:not(:last-child){
                 border-bottom:rgba(0, 0, 0, 0.1) solid 1px;
                 }
-              a{
-                height:100%;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                color:#404040;
+              // a{
+                // height:100%;
+                // display: flex;
+                // justify-content: space-between;
+                // align-items: center;
+                // color:#404040;
                 .detail-header__modal__list__item-left{
                   font-size:1.2rem;
                 }
@@ -146,7 +173,7 @@ export default{
                   color:#404040;
                 }
 
-              }
+              // }
             }
           }
         }
@@ -159,6 +186,15 @@ export default{
           z-index:1;
         }
       }
+    }
+    .modal-edit-wrapper{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      z-index:1;
+      background:rgba(0,0,0,0.6)
     }
   }
 
