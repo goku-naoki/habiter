@@ -1,9 +1,8 @@
 <template>
   <div id="app">
 
-    <!-- <Header></Header> -->
     <router-view></router-view>
-    <!-- <Footer></Footer> -->
+    <Footer></Footer>
 
   </div>
 </template>
@@ -12,7 +11,7 @@
 import axios from 'axios';
 import 'normalize.css'
 // import Header from './components/globals/Header' 
-// import Footer from './components/globals/Footer' 
+import Footer from './components/global/Footer' 
 
 
 export default{
@@ -22,13 +21,16 @@ export default{
     }
   },
   created(){
+    const that=this
     axios
-    .get("api/v1/users/get_user")
+    .get("/api/v1/users/get_user")
     .then(response => {
-       this.$store.commit("setCurrentUser", response.data)
-       console.log(this.$store.state.currentUser)
+       that.$store.commit("setCurrentUser", response.data)
+       console.log(that.$store.state.currentUser)
     })
- 
+  },
+  components:{
+    Footer
   }
 
 }

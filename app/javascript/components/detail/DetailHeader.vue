@@ -28,7 +28,7 @@
     </div>
 
     <HabitEdit :id="habitUser.id" v-if="isFormTouched" @cancel="toggleForm" @updated="updated"/>
-    <div @click="toggleForm" v-if="isFormTouchezpd" class="modal-edit-wrapper"></div>
+    <div @click="toggleForm" v-if="isFormTouched" class="modal-edit-wrapper"></div>
   </div>
 </template>
 
@@ -96,9 +96,9 @@ export default{
   .detail-header{
     width:100%;
     height:60px;
-    margin-bottom:20px;
     z-index: 0;
-    position: relative;  //下ボックスの重なり解除
+    position: fixed;
+    top:0; 
     box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
     &__inner{
       width:95%;

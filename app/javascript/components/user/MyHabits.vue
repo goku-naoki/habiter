@@ -37,12 +37,15 @@ components:{
 <style scoped lang="scss">
   .my-habits{
     width:100%;
-    height:600px;
-    padding-top:40px;
+    height: calc(100vh - 60px - 50px);
+    padding-top:60px;
+    overflow: scroll;
+    padding-top: 60px;
     &__inner{
       width:95%;
       height: 100%;;
       margin:0 auto;
+      padding-top:40px;
       &-title{
         font-size:1.8rem;
         margin-bottom:20px;

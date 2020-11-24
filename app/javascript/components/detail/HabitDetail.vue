@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <div class="habit-detail">
     <DetailHeader :habit-user="habitUser" @updated="updated"/>
-    <HabitProgress :habit-user="habitUser"/>
-    <HabitCalender :habit-user="habitUser"/>
+    <div class="habit-detail__main">
+      <HabitProgress :habit-user="habitUser"/>
+      <HabitCalender :habit-user="habitUser"/>
+    </div>
   </div>
-  
 </template>
 
 <script>
@@ -49,5 +50,9 @@ export default{
 </script>
 
 <style scoped lang="scss">
-
+  .habit-detail__main{
+    height: calc(100vh - 60px - 50px);
+    overflow: scroll;
+    padding-top:60px;
+  }
 </style>
