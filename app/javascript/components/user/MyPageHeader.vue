@@ -6,7 +6,7 @@
         <p class="mypage-header__inner__left-name">{{user.nickname}}</p>
       </div>
       <div class="mypage-header__inner__right">
-        <v-icon>mdi-home-export-outline</v-icon>
+        <v-icon @click="logout">mdi-home-export-outline</v-icon>
       </div>
     </div>
   </div>
@@ -14,12 +14,29 @@
 
 <script>
 import axios from 'axios';
+import Csrf from '../..//mixins/csrf'
 
 export default{
   props:{
     user:Object
   },
-  
+  methods:{
+    logout(event){
+      event.preventDefault()
+      this.setAxiosDefaults();
+
+       axios.delete(
+        '/users/sign_out'
+      )
+      .then(response => {
+        this.updateCsrfToken(response.data.csrf_token);
+        this.$router.push({path: '/user/signin'});
+      })
+    }
+  },
+  mixins:[
+    Csrf,
+    ],
 
 
   

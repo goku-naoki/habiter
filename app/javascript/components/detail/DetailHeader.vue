@@ -21,25 +21,14 @@
                   <v-icon> mdi-grease-pencil</v-icon>
                 </div>
             </li>
-            <!-- <li class="detail-header__modal__list__item">
-              <router-link to="/">
-                <p class="detail-header__modal__list__item-left">
-                  履歴
-                </p>
-                <div class="detail-header__modal__list__item-right">
-                  <v-icon> mdi-view-split-vertical</v-icon>
-                </div>
-              </router-link>
-            </li> -->
           </ul>
         </div>
         <div @click="toggleModal()" v-if="isModalTouched" class="modal-wrapper"></div>
       </div>
     </div>
-  <HabitEdit :id="habitUser.id" v-if="isFormTouched" @cancel="toggleForm" @updated="updated">
-   
-  </HabitEdit>
-  <div @click="toggleForm" v-if="isFormTouched" class="modal-edit-wrapper"></div>
+
+    <HabitEdit :id="habitUser.id" v-if="isFormTouched" @cancel="toggleForm" @updated="updated"/>
+    <div @click="toggleForm" v-if="isFormTouchezpd" class="modal-edit-wrapper"></div>
   </div>
 </template>
 

@@ -32,7 +32,7 @@ export default{
     width:48.75%; 
     height:35vh;
     margin-bottom:2.5%;
-    background:rgba(52,172,188,0.6);
+    background:rgba(0,0,0,0.1);
     box-shadow: 0 2.5rem 2rem -2rem hsl(200 50% 20% / 40%);
     border-radius: 10px;
     a{
