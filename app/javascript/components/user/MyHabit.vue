@@ -17,12 +17,6 @@ export default{
    props:{
     habitUser:Object
   },
-  
-
-
-
-  
-
 }
 
 </script>
@@ -35,6 +29,12 @@ export default{
     background:rgba(0,0,0,0.1);
     box-shadow: 0 2.5rem 2rem -2rem hsl(200 50% 20% / 40%);
     border-radius: 10px;
+    &:nth-child(odd){
+      margin-right:1.25%;
+    }
+    &:nth-child(even){
+      margin-left:1.25%;
+    }
     a{
       height:100%;
       display: block;
@@ -57,7 +57,26 @@ export default{
 
     .habit-item{
       width:calc(95% / 3); 
+
+      &:nth-child(odd){
+      margin-right:0%;
+      }
+      &:nth-child(even){
+        margin-left:0%;
+      }
+      &:nth-child(1){
+      margin-right:2.5%;
+     
+      }
+      &:nth-child(3n + 1){
+      margin-right:2.5%;
+      }
+      &:nth-child(3n){
+        margin-left:2.5%;
+      }
+      
     }
+
   }
 
 </style>
