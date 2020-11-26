@@ -7,8 +7,8 @@
           <p class="footer__list__item-title">Journal</p>
         </router-link>
       </li>
-      <li class="footer__list__item"> 
-        <router-link :to="{ name: 'MyPage', params: { id: currentUser.id } } ">
+      <li class="footer__list__item" > 
+        <router-link :to="{ name: 'MyPage', params: { id: currentUserId } } " >
           <v-icon>mdi-account</v-icon>
           <p class="footer__list__item-title">MyPage</p>
         </router-link>
@@ -21,7 +21,7 @@
         <div class="search-box">
           <Search @getResult="showResult" @cancelSearch="cancelSearch"></Search>
         </div>
-        <div id="search-result" v-if="isFormResult" @click="cancelSearch">
+        <div id="search-result" v-if="isFormResult" @click="toggleForm">
           <SearchResult :users="users" ></SearchResult>
         </div>
         <div @click="toggleForm"  class="modal-wrapper"></div>
@@ -40,7 +40,7 @@ import SearchResult from './SearchResult.vue'
 export default{
   data(){
     return{
-      name:"",
+      currentUserId: this.$store.getters.currentUser.id,
       isFormResult:false,
       isFormTouched:false,
       users:[]
@@ -67,28 +67,22 @@ export default{
   },
   
   beforeUpdate(){
-    if(this.isFormResult){
-      let length=30
-      if(this.users.length!=0){
-        length=this.users.length*30 
+    //検索結果に応じて結果表示のposi変更
+    const resultDom=document.getElementById('search-result')
+      if(this.isFormResult && resultDom!=null){
+      
+        let length=30
+        if(this.users.length!=0){
+          length=this.users.length*30 
+        }
+        resultDom.setAttribute(`style`,`top:-${length+4}px`)
       }
-       document.getElementById('search-result').setAttribute(`style`,`top:-${length+4}px`)
-    }
   },
-  computed:{
-    currentUser(){
-      return this.$store.getters.currentUser
-    }
-  },
-  
-  created(){
-    this.$store.watch(
-      (state,getters)=>getters.currentUser,
-      (val)=>{
-        this.currentUser=val
-      }
-    )
-  },
+  // watch:{
+  //   currentUserId(val){
+  //     debugger
+  //   }
+  // },
   components:{
     Search,
     SearchResult
@@ -152,6 +146,7 @@ export default{
         right: 70px;
         top:-34px; //該当なかったようにdefault
         z-index: 2;
+        background:white;
         border:1px solid rgba(0,0,0,0.1);
         border-radius:10px;
        

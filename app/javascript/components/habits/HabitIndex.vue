@@ -2,6 +2,7 @@
   <div class='habit-index'>
     <IndexHeader @added="added"/>
     <HabitList v-if="habits!=null" :habits="habits" />
+    <Footer></Footer>
   </div>
 </template>
 
@@ -9,6 +10,7 @@
 import axios from 'axios';
 import IndexHeader from './IndexHeader'
 import HabitList from './HabitList'
+import Footer from '../global/Footer' 
 
 export default{
 
@@ -28,11 +30,7 @@ export default{
         console.log(this.habits)
       })
   },
-  components:{
-    IndexHeader,
-    HabitList,
   
-  },
   methods:{
     checkHabits(habits,date){
       let result=habits.filter((cur)=>{
@@ -56,6 +54,13 @@ export default{
     allHabits(val){
       this.habits=this.checkHabits(this.allHabits,this.selected_date)
     }
-  }
+  },
+  components:{
+    IndexHeader,
+    HabitList,
+    Footer
+  
+  },
+  
 }
 </script>
