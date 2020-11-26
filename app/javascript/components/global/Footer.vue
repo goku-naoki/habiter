@@ -17,10 +17,15 @@
           <v-icon>mdi-arrow-left-bold</v-icon>
           <p class="footer__list__item-title">Search</p>
       </li>
-      <div v-if="isFormTouched" class="search-box">
-        <Search></Search>
-      </div>
-      <div @click="toggleForm" v-if="isFormTouched" class="modal-wrapper"></div>
+      <template v-if="isFormTouched">
+        <div class="search-box">
+          <Search @getResult="showResult" @cancelSearch="cancelSearch"></Search>
+        </div>
+        <div id="search-result" v-if="isFormResult" @click="cancelSearch">
+          <SearchResult :users="users" ></SearchResult>
+        </div>
+        <div @click="toggleForm"  class="modal-wrapper"></div>
+      </template>
     </ul>
   </div>
 </template>
@@ -29,13 +34,16 @@
 
 
 import Search from './Search.vue'
+import SearchResult from './SearchResult.vue'
 
 
 export default{
   data(){
     return{
       name:"",
-      isFormTouched:false
+      isFormResult:false,
+      isFormTouched:false,
+      users:[]
      }
   },
   methods:{
@@ -44,8 +52,28 @@ export default{
         this.isFormTouched=true
       }else{
         this.isFormTouched=false
+        this.isFormResult=false
+        this.users=[]
       }
     },
+    showResult(val){
+      this.isFormResult=true
+      this.users=val
+    },
+    cancelSearch(){
+      this.isFormResult=false
+      this.users=[]
+    }
+  },
+  
+  beforeUpdate(){
+    if(this.isFormResult){
+      let length=30
+      if(this.users.length!=0){
+        length=this.users.length*30 
+      }
+       document.getElementById('search-result').setAttribute(`style`,`top:-${length+4}px`)
+    }
   },
   computed:{
     currentUser(){
@@ -62,7 +90,8 @@ export default{
     )
   },
   components:{
-    Search
+    Search,
+    SearchResult
   }
 }
 
@@ -116,6 +145,16 @@ export default{
         width:100%;
         height:100%;
         z-index:1;
+      }
+      #search-result{
+        width:200px;
+        position: absolute;
+        right: 70px;
+        top:-34px; //該当なかったようにdefault
+        z-index: 2;
+        border:1px solid rgba(0,0,0,0.1);
+        border-radius:10px;
+       
       }
      
     }

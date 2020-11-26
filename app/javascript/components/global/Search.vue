@@ -1,5 +1,5 @@
 <template>
-  <input @keyup="UserSearch"  v-model="keyword" placeholder="ユーザーを検索">
+  <input @keypress="UserSearch"  v-model="keyword" placeholder="ユーザーを検索">
 </template>
 
 <script>
@@ -14,7 +14,25 @@ export default{
   },
   methods:{
     UserSearch(){
-      
+      axios
+      .get("/api/v1/users/search",{
+        params:{keyword:this.keyword}
+      })
+      .then(response => {
+    
+        let users=response.data
+        if(response.data.length==0){
+          users=[]
+        }
+        this.$emit("getResult",users)
+    })
+    }
+  },
+  watch:{
+    keyword(val){
+      if(val.length==0){
+        this.$emit('cancelSearch',val)
+      }
     }
   }
  

@@ -19,8 +19,16 @@ class Api::V1::UsersController < ApiController
 
   def get_user
     if user_signed_in?
-      
       render :json => { user:current_user}
     end
+  end
+
+  def search
+    
+    if params[:keyword]==""
+      return 
+    end
+    users=User.where(['nickname like ?',"%#{params[:keyword]}%"])
+    render json: users,each_serializer: UserSerializer
   end
 end
