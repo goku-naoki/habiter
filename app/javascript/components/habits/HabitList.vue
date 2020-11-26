@@ -25,6 +25,9 @@ export default{
 <style scoped lang="scss">
   .habit-list{
     width:100%;
+    height: calc(100vh - 60px - 50px);
+    padding-top:60px;
+    overflow: scroll;
     &__box{
       width:95%;
       margin:0 auto;

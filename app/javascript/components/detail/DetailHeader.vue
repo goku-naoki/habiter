@@ -21,25 +21,14 @@
                   <v-icon> mdi-grease-pencil</v-icon>
                 </div>
             </li>
-            <!-- <li class="detail-header__modal__list__item">
-              <router-link to="/">
-                <p class="detail-header__modal__list__item-left">
-                  履歴
-                </p>
-                <div class="detail-header__modal__list__item-right">
-                  <v-icon> mdi-view-split-vertical</v-icon>
-                </div>
-              </router-link>
-            </li> -->
           </ul>
         </div>
         <div @click="toggleModal()" v-if="isModalTouched" class="modal-wrapper"></div>
       </div>
     </div>
-  <HabitEdit :id="habitUser.id" v-if="isFormTouched" @cancel="toggleForm" @updated="updated">
-   
-  </HabitEdit>
-  <div @click="toggleForm" v-if="isFormTouched" class="modal-edit-wrapper"></div>
+
+    <HabitEdit :id="habitUser.id" v-if="isFormTouched" @cancel="toggleForm" @updated="updated"/>
+    <div @click="toggleForm" v-if="isFormTouched" class="modal-edit-wrapper"></div>
   </div>
 </template>
 
@@ -107,9 +96,9 @@ export default{
   .detail-header{
     width:100%;
     height:60px;
-    margin-bottom:20px;
     z-index: 0;
-    position: relative;  //下ボックスの重なり解除
+    position: fixed;
+    top:0; 
     box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
     &__inner{
       width:95%;

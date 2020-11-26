@@ -10,6 +10,8 @@ import HabitIndex from './components/habits/HabitIndex.vue'
 import HabitAdd from './components/habits/HabitAdd.vue'
 import HabitEdit from './components/habits/HabitEdit.vue'
 import HabitDetail from './components/detail/HabitDetail.vue'
+import MyPage from './components/user/MyPage.vue'
+
 
 Vue.use(Router)
 const router = new Router({
@@ -49,6 +51,13 @@ const router = new Router({
     { path: '/habit/:id(\\d+)',
       name: 'HabitDetail',
       component: HabitDetail,
+      props:routes =>({
+        id: Number(routes.params.id)  //型をけっていできないので指定する
+      })
+    },
+    { path: '/user/:id(\\d+)',
+      name: 'MyPage',
+      component: MyPage,
       props:routes =>({
         id: Number(routes.params.id)  //型をけっていできないので指定する
       })
