@@ -21,7 +21,7 @@
         <div class="search-box">
           <Search @getResult="showResult" @cancelSearch="cancelSearch"></Search>
         </div>
-        <div id="search-result" v-if="isFormResult" @click="cancelSearch">
+        <div id="search-result" v-if="isFormResult" @click="toggleForm">
           <SearchResult :users="users" ></SearchResult>
         </div>
         <div @click="toggleForm"  class="modal-wrapper"></div>
@@ -78,6 +78,11 @@ export default{
         resultDom.setAttribute(`style`,`top:-${length+4}px`)
       }
   },
+  // watch:{
+  //   currentUserId(val){
+  //     debugger
+  //   }
+  // },
   components:{
     Search,
     SearchResult
