@@ -28,7 +28,7 @@ class Api::V1::UsersController < ApiController
     if params[:keyword]==""
       return 
     end
-    users=User.where(['nickname like ?',"%#{params[:keyword]}%"])
+    users=User.where(['nickname like ?',"%#{params[:keyword]}%"]).where.not(id:current_user.id)
     render json: users,each_serializer: UserSerializer
   end
 end

@@ -2,7 +2,7 @@
   <div id="app">
 
     <router-view></router-view>
-    <Footer></Footer>
+   
 
   </div>
 </template>
@@ -11,7 +11,7 @@
 import axios from 'axios';
 import 'normalize.css'
 // import Header from './components/globals/Header' 
-import Footer from './components/global/Footer' 
+
 
 
 export default{
@@ -30,7 +30,7 @@ export default{
     })
   },
   components:{
-    Footer
+   
   }
 
 }
