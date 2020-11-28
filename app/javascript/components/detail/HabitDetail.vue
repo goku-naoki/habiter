@@ -18,7 +18,7 @@ import Footer from '../global/Footer'
 
 export default{
   data(){
-    console.log('hoge')
+
     return{
       habitUser:{
         

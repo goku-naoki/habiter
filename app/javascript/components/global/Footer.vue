@@ -8,7 +8,7 @@
         </router-link>
       </li>
       <li class="footer__list__item" > 
-        <router-link :to="{ name: 'MyPage', params: { id: currentUserId } } " >
+        <router-link :to="{ name: 'MyPage', params: { id: currentUser.id } } " >
           <v-icon>mdi-account</v-icon>
           <p class="footer__list__item-title">MyPage</p>
         </router-link>
@@ -37,10 +37,11 @@ import Search from './Search.vue'
 import SearchResult from './SearchResult.vue'
 
 
+
 export default{
   data(){
     return{
-      currentUserId: this.$store.getters.currentUser.id,
+      currentUser:{},
       isFormResult:false,
       isFormTouched:false,
       users:[]
@@ -78,11 +79,26 @@ export default{
         resultDom.setAttribute(`style`,`top:-${length+4}px`)
       }
   },
-  // watch:{
-  //   currentUserId(val){
-  //     debugger
-  //   }
-  // },
+  
+  computed:{
+     getCurrentUser(){
+      return this.$store.getters.currentUser
+    }
+  },
+  watch:{
+    getCurrentUser(val){
+      this.currentUser=this.getCurrentUser
+
+    }
+  },
+  
+  created(){
+    //appのcreatedがわがまま！！！ user getする事もあるが、しない時も！！！ した際はここ、ない際はwatch
+    if(this.getCurrentUser!=null){
+      this.currentUser= this.getCurrentUser
+    }
+  },
+ 
   components:{
     Search,
     SearchResult

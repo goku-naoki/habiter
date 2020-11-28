@@ -10,20 +10,22 @@
         </p>
       </div>
       <div class="detail-header__inner-right">
-        <v-icon @click="toggleModal()">mdi-dots-horizontal-circle</v-icon>
-        <div class="detail-header__modal" v-if="isModalTouched">
-          <ul class="detail-header__modal__list">
-            <li class="detail-header__modal__list__item" @click="toggleForm" >
-                <p class="detail-header__modal__list__item-left">
-                  編集
-                </p>
-                <div class="detail-header__modal__list__item-right">
-                  <v-icon> mdi-grease-pencil</v-icon>
-                </div>
-            </li>
-          </ul>
-        </div>
-        <div @click="toggleModal()" v-if="isModalTouched" class="modal-wrapper"></div>
+        <template v-if="currentUser.id==habitUser.user_id">
+          <v-icon @click="toggleModal()">mdi-dots-horizontal-circle</v-icon>
+          <div class="detail-header__modal" v-if="isModalTouched">
+            <ul class="detail-header__modal__list">
+              <li class="detail-header__modal__list__item" @click="toggleForm" >
+                  <p class="detail-header__modal__list__item-left">
+                    編集
+                  </p>
+                  <div class="detail-header__modal__list__item-right">
+                    <v-icon> mdi-grease-pencil</v-icon>
+                  </div>
+              </li>
+            </ul>
+          </div>
+          <div @click="toggleModal()" v-if="isModalTouched" class="modal-wrapper"></div>
+        </template>
       </div>
     </div>
 
@@ -42,7 +44,9 @@ export default{
     return{
       name:"",
       isModalTouched:false,
-      isFormTouched:false
+      isFormTouched:false,
+      currentUser:{}
+      
     }
   },
   props:{
@@ -72,15 +76,24 @@ export default{
   computed:{
     habitName(){
       return this.habit.name
+    },
+    getCurrentUser(){
+      return this.$store.getters.currentUser
     }
   },
   watch:{
     habitUser(val){
       this.name=val.habit.name  //propsの取得に時間がかかる？？？？
+    },
+    getCurrentUser(val){
+      debugger
+      this.currentUser=val
     }
   },
   created(){
-    
+    if(this.getCurrentUser!=null){
+      this.currentUser= this.getCurrentUser
+    }
   },
   components : {
     HabitEdit,

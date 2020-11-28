@@ -7,7 +7,7 @@ const store = () => {
     return new Vuex.Store({
         state: {
             selectedDate:day,
-            currentUser:{},
+            currentUser:null,
         },
         getters:{
             currentUser(state){return state.currentUser}

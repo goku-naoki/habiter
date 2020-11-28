@@ -31,7 +31,8 @@ import HabitAdd from './HabitAdd'
 export default{
   data(){
     return{
-      date:this.selected_date,
+      // date:this.selected_date,
+      date:0,
       isToday:false,
       isFormTouched:false
     }
@@ -71,8 +72,12 @@ export default{
   },
   watch: {
 
-    date:function(date){
-      this.$store.commit("setDate", date)
+    selected_date:function(date){
+      this.date=date
+      this.checkToday()
+    },
+    date(val){
+      this.$store.commit("setDate",val)
       this.checkToday()
     }
   },
