@@ -2,11 +2,12 @@
   <div class="mypage-header">
     <div class="mypage-header__inner">
       <div class="mypage-header__inner__left">
-        <v-icon>mdi-account-circle</v-icon>
+        <v-icon >mdi-account-circle</v-icon>
         <p class="mypage-header__inner__left-name">{{user.nickname}}</p>
       </div>
       <div class="mypage-header__inner__right">
-        <v-icon @click="logout">mdi-home-export-outline</v-icon>
+        <v-icon v-if="currentUser.id==user.id" @click="logout">mdi-home-export-outline</v-icon>
+        <v-icon v-else>mdi-star-outline</v-icon>
       </div>
     </div>
   </div>
@@ -17,14 +18,18 @@ import axios from 'axios';
 import Csrf from '../..//mixins/csrf'
 
 export default{
+  data(){
+    return{
+      currentUser:{}
+    }
+  },
   props:{
-    user:Object
+    user:Object,
   },
   methods:{
     logout(event){
       event.preventDefault()
       this.setAxiosDefaults();
-
        axios.delete(
         '/users/sign_out'
       )
@@ -34,9 +39,26 @@ export default{
       })
     }
   },
+  computed:{
+    getCurrentUser(){
+      return this.$store.getters.currentUser
+    }
+  },
+  watch:{
+    getCurrentUser(val){
+      debugger
+      this.currentUser=val
+    }
+  },
+  created(){
+    if(this.getCurrentUser!=null){
+      this.currentUser= this.getCurrentUser
+    }
+  },
+
   mixins:[
-    Csrf,
-    ],
+    Csrf],
+
 
 
   

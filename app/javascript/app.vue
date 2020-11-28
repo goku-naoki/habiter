@@ -24,12 +24,12 @@ export default{
     
   },
   created(){
-    debugger
+   
    const that=this
     axios
     .get("/api/v1/users/get_user")
     .then(response => {
-       debugger
+      
        that.$store.commit("setCurrentUser", response.data)
        console.log(that.$store.state.currentUser)
      
