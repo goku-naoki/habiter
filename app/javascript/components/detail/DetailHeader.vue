@@ -80,7 +80,7 @@ export default{
     }
   },
   created(){
-    
+    debugger
   },
   components : {
     HabitEdit,
