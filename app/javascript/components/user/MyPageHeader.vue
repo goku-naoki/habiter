@@ -6,8 +6,12 @@
         <p class="mypage-header__inner__left-name">{{user.nickname}}</p>
       </div>
       <div class="mypage-header__inner__right">
+      
         <v-icon v-if="currentUser.id==user.id" @click="logout">mdi-home-export-outline</v-icon>
-        <v-icon v-else @click="follow">mdi-star-outline</v-icon>
+        <template v-else>
+          <v-icon  @click="follow">mdi-star-outline</v-icon>
+        </template>
+        
       </div>
     </div>
   </div>
@@ -44,7 +48,8 @@ export default{
         '/api/v1/follows',{user_id:this.user.id}
       )
       .then(response => {
-       debugger
+        //userの配列にぶち込む
+        //真偽値でコード変更
       })
 
     }
