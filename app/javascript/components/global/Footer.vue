@@ -113,6 +113,7 @@ export default{
     bottom:0;
     width:100vw;
     height:50px;
+    background:white;
     border-top:1px solid rgba(0,0,0,0.1);
     &__list{
       width:95%;
