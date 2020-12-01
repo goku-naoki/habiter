@@ -7,7 +7,7 @@
       </div>
       <div class="mypage-header__inner__right">
         <v-icon v-if="currentUser.id==user.id" @click="logout">mdi-home-export-outline</v-icon>
-        <v-icon v-else>mdi-star-outline</v-icon>
+        <v-icon v-else @click="follow">mdi-star-outline</v-icon>
       </div>
     </div>
   </div>
@@ -37,6 +37,16 @@ export default{
         this.updateCsrfToken(response.data.csrf_token);
         this.$router.push({path: '/user/signin'});
       })
+    },
+    follow(){ 
+      this.setAxiosDefaults();
+      axios.post(
+        '/api/v1/follows',{user_id:this.user.id}
+      )
+      .then(response => {
+       debugger
+      })
+
     }
   },
   computed:{

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
           delete "habit_undo"
         end
       end
+      resources :follows, :only
     end
   end
   get '*path' => 'home#index'

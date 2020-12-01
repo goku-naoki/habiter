@@ -20,7 +20,7 @@ class User < ApplicationRecord
   
 
 
-  def follow(other_user)
+  def follow(other_user)  #current_user.follow
     active_relationships.create(followed_id: other_user.id)
   end
 
