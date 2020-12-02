@@ -4,13 +4,9 @@
       <p class="my-habits__inner-title">
         Habits
       </p>
-
-      <!-- 2つ条件入れて置かないと、habit_user取れていないときにエラー -->
-      <p v-if="!user.habit_users ||user.habit_users.length==0" class="my-habits__inner-no">習慣が登録されていません</p>
-      <ul v-else class="my-habits__inner__list">
+      <ul class="my-habits__inner__list">
         <MyHabit :habit-user="habitUser" v-for="habitUser in user.habit_users" :key="habitUser.id"/>
       </ul>
-     
     </div>
   </div>
 </template>
@@ -27,14 +23,6 @@ export default{
     }
   },
   
-  watch:{
-    user(val){
-      this.user=val
-    }
-  },
-  created(){
-    debugger
-  },
 
 components:{
   MyHabit
@@ -65,10 +53,6 @@ components:{
       &__list{
         display: flex;
         flex-wrap:wrap;
-      }
-      &-no{
-        margin-top:50px;
-        
       }
     }
   }
