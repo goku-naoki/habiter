@@ -17,8 +17,12 @@
           <MyHabit :habit-user="habitUser" v-for="habitUser in user.habit_users" :key="habitUser.id"/>
         </ul>
       </template>
+
       <template v-else>
-        fff
+        <p v-if="!user.habit_users ||user.following==0" class="my-habits__inner-no">no following</p>
+        <ul v-else class="my-habits__inner__list">
+          <MyFollowed :followed="followed" v-for="followed in user.following" :key="followed.id"/>
+        </ul>
       </template>
       
      
@@ -31,6 +35,7 @@
 import axios from 'axios';
 import MyHabit from './MyHabit'
 import MyFollowed from './MyFollowed'
+
 export default{
   
    data(){
@@ -65,6 +70,7 @@ export default{
 components:{
   MyHabit,
   MyFollowed
+
 }
 
   

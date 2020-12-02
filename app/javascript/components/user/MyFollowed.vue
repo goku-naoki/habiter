@@ -1,15 +1,18 @@
 <template>
-  <div>
-    fofe
-  </div>
+  <li class="followed_list">
+    {{followed.nickname}}
+  </li>
 </template>
 
 
 <script>
 import axios from 'axios';
-import MyHabit from './MyHabit'
+
 export default{
 
+  props:{
+    followed:Object
+  }
  
   
 
