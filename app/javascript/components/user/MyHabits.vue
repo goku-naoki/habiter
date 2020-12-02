@@ -68,7 +68,7 @@ components:{
       }
       &-no{
         margin-top:50px;
-        
+        font-size:1.4rem;
       }
     }
   }
