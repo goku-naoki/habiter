@@ -29,10 +29,10 @@ export default{
     return{
       today:today,
       details:[
-        {icon:'mdi-fire',value:-1,title:"達成",id:0},
-        {icon:'mdi-clock-start',value:-1,title:"開始",id:1},
-        {icon:'mdi-cached',value:-1,title:"連続",id:2},
-        {icon:'mdi-check-all',value:-1,title:"今月達成",id:3},
+        {icon:'mdi-fire',value:-1,title:"総達成",id:0},
+        {icon:'mdi-clock-start',value:-1,title:"開始日",id:1},
+        {icon:'mdi-cached',value:-1,title:"連続日数",id:2},
+        {icon:'mdi-check-all',value:-1,title:"今月達成度",id:3},
       ]
     }
   },
@@ -110,7 +110,7 @@ export default{
       }else{
         this.details[0].value=0
         this.details[2].value=0
-        this.details[3].value=0
+        this.details[3].value="0%"
       }
     }
   }

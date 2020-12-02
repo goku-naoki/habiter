@@ -96,7 +96,6 @@ export default {
     --day-content-dark-bg-color-hover: rgba(114,129,151,0); 
     --day-content-bg-color-focus: rgba(204,214,224,0);
     --day-content-dark-bg-color-focus: rgba(114,129,151,0);
-    z-index: -1;
     position: relative;
   }
   .vc-cursor-pointer{

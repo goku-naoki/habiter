@@ -64,8 +64,10 @@ export default{
       if(!this.isFormTouched){
         this. toggleModal()
         this.isFormTouched=true
+        document.getElementsByClassName("vc-container")[0].setAttribute("style","z-index: -1;")  //強引にz-index調整
       }else{
         this.isFormTouched=false
+         document.getElementsByClassName("vc-container")[0].removeAttribute("style","z-index: -1;")
       }
     },
     updated(response){

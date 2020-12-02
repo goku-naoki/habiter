@@ -2,16 +2,15 @@
   <div class="my-habits">
     <div class="my-habits__inner">
       <div class="my-habits__inner-titles">
-        <p class="my-habits__inner-title" @click="touchHabit()">
+        <p class="my-habits__inner-title" @click="touchHabit()" :class="{active: isHabitActive}">
           Habits
         </p>
-        <p class="my-habits__inner-title" @click="touchFollow()">
+        <p class="my-habits__inner-title" @click="touchFollow()" :class="{active: !isHabitActive}">
           Following
         </p>
       </div>
       
-      <template v-if="isHabitActive">
-        <!-- 2つ条件入れて置かないと、habit_user取れていないときにエラー -->
+      <template v-if="isHabitActive">   <!-- 2つ条件入れて置かないと、habit_user取れていないときにエラー -->
         <p v-if="!user.habit_users ||user.habit_users.length==0" class="my-habits__inner-no">習慣が登録されていません</p>
         <ul v-else class="my-habits__inner__list">
           <MyHabit :habit-user="habitUser" v-for="habitUser in user.habit_users" :key="habitUser.id"/>
@@ -19,13 +18,12 @@
       </template>
 
       <template v-else>
-        <p v-if="!user.habit_users ||user.following==0" class="my-habits__inner-no">no following</p>
+        <p v-if="!user.habit_users ||user.following==0" class="my-habits__inner-no">フォローしているユーザーはいません</p>
         <ul v-else class="my-habits__inner__list">
           <MyFollowed :followed="followed" v-for="followed in user.following" :key="followed.id"/>
         </ul>
       </template>
       
-     
     </div>
   </div>
 </template>
@@ -96,10 +94,17 @@ components:{
         margin-bottom:20px;
         display:flex;
         p{
+          border: 1px rgba(0,0,0,0.1)solid;
+          padding: 5px 10px;
+          border-radius: 5px;
           font-size:1.8rem;
+          cursor:pointer !important;
           &:first-child{
             margin-right:30px;
           }
+        }
+        .active{
+          box-shadow: 0 0 8px grey;
         }
       }
       &__list{
