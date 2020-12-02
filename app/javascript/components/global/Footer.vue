@@ -7,7 +7,7 @@
           <p class="footer__list__item-title">Journal</p>
         </router-link>
       </li>
-      <li class="footer__list__item" > 
+      <li class="footer__list__item res" > 
         <router-link :to="{ name: 'MyPage', params: { id: currentUser.id } } " >
           <v-icon>mdi-account</v-icon>
           <p class="footer__list__item-title">MyPage</p>
@@ -75,6 +75,7 @@ export default{
         let length=30
         if(this.users.length!=0){
           length=this.users.length*30 
+          
         }
         resultDom.setAttribute(`style`,`top:-${length+4}px`)
       }
@@ -146,7 +147,7 @@ export default{
       }
       .search-box{
         position:absolute;
-        right:100px;
+        right:65px;
         z-index: 2;
       }
       .modal-wrapper{
@@ -160,7 +161,7 @@ export default{
       #search-result{
         width:200px;
         position: absolute;
-        right: 70px;
+        right: 40px;
         top:-34px; //該当なかったようにdefault
         z-index: 2;
         background:white;
@@ -170,6 +171,17 @@ export default{
       }
      
     }
+  }
+
+
+    @media screen and (max-width: 627px) {
+
+      .res{
+        position: absolute;
+        left: 20%;
+      }
+      // 
+
   }
 
 

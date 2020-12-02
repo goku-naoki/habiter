@@ -6,8 +6,16 @@
         <p class="mypage-header__inner__left-name">{{user.nickname}}</p>
       </div>
       <div class="mypage-header__inner__right">
-        <v-icon v-if="currentUser.id==user.id" @click="logout">mdi-home-export-outline</v-icon>
-        <v-icon v-else>mdi-star-outline</v-icon>
+        
+        <template v-if="currentUser.id==user.id">
+           <v-icon  @click="logout">mdi-home-export-outline</v-icon>
+        </template>
+
+        <template v-else>
+          <v-icon  v-if="isFollow" @click="unFollow">mdi-account-multiple-minus-outline</v-icon>
+          <v-icon  v-else @click="follow">mdi-account-plus</v-icon>
+        </template>
+        
       </div>
     </div>
   </div>
@@ -20,7 +28,8 @@ import Csrf from '../..//mixins/csrf'
 export default{
   data(){
     return{
-      currentUser:{}
+      currentUser:{},
+      isFollow:false,
     }
   },
   props:{
@@ -34,21 +43,74 @@ export default{
         '/users/sign_out'
       )
       .then(response => {
+        debugger
         this.updateCsrfToken(response.data.csrf_token);
         this.$router.push({path: '/user/signin'});
       })
+    },
+    follow(){ 
+      this.setAxiosDefaults();
+      axios.post(
+        '/api/v1/follows',{user_id:this.user.id}
+      )
+      .then(response => {
+        this.isFollow=true; //ここで条件変えても見た目変わらない？
+        this.user.followers=response.data  //userのfollowerを最新に
+        this.followedCheck()
+        //userの配列にぶち込む
+      })
+      
+
+    },
+    unFollow(){
+      
+      this.setAxiosDefaults();
+      axios.delete(
+        `/api/v1/follows/${this.user.id}`,{data:{user_id:this.user.id}}
+      )
+      .then(response => {
+        this.isFollow=false; //ここで条件変えても見た目変わらない？
+        this.user.followers=response.data  //userのfollowerを最新に
+        this.followedCheck()
+        //userの配列にぶち込む
+      })
+
+     
+    },
+
+    followedCheck(){
+      debugger
+      if(this.user.followers.some((cur)=>cur.id==this.currentUser.id)){
+        this.isFollow=true
+      }else{
+        this.isFollow=false
+      }
     }
   },
   computed:{
     getCurrentUser(){
       return this.$store.getters.currentUser
-    }
+    },
+  
   },
   watch:{
     getCurrentUser(val){
-      debugger
       this.currentUser=val
-    }
+      if(this.user.id>0){  //currentUsetと該当ユーザーの２つを得てから、followをcheck
+    
+          this.followedCheck()
+      }
+    },
+    user(val){
+      this.isCurrentAndSelectedUser=false
+      debugger
+      this.user=val
+      if(this.currentUser.id>0){
+          this.followedCheck()
+      }
+
+    },
+   
   },
   created(){
     if(this.getCurrentUser!=null){

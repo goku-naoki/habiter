@@ -29,6 +29,7 @@ export default{
     background:rgba(0,0,0,0.1);
     box-shadow: 0 2.5rem 2rem -2rem hsl(200 50% 20% / 40%);
     border-radius: 10px;
+    cursor:pointer;
     &:nth-child(odd){
       margin-right:1.25%;
     }

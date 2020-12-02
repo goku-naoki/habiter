@@ -7,6 +7,7 @@ class Api::V1::UsersController < ApiController
   end
 
   def show
+    
     @user=User.find(params[:id])
     render json: @user,include: { habit_users: [:habit] },serializer: UserSerializer
   end
