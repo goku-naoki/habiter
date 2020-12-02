@@ -5,7 +5,7 @@ class UserSerializer < ActiveModel::Serializer
   
 
   def following
-    binding.pry
+   
     object.following
   end
 
