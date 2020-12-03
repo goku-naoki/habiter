@@ -1,13 +1,8 @@
 class Api::V1::HabitsController < ApiController
 
-  # ActiveRecordのレコードが見つからなければ404 not foundを応答する
-  rescue_from ActiveRecord::RecordNotFound do |exception|
-    render json: { error: '404 not found' }, status: 404
-  end
-
   def index
     
-    habit_users=current_user.habit_users
+    habit_users=current_user.habit_users.preload(:habit_dones)
     render json: habit_users,each_serializer: HabitUserSerializer
   end
 
@@ -77,7 +72,9 @@ class Api::V1::HabitsController < ApiController
     params.require(:habit).permit(:name,:start_date)
   end
 
+
   def habit_done_params
     params.require(:habit_done).permit(:habit_user_id,:done_date)
   end
+  
 end

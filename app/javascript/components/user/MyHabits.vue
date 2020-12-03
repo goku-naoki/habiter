@@ -39,7 +39,6 @@ export default{
    data(){
      return{
        isHabitActive:true,
-       isFollowActive:false
      }
    },
    props:{
@@ -58,11 +57,11 @@ export default{
   
   watch:{
     user(val){
-      this.user=val
+      this.user=val;
+      this.isHabitActive==false? this.isHabitActive=true :{}  //他ページに移る際にreset
     }
   },
   created(){
-    debugger
   },
 
 components:{
