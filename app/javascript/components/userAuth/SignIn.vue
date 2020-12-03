@@ -2,11 +2,11 @@
   <div class="login-form">
       <div class="login-form-box">
         <h2 class="login-form-box-title">Habiter</h2>
-          <div class="form-error" v-if="errors.length != 0">
-          <ul v-for="e in errors" :key="e">
-            <li><font color="red">{{ e }}</font></li>
+          <ul v-if="errors.lenght!=0" class="errors">
+            <li class="error" v-for="error in errors" :key="error">
+              {{error}}
+            </li>
           </ul>
-        </div>
         <div class="login-form-box-form">
           <form >   
             <div class="login-form-box-form-email">
@@ -16,7 +16,7 @@
               <input v-model="password" type="password" placeholder="password">
             </div>
             <div class="login-form-box-form-submit">
-              <button @click="logIn" type="submit">ログイン</button>
+              <button @click="checkForm" type="submit">ログイン</button>
             </div>
             <div class="login-form-box-form-another">
               <div></div>
@@ -54,6 +54,19 @@ export default{
    
   },
   methods: {
+     checkForm(event){  
+      event.preventDefault();
+      this.errors=[]
+
+      if (this.email && this.password) {
+       this.logIn(event)
+      }else{
+        this.errors.push('emailまたはpasswordが不正です');
+      }
+  
+      
+
+    },
 
   },
    mixins:[
@@ -66,6 +79,12 @@ export default{
 
 
 <style scoped lang="scss">
+
+.error{
+  font-size:1.2rem;
+  margin-bottom:10px;
+  color:tomato;
+}
 input{
   border: 1px solid rgba(var(--b6a,219,219,219),1);
   background:rgba(var(--b3f,250,250,250),1);
