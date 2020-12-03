@@ -7,17 +7,22 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     super do
-      # binding.pry
       if request.format.json?
-        render :json => {
-          'status' => 'ok',
-          'csrf_token' => form_authenticity_token,
-          'result' => {
-            'user' => {
-              'id' => @user.id,
-              'email' => @user.email
+        unless !@user.errors.messages.empty?
+          render :json => {
+            'status' => 'ok',
+            'csrf_token' => form_authenticity_token,
+            'result' => {
+              'user' => {
+                'id' => @user.id,
+                'email' => @user.email
+              }
             }
-          }
+          } and return
+        end
+        render :json => {
+          'status' => 401,
+          'errors'=>@user.errors
         } and return
       end
     end

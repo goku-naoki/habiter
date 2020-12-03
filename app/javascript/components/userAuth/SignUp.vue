@@ -5,6 +5,7 @@
         <p class="signup-form-box-desc">
           習慣形成を行って、最高な毎日を
         </p>
+
         <div class="signup-form-box-form">
           <form >
             <div class="signup-form-box-form-facebook">
@@ -15,11 +16,11 @@
               <p>または</p>
               <div></div>
             </div>  
-            <div class="form-error" v-if="errors.length != 0">
-              <ul v-for="e in errors" :key="e">
-                <li><font color="red">{{ e }}</font></li>
+              <ul v-if="errors.lenght!=0" class="errors">
+                <li class="error" v-for="error in errors" :key="error">
+                  {{error}}
+                </li>
               </ul>
-            </div>
             <div class="signup-form-box-form-email">
               <input type="email" v-model="email" placeholder="メールアドレス" >
             </div>
@@ -30,7 +31,7 @@
               <input type="password" v-model="password" placeholder="パスワード" >
             </div>
             <div class="signup-form-box-form-submit">
-              <button @click="signUp" type="submit">登録する</button>
+              <button @click="checkForm" type="submit">登録する</button>
             </div>
           </form>
         </div>
@@ -46,16 +47,37 @@
 import axios from 'axios';
 import Signin from '../..//mixins/signin'
 import Csrf from '../..//mixins/csrf'
+
 export default{
   data(){
     return{
-        email:"",
-        nickname:"",
-        password:"",
-        errors:[],
+      email:null,
+      nickname:null,
+      password:null,
+      errors:[],
     }
   },
+
   methods:{ 
+
+     checkForm(event){  
+      event.preventDefault();
+      this.errors=[]
+
+      if (this.email && this.nickname && this.password) {
+       this.signUp(event)
+      }
+       if(!this.email){
+        this.errors.push('emailを入力して下さい')
+      }
+      if(!this.nickname){
+        this.errors.push('nicknameを入力して下さい')
+      }
+     if(!this.password){
+        this.errors.push('passwordを入力して下さい')
+      }
+
+    },
     signUp: function(event){
       event.preventDefault()
       this.setAxiosDefaults();
@@ -68,20 +90,39 @@ export default{
         }
       })
       .then(response => {
+         debugger
+         if(!response.data.errors){
           this.updateCsrfToken(response.data.csrf_token);
           this.logIn(event)
+         }else{
+           this.errors=Object.entries(response.data.errors).map(cur=>`${cur[0]} ${cur[1]}`)
+         }
+        })
+      .catch(error => {
+          
         })
       )
     }
   },
+
   mixins:[
     Csrf,
     Signin
-    ],
+  ]
+
 }
 </script>
 
 <style scoped lang="scss">
+
+.error{
+  width:80%;
+  margin:0 auto;
+  text-align:center;
+  font-size:1.2rem;
+  color:tomato;
+  margin-bottom:10px;
+}
 input{
   border: 1px solid rgba(var(--b6a,219,219,219),1);
   background:rgba(var(--b3f,250,250,250),1);

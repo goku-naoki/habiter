@@ -3,9 +3,14 @@
     <div class="habit-add__header">
       <div class="habit-add__header__inner">
         <p @click="cancel">キャンセル</p>
-        <input class="habit-add__header__inner-right" @click="submit" type="submit" value="保存">
+        <input class="habit-add__header__inner-right" @click="checkForm" type="submit" value="保存">
       </div>
     </div>
+    <ul v-if="errors.lenght!=0" class="errors">
+      <li class="error" v-for="error in errors" :key="error">
+        {{error}}
+      </li>
+    </ul>
     <div class="habit-add__form">
       <div class="habit-add__form__name">
         <input type="text" v-model="name"  placeholder="習慣の名前" >
@@ -18,7 +23,7 @@
           </div>
           <div class="habit-add__form__detail__item-right">
             <Datepicker  id="day" v-model="date"></Datepicker>
-            <label v-show="date==0" for="day"><span>日付</span></label>
+            <label v-show="date==null" for="day"><span>日付</span></label>
           </div>
         </div>
       </div>
@@ -35,8 +40,9 @@ import Datepicker from 'vuejs-datepicker';
 export default{
   data(){
     return{
-      name:"",
-      date:0,
+      name:null,
+      date:null,
+      errors:[]
    
     }
   },
@@ -49,6 +55,23 @@ export default{
     }
   },
   methods:{
+    checkForm(event){  
+      if (this.name && this.date) {
+       this.submit(event)
+      }
+      this.errors=[]
+
+      if (!this.name) {
+        this.errors.push('習慣の名前を入力して下さい');
+      }
+      if (!this.date) {
+        this.errors.push('開始日を選択して下さい');
+      }
+
+      debugger
+      event.preventDefault();
+
+    },
     submit:function(event){
       event.preventDefault()
       const habit={name:this.name,date:this.date}
@@ -110,7 +133,7 @@ export default{
     &__form{
       &__name{
         width: 100%;
-        height:60px;
+        // height:60px;
         margin-bottom:20px;
         text-align:center;
         line-height:60px;
@@ -162,6 +185,15 @@ export default{
 
 <style lang="scss">
 .habit-add{
+
+  .error{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 5px;
+    color: tomato;
+    font-size: 1.2rem;
+  }
   .vdp-datepicker input{
     width:110px;
     color: #404040;

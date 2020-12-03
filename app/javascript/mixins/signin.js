@@ -1,5 +1,10 @@
 import axios from 'axios';
 export default {
+  data(){
+    return{
+      errors:[]
+    }
+  },
   methods:{
     logIn:function(event){
       event.preventDefault()
@@ -11,11 +16,15 @@ export default {
         }
       })
         .then(response => {
+       
           this.updateCsrfToken(response.data.csrf_token);
           this.$store.commit("setCurrentUser",response.data.result)
           this.$router.push({path: '/'});
         })
-
+        .catch(error=>{
+          
+          this.errors.push('emailまたはpasswordが不正です');
+        })
       )
     },
   }
