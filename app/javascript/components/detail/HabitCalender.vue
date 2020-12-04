@@ -34,7 +34,7 @@ export default {
     };
   },
   props:{
-    habitUser:Object
+    userHabit:Object
   },
   methods: {
     getDates(arr){
@@ -67,9 +67,9 @@ export default {
     }
   },
   watch:{
-    habitUser(val){   
+    userHabit(val){   
       if(this.attributes.length==1){  //分岐させないと、habitUser更新されてた際にドットが重複
-        const dates=this.getDates(val.habit_dones)
+        const dates=this.getDates(val.done_habits)
         this.attributes.push({dot:"teal",dates:dates})
       }
     }

@@ -13,8 +13,8 @@ Rails.application.routes.draw do
       end
       resources :habits do
         collection do
-          post "habit_done"
-          delete "habit_undo"
+          post "done_habit"
+          delete "undo_habit"
         end
       end
       resources :follows, :only

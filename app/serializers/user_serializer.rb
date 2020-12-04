@@ -1,7 +1,7 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :id,:nickname,:email,:following,:followers
 
-  has_many :habit_users
+  has_many :user_habits
   
 
   def following

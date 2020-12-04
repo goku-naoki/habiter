@@ -13,7 +13,7 @@
       <template v-if="isHabitActive">   <!-- 2つ条件入れて置かないと、habit_user取れていないときにエラー -->
         <p v-if="!user.habit_users ||user.habit_users.length==0" class="my-habits__inner-no">習慣が登録されていません</p>
         <ul v-else class="my-habits__inner__list">
-          <MyHabit :habit-user="habitUser" v-for="habitUser in user.habit_users" :key="habitUser.id"/>
+          <MyHabit :habit-user="userHabit" v-for="userHabit in user.user_habits" :key="userHabit.id"/>
         </ul>
       </template>
 
@@ -43,7 +43,7 @@ export default{
    },
    props:{
     user:{
-      habit_users:Array
+      user_habits:Array
     }
   },
   methods:{

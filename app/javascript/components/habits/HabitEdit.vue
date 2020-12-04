@@ -1,5 +1,5 @@
 <template>
-  <HabitForm :habit-user="habitUser" @submit="editHabit" @cancel="cancel">
+  <HabitForm :user-habit="userHabit" @submit="editHabit" @cancel="cancel">
     <HabitDelete :id="id"/>
   </HabitForm>
 </template>
@@ -13,7 +13,7 @@ import HabitDelete from './HabitDelete'
 export default{
   data(){
     return{
-      habitUser:{}
+     userHabit:{}
     }
   },
   props:{
@@ -45,7 +45,7 @@ export default{
      axios
       .get(`/api/v1/habits/${this.id}`)
       .then(response => {
-        this.habitUser=response.data
+        this.userHabit=response.data
       })
   },
 

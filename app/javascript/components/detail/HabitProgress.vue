@@ -37,7 +37,7 @@ export default{
     }
   },
   props:{
-    habitUser:{}
+    userHabit:{}
   },
   methods:{
     checkCont(arr){
@@ -97,16 +97,16 @@ export default{
   },
   
   watch:{
-    habitUser(val){
+    userHabit(val){
   
       
       this.details[1].value=this.beauty(val.start_date)
 
-      if(val.habit_dones.length!=0){
+      if(val.done_habits.length!=0){
        
-        this.details[0].value=val.habit_dones.length
-        this.details[2].value=this.checkCont(val.habit_dones)
-        this.details[3].value=this.getRate(val.habit_dones)
+        this.details[0].value=val.done_habits.length
+        this.details[2].value=this.checkCont(val.done_habits)
+        this.details[3].value=this.getRate(val.done_habits)
       }else{
         this.details[0].value=0
         this.details[2].value=0

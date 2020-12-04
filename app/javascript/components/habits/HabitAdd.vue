@@ -1,5 +1,5 @@
 <template>
-  <HabitForm :habit-user="habitUser" @submit="addHabit" @cancel="cancel">
+  <HabitForm :user-habit="userHabit" @submit="addHabit" @cancel="cancel">
    
   </HabitForm>
 </template>
@@ -12,7 +12,7 @@ import HabitForm from './HabitForm'
 export default{
   data(){
     return{
-      habitUser:{}
+     userHabit:{}
     }
   },
   methods:{
