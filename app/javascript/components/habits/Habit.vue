@@ -5,7 +5,7 @@
       <v-icon v-else @click="doneHabit(userHabit,$event)"> mdi-checkbox-blank-circle-outline</v-icon>
     </div>
     <div class="habit-list__box__item-right">
-      <router-link :to="{ name: 'HabitDetail', params: { id: userHabitr.id } } ">
+      <router-link :to="{ name: 'HabitDetail', params: { id: userHabit.id } } ">
         <p>{{userHabit.habit.name}}</p>
       </router-link>
     </div>
@@ -41,7 +41,7 @@ export default{
      
       return (axios.post("/api/v1/habits/done_habit", {
         done_habit: {
-          habit_user_id: this.userHabit.id,
+          user_habit_id: this.userHabit.id,
           done_date:this.$store.state.selectedDate.getTime()/1000
         }
       })
@@ -55,7 +55,7 @@ export default{
       
       const that=this
       const done_habit= {
-          habit_user_id: this.userHabit.id,
+          user_habit_id: this.userHabit.id,
           done_date:this.$store.state.selectedDate.getTime()/1000
         }
       event.preventDefault()

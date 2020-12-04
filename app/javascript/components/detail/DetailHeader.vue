@@ -85,10 +85,11 @@ export default{
   },
   watch:{
    userHabit(val){
+     debugger
       this.name=val.habit.name  //propsの取得に時間がかかる？？？？
     },
     getCurrentUser(val){
-      debugger
+      
       this.currentUser=val
     }
   },

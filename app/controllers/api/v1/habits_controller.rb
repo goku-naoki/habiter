@@ -2,7 +2,7 @@ class Api::V1::HabitsController < ApiController
 
   def index
     
-    user_habits=current_user.habit_users.preload(:habit_dones)
+    user_habits=current_user.user_habits.preload(:done_habits)
     render json: user_habits,each_serializer: UserHabitSerializer
   end
 
@@ -49,8 +49,8 @@ class Api::V1::HabitsController < ApiController
   end
   def done_habit
     
-    done_habit=DoneHabit.new(user_habit_id:habit_done_params[:user_habit_id],
-                             done_date:Time.at(habit_done_params[:done_date]))
+    done_habit=DoneHabit.new(user_habit_id:done_habit_params[:user_habit_id],
+                             done_date:Time.at(done_habit_params[:done_date]))
                              #jsとrailsで時間が違うの変換する
     if done_habit.save
       render json: done_habit,serializer: DoneHabitSerializer

@@ -1,9 +1,9 @@
 <template>
   <div class="habit-detail">
-    <DetailHeader :habit-user="userHabit" @updated="updated"/>
+    <DetailHeader :user-habit="userHabit" @updated="updated"/>
     <div class="habit-detail__main">
-      <HabitProgress :habit-user="userHabit"/>
-      <HabitCalender :habit-user="userHabit"/>
+      <HabitProgress :user-habit="userHabit"/>
+      <HabitCalender :user-habit="userHabit"/>
     </div>
     <Footer></Footer>
   </div>
