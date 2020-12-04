@@ -67,8 +67,6 @@ export default{
       if (!this.date) {
         this.errors.push('開始日を選択して下さい');
       }
-
-      debugger
       event.preventDefault();
 
     },
