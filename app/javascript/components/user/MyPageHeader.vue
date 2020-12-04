@@ -43,7 +43,6 @@ export default{
         '/users/sign_out'
       )
       .then(response => {
-        debugger
         this.updateCsrfToken(response.data.csrf_token);
         this.$router.push({path: '/user/signin'});
       })
@@ -79,7 +78,6 @@ export default{
     },
 
     followedCheck(){
-      debugger
       if(this.user.followers.some((cur)=>cur.id==this.currentUser.id)){
         this.isFollow=true
       }else{
@@ -103,7 +101,6 @@ export default{
     },
     user(val){
       this.isCurrentAndSelectedUser=false
-      debugger
       this.user=val
       if(this.currentUser.id>0){
           this.followedCheck()
