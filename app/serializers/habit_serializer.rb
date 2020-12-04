@@ -2,7 +2,7 @@ class HabitSerializer < ActiveModel::Serializer
   attributes :id,:name
 
   
-  has_many :habit_users
+  has_many :user_habits
   
 
 end

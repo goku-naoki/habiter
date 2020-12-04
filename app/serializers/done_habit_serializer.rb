@@ -1,7 +1,7 @@
 class DoneHabitSerializer < ActiveModel::Serializer
-  attributes :id,:habit_user_id,:done_date
+  attributes :id,:user_habit_id,:done_date
 
-  belongs_to :habit_user
+  belongs_to :user_habit
   
 
 end

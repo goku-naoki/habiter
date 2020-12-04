@@ -1,4 +1,5 @@
 class DoneHabit < ApplicationRecord
  
-  belongs_to :habit_user
+  belongs_to :user_habit
+  
 end
