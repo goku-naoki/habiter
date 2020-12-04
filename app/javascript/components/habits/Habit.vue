@@ -60,7 +60,7 @@ export default{
         }
       event.preventDefault()
       this.setAxiosDefaults();
-      return (axios.delete("/api/v1/habits/habit_undo", {
+      return (axios.delete("/api/v1/habits/undo_habit", {
         data: {done_habit: done_habit}
       })
       .then(response => {

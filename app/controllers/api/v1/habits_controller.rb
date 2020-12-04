@@ -47,7 +47,7 @@ class Api::V1::HabitsController < ApiController
     @user_habit.destroy
     render json: @user_habit,serializer: UserHabitSerializer
   end
-  def habit_done
+  def done_habit
     
     done_habit=DoneHabit.new(user_habit_id:habit_done_params[:user_habit_id],
                              done_date:Time.at(habit_done_params[:done_date]))
@@ -59,9 +59,9 @@ class Api::V1::HabitsController < ApiController
     end
   end
 
-  def habit_undo
-    done_habit=DoneHabit.find_by(user_habit_id:habit_done_params[:user_habit_id],
-                                 done_date:Time.at(habit_done_params[:done_date]))
+  def undo_habit
+    done_habit=DoneHabit.find_by(user_habit_id:done_habit_params[:user_habit_id],
+                                 done_date:Time.at(done_habit_params[:done_date]))
     done_habit.destroy
     render json: done_habit                      
   end
@@ -73,7 +73,7 @@ class Api::V1::HabitsController < ApiController
   end
 
 
-  def habit_done_params
+  def done_habit_params
     params.require(:done_habit).permit(:user_habit_id,:done_date)
   end
   
