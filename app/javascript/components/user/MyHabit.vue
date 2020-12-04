@@ -1,8 +1,8 @@
 <template>
   <li class="habit-item">
-    <router-link :to="{ name: 'HabitDetail', params: { id: habitUser.id } } ">
+    <router-link :to="{ name: 'HabitDetail', params: { id: userHabit.id } } ">
       <div class="habit-item__inner">
-        <p>{{habitUser.habit.name}}</p>
+        <p>{{userHabit.habit.name}}</p>
       </div>
     </router-link>
   </li>
@@ -15,7 +15,7 @@ import axios from 'axios';
 export default{
 
    props:{
-    habitUser:Object
+   userHabit:Object
   },
 }
 

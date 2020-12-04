@@ -1,9 +1,9 @@
 <template>
   <div class="habit-detail">
-    <DetailHeader :habit-user="habitUser" @updated="updated"/>
+    <DetailHeader :user-habit="userHabit" @updated="updated"/>
     <div class="habit-detail__main">
-      <HabitProgress :habit-user="habitUser"/>
-      <HabitCalender :habit-user="habitUser"/>
+      <HabitProgress :user-habit="userHabit"/>
+      <HabitCalender :user-habit="userHabit"/>
     </div>
     <Footer></Footer>
   </div>
@@ -20,7 +20,7 @@ export default{
   data(){
 
     return{
-      habitUser:{
+      userHabit:{
         
       },
     }
@@ -31,7 +31,7 @@ export default{
   methods:{
     updated(response){
      
-      this.habitUser=response
+      this.userHabit=response
   
     }
   },
@@ -39,7 +39,7 @@ export default{
     axios
       .get(`/api/v1/habits/${this.id}`)
       .then(response => {
-        this.habitUser=response.data
+        this.userHabit=response.data
       })
   },
   components:{

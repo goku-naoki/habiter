@@ -1,12 +1,12 @@
 <template>
   <li class="habit-list__box__item">
     <div class="habit-list__box__item-left">
-      <v-icon v-if=" isDone" @click="undoHabit(habitUser, $event)">mdi-checkbox-marked-circle</v-icon>
-      <v-icon v-else @click="doneHabit(habitUser,$event)"> mdi-checkbox-blank-circle-outline</v-icon>
+      <v-icon v-if=" isDone" @click="undoHabit(userHabit, $event)">mdi-checkbox-marked-circle</v-icon>
+      <v-icon v-else @click="doneHabit(userHabit,$event)"> mdi-checkbox-blank-circle-outline</v-icon>
     </div>
     <div class="habit-list__box__item-right">
-      <router-link :to="{ name: 'HabitDetail', params: { id: habitUser.id } } ">
-        <p>{{habitUser.habit.name}}</p>
+      <router-link :to="{ name: 'HabitDetail', params: { id: userHabit.id } } ">
+        <p>{{userHabit.habit.name}}</p>
       </router-link>
     </div>
   </li>
@@ -31,7 +31,7 @@ export default{
     }
   },
   props:{
-    habitUser:Object
+    userHabit:Object
   },
   methods:{
     doneHabit:function(habit,event){
@@ -39,34 +39,34 @@ export default{
       event.preventDefault()
       this.setAxiosDefaults();
      
-      return (axios.post("/api/v1/habits/habit_done", {
-        habit_done: {
-          habit_user_id: this.habitUser.id,
+      return (axios.post("/api/v1/habits/done_habit", {
+        done_habit: {
+          user_habit_id: this.userHabit.id,
           done_date:this.$store.state.selectedDate.getTime()/1000
         }
       })
       .then(response => {
         this.isDone=true
-        this.habitUser.habit_dones.push(response.data) //配列の値も更新しないと、chackできやん
+        this.userHabit.done_habits.push(response.data) //配列の値も更新しないと、chackできやん
         })
       )
     },
     undoHabit(habit,event){
       
       const that=this
-      const habit_done= {
-          habit_user_id: this.habitUser.id,
+      const done_habit= {
+          user_habit_id: this.userHabit.id,
           done_date:this.$store.state.selectedDate.getTime()/1000
         }
       event.preventDefault()
       this.setAxiosDefaults();
-      return (axios.delete("/api/v1/habits/habit_undo", {
-        data: {habit_done: habit_done}
+      return (axios.delete("/api/v1/habits/undo_habit", {
+        data: {done_habit: done_habit}
       })
       .then(response => {
         this.isDone=false
 
-        that.habitUser.habit_dones=that.habitUser.habit_dones.filter((cur)=>{
+        that.userHabit.done_habits=that.userHabit.done_habits.filter((cur)=>{
           cur.done_date!=response.data.done_date
         })
         })
@@ -74,10 +74,10 @@ export default{
     },
     checkDone:function(date){
    
-      const habit_dones=this.habitUser.habit_dones
+      const done_habits=this.userHabit.done_habits
       const that=this
-      if(habit_dones.lenght!=0){
-        this.isDone=habit_dones.some((done)=>{
+      if(done_habits.lenght!=0){
+        this.isDone=done_habits.some((done)=>{
           let selected_date=that.moment(date)
           return done.done_date==selected_date
         })

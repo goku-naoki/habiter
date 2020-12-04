@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :habit_users
+  has_many :user_habits
   has_many :habits, through: :habit_users
 
   has_many :active_relationships, class_name:  "Relationship",
