@@ -10,7 +10,7 @@
         </p>
       </div>
       <div class="detail-header__inner-right">
-        <template v-if="currentUser.id==habitUser.user_id">
+        <template v-if="currentUser.id== userHabit.user_id">
           <v-icon @click="toggleModal()">mdi-dots-horizontal-circle</v-icon>
           <div class="detail-header__modal" v-if="isModalTouched">
             <ul class="detail-header__modal__list">
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <HabitEdit :id="habitUser.id" v-if="isFormTouched" @cancel="toggleForm" @updated="updated"/>
+    <HabitEdit :id="userHabit.id" v-if="isFormTouched" @cancel="toggleForm" @updated="updated"/>
     <div @click="toggleForm" v-if="isFormTouched" class="modal-edit-wrapper"></div>
   </div>
 </template>
@@ -50,7 +50,7 @@ export default{
     }
   },
   props:{
-      habitUser:Object
+      userHabit:Object
     },
   methods:{
     toggleModal(){
@@ -84,7 +84,7 @@ export default{
     }
   },
   watch:{
-    habitUser(val){
+   userHabit(val){
       this.name=val.habit.name  //propsの取得に時間がかかる？？？？
     },
     getCurrentUser(val){

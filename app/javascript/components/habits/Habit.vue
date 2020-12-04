@@ -1,12 +1,12 @@
 <template>
   <li class="habit-list__box__item">
     <div class="habit-list__box__item-left">
-      <v-icon v-if=" isDone" @click="undoHabit(habitUser, $event)">mdi-checkbox-marked-circle</v-icon>
-      <v-icon v-else @click="doneHabit(habitUser,$event)"> mdi-checkbox-blank-circle-outline</v-icon>
+      <v-icon v-if=" isDone" @click="undoHabit(userHabit, $event)">mdi-checkbox-marked-circle</v-icon>
+      <v-icon v-else @click="doneHabit(userHabit,$event)"> mdi-checkbox-blank-circle-outline</v-icon>
     </div>
     <div class="habit-list__box__item-right">
-      <router-link :to="{ name: 'HabitDetail', params: { id: habitUser.id } } ">
-        <p>{{habitUser.habit.name}}</p>
+      <router-link :to="{ name: 'HabitDetail', params: { id: userHabitr.id } } ">
+        <p>{{userHabit.habit.name}}</p>
       </router-link>
     </div>
   </li>
@@ -31,7 +31,7 @@ export default{
     }
   },
   props:{
-    habitUser:Object
+    userHabit:Object
   },
   methods:{
     doneHabit:function(habit,event){
@@ -39,15 +39,15 @@ export default{
       event.preventDefault()
       this.setAxiosDefaults();
      
-      return (axios.post("/api/v1/habits/habit_done", {
-        habit_done: {
-          habit_user_id: this.habitUser.id,
+      return (axios.post("/api/v1/habits/done_habit", {
+        done_habit: {
+          habit_user_id: this.userHabit.id,
           done_date:this.$store.state.selectedDate.getTime()/1000
         }
       })
       .then(response => {
         this.isDone=true
-        this.habitUser.habit_dones.push(response.data) //配列の値も更新しないと、chackできやん
+        this.userHabit.habit_dones.push(response.data) //配列の値も更新しないと、chackできやん
         })
       )
     },
@@ -55,7 +55,7 @@ export default{
       
       const that=this
       const habit_done= {
-          habit_user_id: this.habitUser.id,
+          habit_user_id: this.userHabit.id,
           done_date:this.$store.state.selectedDate.getTime()/1000
         }
       event.preventDefault()
@@ -66,7 +66,7 @@ export default{
       .then(response => {
         this.isDone=false
 
-        that.habitUser.habit_dones=that.habitUser.habit_dones.filter((cur)=>{
+        that.userHabit.habit_dones=that.userHabit.habit_dones.filter((cur)=>{
           cur.done_date!=response.data.done_date
         })
         })
@@ -74,7 +74,7 @@ export default{
     },
     checkDone:function(date){
    
-      const habit_dones=this.habitUser.habit_dones
+      const habit_dones=this.userHabit.habit_dones
       const that=this
       if(habit_dones.lenght!=0){
         this.isDone=habit_dones.some((done)=>{

@@ -47,7 +47,7 @@ export default{
     }
   },
   props:{
-    habitUser:{
+     userHabit:{
       habit:{
         name:String,
       },
@@ -82,9 +82,9 @@ export default{
     }
   },
   watch:{
-    habitUser(){
-     this.name=this.habitUser.habit.name
-     this.date=this.habitUser.start_date
+    userHabit(){
+     this.name=this.userHabit.habit.name
+     this.date=this.userHabit.start_date
     }
   },
   // mixins:[Csrf],
