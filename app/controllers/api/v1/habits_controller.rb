@@ -13,12 +13,16 @@ class Api::V1::HabitsController < ApiController
 
 
   def create
-    @habit=Habit.new(name:habit_params[:name])
-    if @habit.save
-      
+
+    @habit=Habit.where(name:habit_params[:name]).first_or_initialize
+    if @habit.valid?
+      unless @habit.persisted?
+        @habit.save
+      end
+
       @user_habit=UserHabit.create(user_id:current_user.id,
-                       habit_id:@habit.id,
-                       start_date:Time.at(habit_params[:start_date]))
+        habit_id:@habit.id,
+        start_date:Time.at(habit_params[:start_date]))
 
       render json: @user_habit,serializer: UserHabitSerializer
     else
