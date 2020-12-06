@@ -7,7 +7,7 @@ services:
     ports: 
       - '3306:3306' # ホストからゲストへポートフォワード
     environment:
-      MYSQL_DATABASE: error_habiter_development
+      MYSQL_DATABASE: habiter_development
       MYSQL_USER: root
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
 
