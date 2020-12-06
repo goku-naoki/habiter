@@ -61,3 +61,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'pry-rails'
 gem 'devise'
 gem 'active_model_serializers'  
+
+group :production do
+  gem 'unicorn', '5.4.1'
+end
