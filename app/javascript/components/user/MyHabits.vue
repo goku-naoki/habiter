@@ -11,14 +11,14 @@
       </div>
       
       <template v-if="isHabitActive">   <!-- 2つ条件入れて置かないと、habit_user取れていないときにエラー -->
-        <p v-if="!user.habit_users ||user.habit_users.length==0" class="my-habits__inner-no">習慣が登録されていません</p>
+        <p v-if="!user.user_habits||user.user_habits.length==0" class="my-habits__inner-no">習慣が登録されていません</p>
         <ul v-else class="my-habits__inner__list">
           <MyHabit :habit-user="userHabit" v-for="userHabit in user.user_habits" :key="userHabit.id"/>
         </ul>
       </template>
 
       <template v-else>
-        <p v-if="!user.habit_users ||user.following==0" class="my-habits__inner-no">フォローしているユーザーはいません</p>
+        <p v-if="!user.user_habits ||user.following==0" class="my-habits__inner-no">フォローしているユーザーはいません</p>
         <ul v-else class="my-habits__inner__list">
           <MyFollowed :followed="followed" v-for="followed in user.following" :key="followed.id"/>
         </ul>
