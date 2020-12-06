@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: habiter_production
-  username: habiter
+  username: root
   password: <%= ENV['HABITER_DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
