@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y build-essential libpq-dev
 RUN apt-get update && apt-get install -y nodejs --no-install-recommends && rm -rf /var/lib/apt/lists/*
 RUN apt-get update && apt-get install -y mariadb-client --no-install-recommends && rm -rf /var/lib/apt/lists/*
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
-RUN mkdir /habiter
+
 
 RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
 # +# Fix: 'Cannot find module 'node-sass'
 RUN yarn add node-sass
 
+RUN mkdir /habiter
 WORKDIR /habiter
 
 COPY Gemfile /habiter/Gemfile
