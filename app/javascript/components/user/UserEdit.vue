@@ -1,6 +1,6 @@
 <template>
   <div class="mypage-header">
-   efef
+  
   </div>
 </template>
 
@@ -10,7 +10,9 @@ import Csrf from '../..//mixins/csrf'
 
 export default{
   data(){
-    
+    return{
+
+    }
   },
   props:{
     user:Object,
@@ -42,11 +44,11 @@ export default{
     // },
    
   },
-  created(){
-    if(this.getCurrentUser!=null){
-      this.currentUser= this.getCurrentUser
-    }
-  },
+  // created(){
+  //   if(this.getCurrentUser!=null){
+  //     this.currentUser= this.getCurrentUser
+  //   }
+  // },
 
   mixins:[
     Csrf],

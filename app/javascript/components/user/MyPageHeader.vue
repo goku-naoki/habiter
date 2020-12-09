@@ -7,7 +7,7 @@
       </div>
       <template v-if="isUserForm">
         <UserEdit :user="user"/>
-        <div @click="toggleForm" v-if="isUserForm" class="modal-wrapper"></div>
+        <div @click="toggleForm"  class="modal-wrapper"></div>
       </template>
       <div class="mypage-header__inner__right">
         
@@ -90,7 +90,7 @@ export default{
         this.isFollow=false
       }
     },
-    toggelForm(){
+    toggleForm(){
       (!this.isUserForm) ? this.isUserForm=true: this.isUserForm=false
     },
   },
@@ -126,9 +126,9 @@ export default{
 
   mixins:[
     Csrf],
-  components:[
+  components:{
     UserEdit
-  ]
+  }
 
   
 
