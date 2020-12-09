@@ -1,12 +1,35 @@
 <template>
-  <div class="user-edit"> 
+  <form class="user-edit"> 
     <div class="user-edit__header">
       <div class="user-edit__header__inner">
-        
+        <p @click="cancel">キャンセル</p>
+        <input class="user-edit__header__inner-right" @click="checkForm" type="submit" value="更新">
       </div>
     </div>
-  
-  </div>
+    <ul v-if="errors.lenght!=0" class="errors">
+      <li class="error" v-for="error in errors" :key="error">
+        {{error}}
+      </li>
+    </ul>
+    <div class="user-edit__main">
+      <div class="user-edit__main__inner">
+        <label class="user-edit__photo" @click="editImage" for="image-input">
+          <v-icon v-if="photo==null">mdi-account-circle</v-icon>
+          <img v-else :src="photo">
+         
+        </label>
+
+        <input type="file" id="image-input" accept="image/*" ref="file" @change="onFileChange">
+
+        <div class="user-edit__input">
+          <input v-model="user.nickname" type="text" placeholder="nickname" >
+        </div>
+        <div class="user-edit__input">
+          <input v-model="user.email" type="text"   placeholder="email" >
+        </div>
+      </div>
+    </div>
+  </form>
 </template>
 
 <script>
@@ -16,6 +39,10 @@ import Csrf from '../..//mixins/csrf'
 export default{
   data(){
     return{
+      errors:[],
+      nickname:null,
+      email:null,
+      photo:null
 
     }
   },
@@ -23,6 +50,25 @@ export default{
     user:Object,
   },
   methods:{
+    cancel(){
+
+    },
+    checkForm(){
+
+    },
+    editImage(){
+
+    },
+    onFileChange(event) {
+     this.photo=URL.createObjectURL(event.target.files[0]);
+    // let file = event.target.files[0] || event.dataTransfer.files
+    // let reader = new FileReader()
+    //   reader.onload = () => {
+    //       this.uploadedImage = event.target.result
+    //       this.photo = this.uploadedImage
+    //     }
+    //   reader.readAsDataURL(file)
+      },
    
   },
   computed:{
@@ -65,18 +111,17 @@ export default{
 <style scoped lang="scss">
   .user-edit{
     width:50vw;
-    height:50vh;
+    height:calc(100vh - 50px - 60px);
     position:fixed;
-    top: 40%;
+    top: 60px;
     left: 50%;
-    transform: translateY(-50%) translateX(-50%);
+    transform:translateX(-50%);
     z-index:100;
     background:#fafafa;
     border-radius: 5px; //なぜか上だけ効かないのでheaderの上に
     &__header{
       width:100%;
       height:50px;
-      margin-bottom:20px;
       font-size:1.4rem;
       background:white;
       color:#34acbc;
@@ -95,53 +140,44 @@ export default{
         }
       }
     }
-    &__form{
-      &__name{
-        width: 100%;
-        // height:60px;
-        margin-bottom:20px;
-        text-align:center;
-        line-height:60px;
-        background:white;
-        input{
-          height:40px;
-          width:95%;
-          margin:0 auto;
-          padding:10px 0;
-          font-size:1.6rem;
-        }
+    &__main{
+      width:100%;
+      padding-top:40px;
+      text-align:center;
+      &__inner{
+        width:90%;
+        margin:0 auto;
       }
-      &__detail{
+    }
+    &__photo{
+      display:block;
+      height: 100px;
+      width: 100px;
+      margin: 0 auto;
+      margin-bottom:30px;
+      img{
         width:100%;
-        background:white;
-        margin-bottom:40px;
-        &__item{
-          width:95%;
-          height:50px;
-          margin:0 auto;
-          display:flex;
-          justify-content:space-between;
-          align-items: center;
-          font-size: 1.4rem;
-          border-bottom:1px solid #fafafa;
-          &-left{
-            display: flex;
-            align-items: center;
-            i{
-              margin-right:15px;
-            }
-          }
-          &-right{
-            width:110px;
-            position: relative;
-            span{
-              position: absolute;
-              top:0;
-              right:0;
-              opacity:0.6;
-            }
-          }
-        }
+        height:100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      i{
+        font-size:5rem;
+      }
+    }
+    input[type="file"]{
+      display:none
+      
+    }
+    &__input{
+      margin-bottom:20px;
+      input{
+        width:100%;
+        height:36px;
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: 5px;
+        font-size: 1.2rem;
       }
     }
   }
