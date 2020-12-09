@@ -145,7 +145,7 @@ export default{
     width:100%;
     height:60px;
     z-index: 0;
-    position: fixed;
+    // position: fixed;
     top:0;   //下ボックスの重なり解除
     box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
     &__inner{

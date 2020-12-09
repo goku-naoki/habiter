@@ -54,9 +54,9 @@ export default{
 
 <style scoped lang="scss">
   .habit-detail__main{
-    height:100vh; //footerとheaderがfixedだから
+    height:calc(100vh - 60px - 50px); //footerとheaderがfixedだから
     overflow: scroll;
-    padding-top:60px;
-   margin-bottom: 50px;
+  //   padding-top:60px;
+  //  margin-bottom: 50px;
   }
 </style>
