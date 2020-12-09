@@ -1,10 +1,14 @@
 <template>
   <div class="mypage-header">
     <div class="mypage-header__inner">
-      <div class="mypage-header__inner__left">
+      <div class="mypage-header__inner__left" @click="toggleForm">
         <v-icon >mdi-account-circle</v-icon>
         <p class="mypage-header__inner__left-name">{{user.nickname}}</p>
       </div>
+      <template v-if="isUserForm">
+        <UserEdit :user="user"/>
+        <div @click="toggleForm" v-if="isUserForm" class="modal-wrapper"></div>
+      </template>
       <div class="mypage-header__inner__right">
         
         <template v-if="currentUser.id==user.id">
@@ -24,12 +28,14 @@
 <script>
 import axios from 'axios';
 import Csrf from '../..//mixins/csrf'
+import UserEdit from './UserEdit'
 
 export default{
   data(){
     return{
       currentUser:{},
       isFollow:false,
+      isUserForm:false
     }
   },
   props:{
@@ -83,7 +89,10 @@ export default{
       }else{
         this.isFollow=false
       }
-    }
+    },
+    toggelForm(){
+      (!this.isUserForm) ? this.isUserForm=true: this.isUserForm=false
+    },
   },
   computed:{
     getCurrentUser(){
@@ -117,6 +126,11 @@ export default{
 
   mixins:[
     Csrf],
+  components:[
+    UserEdit
+  ]
+
+  
 
 
 
@@ -164,5 +178,15 @@ export default{
       }
     }
   }
+
+  .modal-wrapper{
+          position:fixed;
+          top:0;
+          left:0;
+          width:100%;
+          height:100%;
+          z-index:1;
+          background:rgba(0,0,0,0.6)
+      }
 
 </style>
