@@ -18,14 +18,13 @@
           <img v-else :src="photo">
          
         </label>
-
         <input type="file" id="image-input" accept="image/*" ref="file" @change="onFileChange">
 
         <div class="user-edit__input">
-          <input v-model="user.nickname" type="text" placeholder="nickname" >
+          <input v-if="nickname!=null" v-model="nickname" type="text" placeholder="nickname" >
         </div>
         <div class="user-edit__input">
-          <input v-model="user.email" type="text"   placeholder="email" >
+          <input v-if="email!=null" v-model="email" type="text"   placeholder="email" >
         </div>
       </div>
     </div>
@@ -53,7 +52,19 @@ export default{
     cancel(){
 
     },
-    checkForm(){
+    checkForm(event){
+      event.preventDefault()
+      this.setAxiosDefaults();
+      return (axios.put("/users", {
+        user: {
+          nickname:this.nickname,
+          email:this.email
+        }
+      })
+      .then(response => {
+        debugger
+        })
+      )
 
     },
     editImage(){
@@ -86,20 +97,18 @@ export default{
     //   }
     // },
     // user(val){
-    //   this.isCurrentAndSelectedUser=false
-    //   this.user=val
-    //   if(this.currentUser.id>0){
-    //       this.followedCheck()
-    //   }
+    //   debugger
+    //   this.nickname=val.nickname
+    //   this.email=val.email
 
     // },
    
   },
-  // created(){
-  //   if(this.getCurrentUser!=null){
-  //     this.currentUser= this.getCurrentUser
-  //   }
-  // },
+  created(){
+   debugger
+      this.nickname=this.user.nickname
+      this.email=this.user.email
+  },
 
   mixins:[
     Csrf],
@@ -163,7 +172,7 @@ export default{
       }
 
       i{
-        font-size:5rem;
+        font-size:10rem;
       }
     }
     input[type="file"]{

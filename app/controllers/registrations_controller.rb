@@ -27,6 +27,18 @@ class RegistrationsController < Devise::RegistrationsController
       end
     end
   end
+
+
+  def update
+    super
+    #userモデルでupdateをオーバーライド
+  end
+
+
+
+
+
+  
   # GET /resource/sign_up
   # def new
   #   super
