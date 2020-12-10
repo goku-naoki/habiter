@@ -73,17 +73,23 @@ export default{
     editImage(){
 
     },
-    onFileChange(event) {
+    onFileChange() {
+      //この引数にevent入れるとonloadで使えない。。すごい謎
       let that=this
       let file = event.target.files[0] || event.dataTransfer.files
       this.photo=URL.createObjectURL(file);
       let reader = new FileReader()
-        reader.onload = (e) => {
-            that.uploadFile = this.result
-            debugger
+        reader.onload = () => {
+         
+          //  let tmp= this.result
+           that.uploadFile=event.target.result
+
+           debugger
           }
         reader.readAsDataURL(file)
-        },
+
+         debugger
+     },
    
   },
   computed:{
@@ -111,6 +117,8 @@ export default{
   created(){
       this.nickname=this.user.nickname
       this.email=this.user.email
+      debugger
+      (this.user.photo!=null) ? this.photo=this.user.photo :{}
   },
 
   mixins:[

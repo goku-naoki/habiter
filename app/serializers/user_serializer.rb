@@ -1,5 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id,:nickname,:email,:following,:followers
+  include Rails.application.routes.url_helpers
+  attributes :id,:nickname,:email,:following,:followers,:photo
 
   has_many :user_habits
   
@@ -10,9 +11,11 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def followers
-   
     object.followers
   end
   
+  def photo
+   url_for(object.avatar) if object.avatar.attached?
+  end
 
 end
