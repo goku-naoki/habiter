@@ -30,8 +30,15 @@ class RegistrationsController < Devise::RegistrationsController
 
 
   def update
-    super
+    super do
+      if request.format.json?
+        unless !@user.errors.messages.empty?
+          render json: @user,include: { user_habits: [:habit] },serializer: UserSerializer and return
+        end
+      end
+    end
     #userモデルでupdateをオーバーライド
+   
   end
 
 

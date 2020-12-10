@@ -50,7 +50,7 @@ export default{
   },
   methods:{
     cancel(){
-
+      this.$emit('cancel')
     },
     checkForm(event){
       event.preventDefault()
@@ -62,7 +62,7 @@ export default{
         }
       })
       .then(response => {
-        debugger
+        this.$emit("userUpdated",response.data)
         })
       )
 
@@ -105,7 +105,6 @@ export default{
    
   },
   created(){
-   debugger
       this.nickname=this.user.nickname
       this.email=this.user.email
   },

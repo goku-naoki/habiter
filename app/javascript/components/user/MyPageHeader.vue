@@ -6,7 +6,7 @@
         <p class="mypage-header__inner__left-name">{{user.nickname}}</p>
       </div>
       <template v-if="isUserForm">
-        <UserEdit :user="user"/>
+        <UserEdit :user="user" @userUpdated="userUpdated" @cancel="cancel"/>
         <div @click="toggleForm"  class="modal-wrapper"></div>
       </template>
       <div class="mypage-header__inner__right">
@@ -93,6 +93,13 @@ export default{
     toggleForm(){
       (!this.isUserForm) ? this.isUserForm=true: this.isUserForm=false
     },
+    userUpdated(val){
+      this.$emit("userUpdated",val)
+      this.toggleForm()
+    },
+    cancel(){
+      this.toggleForm()
+    }
   },
   computed:{
     getCurrentUser(){
