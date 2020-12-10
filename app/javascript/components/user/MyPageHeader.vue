@@ -1,18 +1,26 @@
 <template>
   <div class="mypage-header">
     <div class="mypage-header__inner">
-      <div class="mypage-header__inner__left" @click="toggleForm">
-        <v-icon >mdi-account-circle</v-icon>
+      <div class="mypage-header__inner__left">
+        <v-icon v-if="user.id!=null && user.photo==null">mdi-account-circle</v-icon>
+        <div v-else-if="user.photo"  class="my-page-header__image">
+          <img :src="user.photo">
+        </div>   
         <p class="mypage-header__inner__left-name">{{user.nickname}}</p>
       </div>
+
       <template v-if="isUserForm">
         <UserEdit :user="user" @userUpdated="userUpdated" @cancel="cancel"/>
         <div @click="toggleForm"  class="modal-wrapper"></div>
       </template>
+      
       <div class="mypage-header__inner__right">
         
         <template v-if="currentUser.id==user.id">
-           <v-icon  @click="logout">mdi-home-export-outline</v-icon>
+          <div class="mypage-header__inner-current">
+            <v-icon  @click="toggleForm"> mdi-account-edit</v-icon>
+            <v-icon  @click="logout">mdi-home-export-outline</v-icon>
+          </div>
         </template>
 
         <template v-else>
@@ -32,6 +40,7 @@ import UserEdit from './UserEdit'
 
 export default{
   data(){
+  
     return{
       currentUser:{},
       isFollow:false,
@@ -116,6 +125,7 @@ export default{
       }
     },
     user(val){
+    
       this.isCurrentAndSelectedUser=false
       this.user=val
       if(this.currentUser.id>0){
@@ -126,6 +136,7 @@ export default{
    
   },
   created(){
+      debugger
     if(this.getCurrentUser!=null){
       this.currentUser= this.getCurrentUser
     }
@@ -165,6 +176,17 @@ export default{
       &__left{
         display:flex;
         align-items: center;
+        .my-page-header__image{
+          width:40px;
+          height:40px;
+          margin-right: 10px;
+          img{
+            width:100%;
+            height:100%;
+            border-radius:50%;
+
+          }
+        }
         i{
           position:relative;
           top:2px;
@@ -179,9 +201,15 @@ export default{
       &__right{
         display: flex;
         align-items: center;
-        i{
+        .mypage-header__inner-current{
+          display:block;
+          button{
           font-size:30px;
-        }
+          &:first-child{
+            margin-right:10px;
+            }
+          }
+        }     
       }
     }
   }
