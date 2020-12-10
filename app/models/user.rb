@@ -8,6 +8,9 @@ class User < ApplicationRecord
   
   validates :nickname, presence: true
 
+  has_one_attached :photo
+  attr_accessor :image
+
   has_many :user_habits
 
   has_many :habits, through: :habit_users

@@ -30,6 +30,7 @@ class RegistrationsController < Devise::RegistrationsController
 
 
   def update
+    binding.pry
     super do
       if request.format.json?
         unless !@user.errors.messages.empty?

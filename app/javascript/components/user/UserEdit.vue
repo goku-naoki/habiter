@@ -41,7 +41,8 @@ export default{
       errors:[],
       nickname:null,
       email:null,
-      photo:null
+      photo:null,
+      uploadFile:null
 
     }
   },
@@ -55,10 +56,12 @@ export default{
     checkForm(event){
       event.preventDefault()
       this.setAxiosDefaults();
+        debugger
       return (axios.put("/users", {
         user: {
           nickname:this.nickname,
-          email:this.email
+          email:this.email,
+          image:this.uploadFile
         }
       })
       .then(response => {
@@ -71,15 +74,16 @@ export default{
 
     },
     onFileChange(event) {
-     this.photo=URL.createObjectURL(event.target.files[0]);
-    // let file = event.target.files[0] || event.dataTransfer.files
-    // let reader = new FileReader()
-    //   reader.onload = () => {
-    //       this.uploadedImage = event.target.result
-    //       this.photo = this.uploadedImage
-    //     }
-    //   reader.readAsDataURL(file)
-      },
+      let that=this
+      let file = event.target.files[0] || event.dataTransfer.files
+      this.photo=URL.createObjectURL(file);
+      let reader = new FileReader()
+        reader.onload = (e) => {
+            that.uploadFile = this.result
+            debugger
+          }
+        reader.readAsDataURL(file)
+        },
    
   },
   computed:{
