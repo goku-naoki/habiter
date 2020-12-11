@@ -11,12 +11,15 @@
         <label for="select-date" class="index-header__inner-right_calender">
           <v-icon>mdi-calendar-range</v-icon>
         </label>
+
         <Datepicker  id="select-date" v-model="date"></Datepicker>
-        <!-- <router-link to="#"> -->
         <v-icon @click="toggleForm">mdi-pencil-plus-outline</v-icon>
-        <HabitAdd v-if="isFormTouched" @cancel="toggleForm" @added="added"/>
-        <div @click="toggleForm" v-if="isFormTouched" class="modal-wrapper"></div>
-        <!-- </router-link> -->
+
+        <template v-if="isFormTouched">
+          <HabitAdd  @cancel="toggleForm" @added="added"/>
+          <ModalWrapper @clickModal="toggleForm"/>
+        </template>
+
       </div>
     </div>
   </div>
@@ -27,6 +30,7 @@ import axios from 'axios';
 import Datepicker from 'vuejs-datepicker';
 import moment from 'moment';
 import HabitAdd from './HabitAdd'
+import ModalWrapper from '../global/ModalWrapper'
 
 export default{
   data(){
@@ -94,7 +98,8 @@ export default{
 
   components : {
     HabitAdd,
-    Datepicker
+    Datepicker,
+    ModalWrapper
   }
  
 }
@@ -139,15 +144,6 @@ export default{
         i{
            color:white;
         }
-      }
-      .modal-wrapper{
-          position:fixed;
-          top:0;
-          left:0;
-          width:100%;
-          height:100%;
-          z-index:1;
-          background:rgba(0,0,0,0.6)
       }
     }
   }

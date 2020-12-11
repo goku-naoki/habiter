@@ -11,7 +11,8 @@
 
       <template v-if="isUserForm">
         <UserEdit :user="user" @userUpdated="userUpdated" @cancel="cancel"/>
-        <div @click="toggleForm"  class="modal-wrapper"></div>
+        <ModalWrapper @clickModal="toggleForm"/>
+        <!-- <div @click="toggleForm"  class="modal-wrapper"></div> -->
       </template>
       
       <div class="mypage-header__inner__right">
@@ -37,6 +38,7 @@
 import axios from 'axios';
 import Csrf from '../..//mixins/csrf'
 import UserEdit from './UserEdit'
+import ModalWrapper from '../global/ModalWrapper'
 
 export default{
   data(){
@@ -145,7 +147,8 @@ export default{
   mixins:[
     Csrf],
   components:{
-    UserEdit
+    UserEdit,
+    ModalWrapper
   }
 
   
@@ -214,14 +217,5 @@ export default{
     }
   }
 
-  .modal-wrapper{
-          position:fixed;
-          top:0;
-          left:0;
-          width:100%;
-          height:100%;
-          z-index:1;
-          background:rgba(0,0,0,0.6)
-      }
 
 </style>

@@ -9,6 +9,7 @@
           {{name}}
         </p>
       </div>
+
       <div class="detail-header__inner-right">
         <template v-if="currentUser.id== userHabit.user_id">
           <v-icon @click="toggleModal()">mdi-dots-horizontal-circle</v-icon>
@@ -24,19 +25,24 @@
               </li>
             </ul>
           </div>
-          <div @click="toggleModal()" v-if="isModalTouched" class="modal-wrapper"></div>
+          <ModalWhiteWrapper v-if="isModalTouched" @clickModal="toggleModal()"/>
         </template>
       </div>
     </div>
 
-    <HabitEdit :id="userHabit.id" v-if="isFormTouched" @cancel="toggleForm" @updated="updated"/>
-    <div @click="toggleForm" v-if="isFormTouched" class="modal-edit-wrapper"></div>
+    <template v-if="isFormTouched">
+      <HabitEdit :id="userHabit.id"  @cancel="toggleForm" @updated="updated"/>
+      <ModalWrapper @clickModal="toggleForm"/>
+    </template>
+
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import HabitEdit from '../habits/HabitEdit'
+import ModalWrapper from '../global/ModalWrapper'
+import ModalWhiteWrapper from '../global/ModalWhiteWrapper'
 
 
 export default{
@@ -99,6 +105,8 @@ export default{
   },
   components : {
     HabitEdit,
+    ModalWrapper,
+    ModalWhiteWrapper
    
     
   }
@@ -176,29 +184,11 @@ export default{
                 i{
                   color:#404040;
                 }
-
               // }
             }
           }
         }
-        .modal-wrapper{
-          position:fixed;
-          top:0;
-          left:0;
-          width:100%;
-          height:100%;
-          z-index:1;
-        }
       }
-    }
-    .modal-edit-wrapper{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      z-index:1;
-      background:rgba(0,0,0,0.6)
     }
   }
 

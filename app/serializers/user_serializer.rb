@@ -33,8 +33,6 @@ class UserSerializer < ActiveModel::Serializer
       user_arr << hash
     end
     return user_arr
-
-
   end
 
 end
