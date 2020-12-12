@@ -6,7 +6,7 @@ Habiter(ハビター)はrailsとvue.jsで作られた習慣管理アプリです
 掛け合わせて命名しました。
 目標があっても行動に移せないと言う問題を解決する為に、小さな一歩からサポートします。
 
-<img src="/assets/habiter-detail.png" >
+<img src="assets/habiter-detail.png" >
 
 ## アプリURL
 
