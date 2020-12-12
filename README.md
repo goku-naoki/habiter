@@ -30,19 +30,35 @@ https://20201212-0923_a49551259e099238c992d6421f67b638.png/
 6. ユーザー検索
 
 ###注力ポイント
+***
+
 **美しくシンプルなUI**
 
 <p align="center">
   <img src="/assets/sign-in.png" width=70%>  
-</p>
+</p>　
 
 <p align="center">
   <img src="/assets/habti-list.png" width=70%>  
-</p>
+</p>　
 
 <p align="center">
   <img src="/assets/my-page.png" width=70%>  
-</p>
+</p>　
+
+**習慣詳細部分**
+
+<p align="center">
+  <img src="/assets/habiter-detail.png" width=70%>  
+</p>　
+
+・習慣達成の合計
+・開始日
+・連続達成日数
+・月の達成度
+・カレンダーで達成日表示
+
+
 
 ## 使用技術
 ・言語/フレームワーク
@@ -62,6 +78,10 @@ https://20201212-0923_a49551259e099238c992d6421f67b638.png/
 
 ・開発環境
 　　■AWS EC2
+
+
+
+
 
 
 
