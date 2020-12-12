@@ -1,8 +1,8 @@
 # Habiter
 
 Habiter(ハビター)はrailsとvue.jsで作られた習慣管理アプリです。<br>
-**"習慣形成を行って、最高な毎日を"**と言うコンセプトの下、<br>
-「習慣」を意味する英語 "habit",「生きる、住む」を意味するフランス語 "habiter"を<br>
+**習慣形成を行って、最高な毎日を**と言うコンセプトの下、<br>
+「習慣」を意味する英語 "habit",「生きる、住む」を意味するフランス語 "habiter"を
 掛け合わせて命名しました。
 目標があっても行動に移せないと言う問題を解決する為に、小さな一歩からサポートします。
 
@@ -16,12 +16,6 @@ http://18.182.240.20/guest
 
 http://18.182.240.20/
 
-## 開発環境
-・Ruby on Rails
-・Vue.js
-・docker
-・VSCode
-https://20201212-0923_a49551259e099238c992d6421f67b638.png/
 ##  機能一覧
 
 1. user(ユーザー),habit(習慣),habit_user(ユーザーに紐づく習慣)のCRUD
@@ -31,17 +25,17 @@ https://20201212-0923_a49551259e099238c992d6421f67b638.png/
 5. ユーザーフォロー機能
 6. ユーザー検索
 
-###注力ポイント
+### 注力ポイント
 ***
 
 **美しくシンプルなUI**
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/60640236/101981790-b0069a00-3cb2-11eb-9291-17de131bd058.png width=70%>  
+  <img src="https://user-images.githubusercontent.com/60640236/101982004-25269f00-3cb4-11eb-88ec-a587719677d8.png" width=70%>  
 </p>
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/60640236/101981874-5bafea00-3cb3-11eb-95da-18b0a34bd760.png" width=70%>  
+  <img src="https://user-images.githubusercontent.com/60640236/101982072-e7764600-3cb4-11eb-8ac6-7f580d478612.png" width=70%>  
 </p>
 
 <p align="center">
@@ -54,32 +48,32 @@ https://20201212-0923_a49551259e099238c992d6421f67b638.png/
   <img src="https://user-images.githubusercontent.com/60640236/101981743-59995b80-3cb2-11eb-8c85-2ac5877880c1.png" width=70%> 
 </p>
 
-・習慣達成の合計
-・開始日
-・連続達成日数
-・月の達成度
-・カレンダーで達成日表示
+・習慣達成の合計<br>
+・開始日<br>
+・連続達成日数<br>
+・月の達成度<br>
+・カレンダーで達成日表示<br>
 
 
 
 ## 使用技術
-・言語/フレームワーク
-　　■フロントエンド: Vue.js
-　　■サーバーサイド: Ruby on Rails
-
-・Vue.jsライブラリ
-　　■Vuex
-　　■Vue Router
-　　■V-Calender
-　　■vuejs-datapicker
-　　■V-Calender
-　　■Vuetify(icon表示用)
+・言語/フレームワーク<br>
+    ■フロントエンド: Vue.js<br>
+    ■サーバーサイド: Ruby on Rails<br>
+<br>
+・Vue.jsライブラリ<br>
+    ■Vuex<br>
+    ■Vue Router<br>
+    ■V-Calender<br>
+    ■vuejs-datapicker<br>
+    ■V-Calender<br>
+    ■Vuetify(icon表示用)<br>
  
-・開発環境
-　　■Docker
+・開発環境<br>
+    ■Docker<br>
 
-・開発環境
-　　■AWS EC2
+・開発環境<br>
+    ■AWS EC2<br>
 
 
 
