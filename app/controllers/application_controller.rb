@@ -8,5 +8,9 @@ class ApplicationController < ActionController::Base
     #更新するためにはupdate用も
   end
 
+  def after_sign_in_path_for(resource) 
+    root_path
+  end
+
  
 end
