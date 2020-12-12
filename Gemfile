@@ -70,3 +70,6 @@ gem 'active_model_serializers'
 group :production do
   gem 'unicorn', '5.4.1'
 end
+
+gem 'mini_magick'
+gem 'aws-sdk-s3', require: false
