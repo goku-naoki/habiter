@@ -56,7 +56,7 @@ export default{
     checkForm(event){
       event.preventDefault()
       this.setAxiosDefaults();
-        debugger
+       
       return (axios.put("/users", {
         user: {
           nickname:this.nickname,
@@ -84,40 +84,19 @@ export default{
           //  let tmp= this.result
            that.uploadFile=event.target.result
 
-           debugger
+          
           }
         reader.readAsDataURL(file)
 
-         debugger
+        
      },
    
   },
-  computed:{
-    // getCurrentUser(){
-    //   return this.$store.getters.currentUser
-    // },
-  
-  },
-  watch:{
-    // getCurrentUser(val){
-    //   this.currentUser=val
-    //   if(this.user.id>0){  //currentUsetと該当ユーザーの２つを得てから、followをcheck
-    
-    //       this.followedCheck()
-    //   }
-    // },
-    // user(val){
-    //   debugger
-    //   this.nickname=val.nickname
-    //   this.email=val.email
 
-    // },
-   
-  },
   created(){
       this.nickname=this.user.nickname
       this.email=this.user.email
-      debugger
+     
       (this.user.photo!=null) ? this.photo=this.user.photo :{}
   },
 

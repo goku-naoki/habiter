@@ -5,7 +5,14 @@ class SessionsController < Devise::SessionsController
   respond_to :json
 
   def create
-    @user = current_user
+   
+    #自動ログイン
+    if params[:user][:email]=="guest@icloud.com"
+      self.resource = warden.authenticate!(auth_options)
+      set_flash_message!(:notice, :signed_in)
+      sign_in(resource_name, resource)
+      redirect_to root_path and return
+    end
   
     super do
       if request.format.json?
@@ -36,9 +43,15 @@ class SessionsController < Devise::SessionsController
     end
   end
   # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  def new
+    #guestyou！
+
+    respond_to do |format|
+      self.resource = resource_class.new(sign_in_params)
+      clean_up_passwords(resource)
+      format.html { render "home/redirect_form" }
+    end
+  end
 
   # POST /resource/sign_in
   # def create

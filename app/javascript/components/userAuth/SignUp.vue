@@ -9,7 +9,7 @@
         <div class="signup-form-box-form">
           <form >
             <div class="signup-form-box-form-facebook">
-              <a href="#">Facebookでログイン</a>
+              <p>Facebookでログイン</p>
             </div> 
             <div class="signup-form-box-form-another">
               <div></div>
@@ -90,7 +90,7 @@ export default{
         }
       })
       .then(response => {
-         debugger
+    
          if(!response.data.errors){
           this.updateCsrfToken(response.data.csrf_token);
           this.logIn(event)
@@ -162,7 +162,7 @@ input{
       &-facebook{
         display:flex;
         justify-content: center;
-        a{
+        p{
           color: #385185;
           font-size:1.4rem;
           font-weight: bold;

@@ -33,7 +33,7 @@ export default{
     userUpdated(val){
      
       this.user=val
-      debugger
+
     }
   },
   watch:{

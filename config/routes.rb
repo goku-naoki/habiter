@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}
-  
+
+  #自動ログイン用path
+  devise_scope :user do
+    get 'guest', to: 'devise/sessions#new'
+  end
   root to: 'home#index'
 
   namespace :api, {format: 'json'} do
@@ -21,7 +25,7 @@ Rails.application.routes.draw do
       resources :follows, :only
     end
   end
-  
+
 
   #activestorageがhome#indexにredirectする事を防ぐ
   get '/rails/active_storage/blobs/:signed_id/*filename' => 'active_storage/blobs#show'

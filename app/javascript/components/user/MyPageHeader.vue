@@ -112,6 +112,7 @@ export default{
       this.toggleForm()
     }
   },
+  
   computed:{
     getCurrentUser(){
       return this.$store.getters.currentUser
@@ -138,7 +139,7 @@ export default{
    
   },
   created(){
-      debugger
+  
     if(this.getCurrentUser!=null){
       this.currentUser= this.getCurrentUser
     }
