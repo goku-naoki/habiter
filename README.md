@@ -6,7 +6,9 @@ Habiter(ハビター)はrailsとvue.jsで作られた習慣管理アプリです
 掛け合わせて命名しました。
 目標があっても行動に移せないと言う問題を解決する為に、小さな一歩からサポートします。
 
-<img src="assets/habiter-detail.png" >
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/60640236/101981743-59995b80-3cb2-11eb-8c85-2ac5877880c1.png" width=70%> 
+</p>
 
 ## アプリURL
 
@@ -35,22 +37,22 @@ https://20201212-0923_a49551259e099238c992d6421f67b638.png/
 **美しくシンプルなUI**
 
 <p align="center">
-  <img src="/assets/sign-in.png" width=70%>  
-</p>　
+  <img src="https://user-images.githubusercontent.com/60640236/101981790-b0069a00-3cb2-11eb-9291-17de131bd058.png width=70%>  
+</p>
 
 <p align="center">
-  <img src="/assets/habti-list.png" width=70%>  
-</p>　
+  <img src="https://user-images.githubusercontent.com/60640236/101981783-a2e9ab00-3cb2-11eb-9dab-9b922c085aac.png" width=70%>  
+</p>
 
 <p align="center">
-  <img src="/assets/my-page.png" width=70%>  
-</p>　
+  <img src="https://user-images.githubusercontent.com/60640236/101981771-8fd6db00-3cb2-11eb-9f24-4a96657889ff.png" width=70%>  
+</p>
 
 **習慣詳細部分**
 
 <p align="center">
-  <img src="/assets/habiter-detail.png" width=70%>  
-</p>　
+  <img src="https://user-images.githubusercontent.com/60640236/101981743-59995b80-3cb2-11eb-8c85-2ac5877880c1.png" width=70%> 
+</p>
 
 ・習慣達成の合計
 ・開始日
@@ -78,6 +80,7 @@ https://20201212-0923_a49551259e099238c992d6421f67b638.png/
 
 ・開発環境
 　　■AWS EC2
+
 
 
 
