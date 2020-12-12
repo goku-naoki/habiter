@@ -25,7 +25,7 @@ http://18.182.240.20/
 1. user(ユーザー),habit(習慣),habit_user(ユーザーに紐づく習慣)のCRUD
 2. ログイン、ログアウト、ゲスト用自動ログイン
 3. 習慣達成チェック機能
-4. 画像アップロード機能
+4. 画像アップロード機能(S3)
 5. ユーザーフォロー機能
 6. ユーザー検索
 
@@ -73,7 +73,7 @@ http://18.182.240.20/
 &emsp; &emsp;■Vuex<br>
 &emsp; &emsp;■Vue Router<br>
 &emsp; &emsp;■V-Calender<br>
-&emsp; &emsp;■vuejs-datapicker<br>
+&emsp; &emsp;■vuejs-datepicker<br>
 &emsp; &emsp;■V-Calender<br>
 &emsp; &emsp;■Vuetify(icon表示用)<br>
  
