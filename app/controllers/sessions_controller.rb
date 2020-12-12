@@ -8,7 +8,10 @@ class SessionsController < Devise::SessionsController
    
     #自動ログイン
     if params[:user][:email]=="guest@icloud.com" && request.format.symbol==:html
+     
       self.resource = warden.authenticate!(auth_options)
+   
+
       set_flash_message!(:notice, :signed_in)
       sign_in(resource_name, resource)
       yield resource if block_given?
@@ -50,7 +53,8 @@ class SessionsController < Devise::SessionsController
     respond_to do |format|
       self.resource = resource_class.new(sign_in_params)
       clean_up_passwords(resource)
-      format.html { render "home/redirect_form" }
+      yield resource if block_given?
+      format.html{respond_with(resource, serialize_options(resource))} 
     end
   end
 
