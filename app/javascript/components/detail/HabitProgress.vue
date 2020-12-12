@@ -19,6 +19,7 @@
     </ul>
   </div> 
 </template>
+
 <script>
 import axios from 'axios';
 import moment from 'moment';
@@ -147,7 +148,7 @@ export default{
           &-left{
             margin-right:10px;
             i{
-              position: static;
+              // position: static;
               z-index: 0;
               color: #34acbc;
               font-size:3rem;

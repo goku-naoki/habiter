@@ -9,7 +9,7 @@ class Api::V1::UsersController < ApiController
   def show
     
     @user=User.find(params[:id])
-    render json: @user,include: { user_habits: [:habit] },serializer: UserSerializer
+    render json: @user,include: { user_habits: [:habit],following:[:avatar] },serializer: UserSerializer
   end
 
   def check_auth

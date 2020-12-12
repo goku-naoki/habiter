@@ -1,6 +1,6 @@
 <template>
   <div class="mypage">
-    <MyPageHeader :user="user"/>
+    <MyPageHeader :user="user" @userUpdated="userUpdated"/>
     <MyHabits :user="user"/>
     <Footer></Footer>
   </div>
@@ -23,22 +23,27 @@ export default{
     id:Number
   },
   methods:{
-    getUser(id){
+    fetchUser(){
       axios
-      .get(`/api/v1/users/${id}`)
+      .get(`/api/v1/users/${this.id}`)
       .then(response => {
         this.user=response.data
       })
+    },
+    userUpdated(val){
+     
+      this.user=val
+
     }
   },
   watch:{
     id(val){
-      this.getUser(val)
+      this.fetchUser(val)
     }
   },
   
   created(){
-    this.getUser(this.id)
+    this.fetchUser()
   
   },
   components:{

@@ -1,0 +1,19 @@
+
+<div class="login-form">
+  <div class="login-form-box">
+    <h2 class="login-form-box-title">Habiter</h2>
+    <div class="login-form-box-form">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>  
+        <div class="login-form-box-form-email">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email",value:"guest@icloud.com" %>
+        </div>
+        <div class="login-form-box-form-password">
+          <%= f.password_field :password, autocomplete: "current-password", value:"guest1234"%>
+        </div>
+        <div class="login-form-box-form-submit">
+          <button >ログイン</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

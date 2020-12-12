@@ -2,7 +2,10 @@
   <li class="followed-user">
     <router-link :to="{ name: 'MyPage', params: { id: followed.id } } ">
       <div class="followed-user__icon">
-        <v-icon >mdi-account</v-icon>
+        <v-icon v-if="followed.id!=null && followed.photo==null">mdi-account</v-icon>
+        <div v-else-if="followed.photo" class="followed-user__photo">
+          <img  :src="followed.photo">
+        </div>
       </div>
       <div class="followed-user__name">
         {{followed.nickname}}
@@ -33,7 +36,7 @@ export default{
     position: relative;
     text-align: center;
     border-radius:50%;
-    background: #34acbd;
+    background: rgba(0,0,0,0.1);
     cursor:pointer !important;
     &:not(:nth-child(4n)){
       margin-right:calc(20% / 3);
@@ -56,7 +59,18 @@ export default{
       right: 0;
       
       .followed-user__icon{
+        display: flex;
+        justify-content: center;
         margin-bottom:10px;
+        .followed-user__photo{
+          width:40px;
+          height:40px;
+          img{
+            height:100%;
+            width: 100%;
+            border-radius:50%;
+          }
+        }
         i{
         font-size:4rem;
         color:white;

@@ -2,13 +2,26 @@
   <div class="mypage-header">
     <div class="mypage-header__inner">
       <div class="mypage-header__inner__left">
-        <v-icon >mdi-account-circle</v-icon>
+        <v-icon v-if="user.id!=null && user.photo==null">mdi-account-circle</v-icon>
+        <div v-else-if="user.photo"  class="my-page-header__image">
+          <img :src="user.photo">
+        </div>   
         <p class="mypage-header__inner__left-name">{{user.nickname}}</p>
       </div>
+
+      <template v-if="isUserForm">
+        <UserEdit :user="user" @userUpdated="userUpdated" @cancel="cancel"/>
+        <ModalWrapper @clickModal="toggleForm"/>
+        <!-- <div @click="toggleForm"  class="modal-wrapper"></div> -->
+      </template>
+      
       <div class="mypage-header__inner__right">
         
         <template v-if="currentUser.id==user.id">
-           <v-icon  @click="logout">mdi-home-export-outline</v-icon>
+          <div class="mypage-header__inner-current">
+            <v-icon  @click="toggleForm"> mdi-account-edit</v-icon>
+            <v-icon  @click="logout">mdi-home-export-outline</v-icon>
+          </div>
         </template>
 
         <template v-else>
@@ -24,12 +37,16 @@
 <script>
 import axios from 'axios';
 import Csrf from '../..//mixins/csrf'
+import UserEdit from './UserEdit'
+import ModalWrapper from '../global/ModalWrapper'
 
 export default{
   data(){
+  
     return{
       currentUser:{},
       isFollow:false,
+      isUserForm:false
     }
   },
   props:{
@@ -83,8 +100,19 @@ export default{
       }else{
         this.isFollow=false
       }
+    },
+    toggleForm(){
+      (!this.isUserForm) ? this.isUserForm=true: this.isUserForm=false
+    },
+    userUpdated(val){
+      this.$emit("userUpdated",val)
+      this.toggleForm()
+    },
+    cancel(){
+      this.toggleForm()
     }
   },
+  
   computed:{
     getCurrentUser(){
       return this.$store.getters.currentUser
@@ -100,6 +128,7 @@ export default{
       }
     },
     user(val){
+    
       this.isCurrentAndSelectedUser=false
       this.user=val
       if(this.currentUser.id>0){
@@ -110,6 +139,7 @@ export default{
    
   },
   created(){
+  
     if(this.getCurrentUser!=null){
       this.currentUser= this.getCurrentUser
     }
@@ -117,6 +147,12 @@ export default{
 
   mixins:[
     Csrf],
+  components:{
+    UserEdit,
+    ModalWrapper
+  }
+
+  
 
 
 
@@ -131,7 +167,7 @@ export default{
     width:100%;
     height:60px;
     z-index: 0;
-    position: fixed;
+    // position: fixed;
     top:0;   //下ボックスの重なり解除
     box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
     &__inner{
@@ -144,6 +180,17 @@ export default{
       &__left{
         display:flex;
         align-items: center;
+        .my-page-header__image{
+          width:40px;
+          height:40px;
+          margin-right: 10px;
+          img{
+            width:100%;
+            height:100%;
+            border-radius:50%;
+
+          }
+        }
         i{
           position:relative;
           top:2px;
@@ -158,11 +205,18 @@ export default{
       &__right{
         display: flex;
         align-items: center;
-        i{
+        .mypage-header__inner-current{
+          display:block;
+          button{
           font-size:30px;
-        }
+          &:first-child{
+            margin-right:10px;
+            }
+          }
+        }     
       }
     }
   }
+
 
 </style>

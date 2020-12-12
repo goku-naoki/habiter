@@ -79,9 +79,9 @@ components:{
 <style scoped lang="scss">
   .my-habits{
     width:100%;
-    height:100vh;
-    padding-top:60px;
-    margin-bottom: 50px;
+    height:calc(100vh - 50px - 60px);
+    // padding-top:60px;
+    // margin-bottom: 50px;
     overflow: scroll;
     &__inner{
       width:95%;

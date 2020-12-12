@@ -27,6 +27,31 @@ class RegistrationsController < Devise::RegistrationsController
       end
     end
   end
+
+
+  def update
+ 
+    super do
+    
+      unless  params[:user][:image]==nil || params[:user][:image].include?("active_storage") 
+        @user.parse_base64(params[:user][:image])
+      end
+
+      if request.format.json?
+        unless !@user.errors.messages.empty?
+          render json: @user,include: { user_habits: [:habit] },serializer: UserSerializer and return
+        end
+      end
+    end
+    #userモデルでupdateをオーバーライド
+   
+  end
+
+
+
+
+
+  
   # GET /resource/sign_up
   # def new
   #   super
