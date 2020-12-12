@@ -41,7 +41,7 @@ https://20201212-0923_a49551259e099238c992d6421f67b638.png/
 </p>
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/60640236/101981783-a2e9ab00-3cb2-11eb-9dab-9b922c085aac.png" width=70%>  
+  <img src="https://user-images.githubusercontent.com/60640236/101981874-5bafea00-3cb3-11eb-95da-18b0a34bd760.png" width=70%>  
 </p>
 
 <p align="center">
