@@ -7,11 +7,12 @@ class SessionsController < Devise::SessionsController
   def create
    
     #自動ログイン
-    if params[:user][:email]=="guest@icloud.com"
+    if params[:user][:email]=="guest@icloud.com" && request.format.symbol==:html
       self.resource = warden.authenticate!(auth_options)
       set_flash_message!(:notice, :signed_in)
       sign_in(resource_name, resource)
-      redirect_to root_path and return
+      yield resource if block_given?
+      respond_with resource, location: after_sign_in_path_for(resource) and return
     end
   
     super do
