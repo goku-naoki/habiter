@@ -23,9 +23,10 @@
         <div class="user-edit__input">
           <input v-if="nickname!=null" v-model="nickname" type="text" placeholder="nickname" >
         </div>
-        <div class="user-edit__input">
+        <!-- guest名が変更されるとログイン出来ないので一時的にコメントアウト -->
+        <!-- <div class="user-edit__input">
           <input v-if="email!=null" v-model="email" type="text"   placeholder="email" >
-        </div>
+        </div> -->
       </div>
     </div>
   </form>
@@ -53,10 +54,9 @@ export default{
     cancel(){
       this.$emit('cancel')
     },
-    checkForm(event){
+    userUpdate(event){
       event.preventDefault()
       this.setAxiosDefaults();
-       
       return (axios.put("/users", {
         user: {
           nickname:this.nickname,
@@ -70,6 +70,19 @@ export default{
       )
 
     },
+    checkForm(event){  
+      event.preventDefault();
+      this.errors=[]
+      if (this.nickname) {
+       this.userUpdate(event)
+      }else{
+        this.errors.push('nicknameを入力して下さい');
+      }
+  
+      
+
+    },
+
     editImage(){
 
     },
@@ -94,9 +107,10 @@ export default{
   },
 
   created(){
-      this.nickname=this.user.nickname
-      this.email=this.user.email
-     
+    debugger
+      this.nickname=this.user.nickname;
+      this.email=this.user.email;
+  
       (this.user.photo!=null) ? this.photo=this.user.photo :{}
   },
 
@@ -108,13 +122,21 @@ export default{
 </script>
 
 <style scoped lang="scss">
+
+  .errors{
+    padding-top: 30px;
+    text-align: center;
+    color: red;
+    font-size: 1.4rem;
+  }
+  
   .user-edit{
     width:50vw;
-    height:calc(100vh - 50px - 60px);
+    height:50vh;
     position:fixed;
-    top: 60px;
+    top: 40%;
     left: 50%;
-    transform:translateX(-50%);
+    transform:translateY(-50%) translateX(-50%);
     z-index:100;
     background:#fafafa;
     border-radius: 5px; //なぜか上だけ効かないのでheaderの上に
