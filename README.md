@@ -2,13 +2,13 @@
 
 Habiter(ハビター)は習慣管理アプリです。<br>
 **習慣形成を行って、最高な毎日を**と言うコンセプトの下、
-目標があっても行動に移せないと言う問題を解決する為に、小さな一歩からサポートします。
+目標があっても行動に移せないと言う問題を解決する為に、小さな一歩からサポートします。<br>
 SPAで使い易く美しい点と、習慣達成を楽しくする詳細画面が見所です。
 <br>
 <br>
 
 <p align="center">
-  <img  src="https://user-images.githubusercontent.com/60640236/102013074-1a8e0780-3d91-11eb-87ad-941347f21825.png" width=80%> 
+  <img  src="https://user-images.githubusercontent.com/60640236/102013074-1a8e0780-3d91-11eb-87ad-941347f21825.png" width=100%> 
 </p>
 <br>
 <br>
@@ -64,12 +64,12 @@ http://18.182.240.20/
 **美しくシンプルなUI**
 <br>
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/60640236/101982004-25269f00-3cb4-11eb-88ec-a587719677d8.png" width=70%>  
+  <img src="https://user-images.githubusercontent.com/60640236/101982072-e7764600-3cb4-11eb-8ac6-7f580d478612.png" width=70%>  
 </p>
 <br>
 <br>
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/60640236/101982072-e7764600-3cb4-11eb-8ac6-7f580d478612.png" width=70%>  
+  <img src="https://user-images.githubusercontent.com/60640236/101982004-25269f00-3cb4-11eb-88ec-a587719677d8.png" width=70%>  
 </p>
 <br>
 <br>
@@ -87,7 +87,7 @@ http://18.182.240.20/
 <br>
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/60640236/101981743-59995b80-3cb2-11eb-8c85-2ac5877880c1.png" width=70%> 
+  <img src="https://user-images.githubusercontent.com/60640236/102013074-1a8e0780-3d91-11eb-87ad-941347f21825.png" width=70%> 
 </p>
 
 

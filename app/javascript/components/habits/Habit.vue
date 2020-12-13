@@ -67,8 +67,10 @@ export default{
         this.isDone=false
 
         that.userHabit.done_habits=that.userHabit.done_habits.filter((cur)=>{
-          cur.done_date!=response.data.done_date
+          return cur.done_date!=response.data.done_date
         })
+
+        debugger
         })
       )
     },
@@ -94,10 +96,6 @@ export default{
     current_user(){
       return this.$store.state.currentUser
     },
-    // get_habit_user(){
-    //     const habitUser=this.habit.habit_users.find(cur=>cur.user_id==this.current_user.id)
-    //     this.habitUser=habitUser
-    // }
   },
   watch: {
     selected_date(date) {
