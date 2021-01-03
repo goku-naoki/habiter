@@ -35,13 +35,14 @@ import ModalWrapper from '../global/ModalWrapper'
 export default{
   data(){
     return{
-      date:0,
-      isToday:false,
-      isFormTouched:false
+      date:0,          //computedのvuexのstateが入る
+      isToday:false,   //選択日と本日の日付が一致しているか
+      isFormTouched:false  //習慣追加のフォーム開いているか
     }
   },
   methods:{
 
+    //選択日と本日が一致しているか確認
     checkToday(){
       const today=this.moment(new Date)
       const date=this.moment(this.date)
@@ -52,9 +53,13 @@ export default{
           this.isToday=false
         }
     },
+
+    //日付の整形
     moment: function (date) {
       return moment(date).format('YYYY-MM-DD');
     },
+
+    //習慣追加のボタン押した際の処理
     toggleForm(){
       if(!this.isFormTouched){
         this.isFormTouched=true
@@ -62,23 +67,27 @@ export default{
         this.isFormTouched=false
       }
     },
+
+    //新たな習慣追加のemit
     added(response){
       this.toggleForm()
-      this.$emit('added',response)
+      this.$emit('added',response)  //indexにemitで上げる
     }
   },
   computed:{
-
     selected_date(){
       return this.$store.state.selectedDate
     }
   },
   watch: {
 
+    //computedで取得出来次第、dateに代入。
     selected_date:function(date){
       this.date=date
       this.checkToday()
     },
+
+    //選択日が変更された際に、state変更
     date(val){
       this.$store.commit("setDate",val)
       this.checkToday()
@@ -86,11 +95,13 @@ export default{
   },
   filters:{
 
+     //日付の整形
     beautyDate: function (date) {
       return moment(date).format('M月D日');
     }
   },
   created(){
+
     this.date=this.selected_date
     this.checkToday()
   },
