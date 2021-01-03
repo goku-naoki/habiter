@@ -55,7 +55,12 @@ export default{
     }
   },
   methods:{
+
+    //バリデーション
     checkForm(event){  
+      
+      event.preventDefault();
+
       if (this.name && this.date) {
        this.submit(event)
       }
@@ -67,19 +72,21 @@ export default{
       if (!this.date) {
         this.errors.push('開始日を選択して下さい');
       }
-      event.preventDefault();
+     
 
     },
     submit:function(event){
-      event.preventDefault()
       const habit={name:this.name,date:this.date}
       this.$emit('submit',habit)
     },
+
+    //キャンセル押したらemitでisformtoucedを操作
     cancel(){
       this.$emit('cancel')
     }
   },
   watch:{
+    //編集の際に、表示させる為
     userHabit(){
      this.name=this.userHabit.habit.name
      this.date=this.userHabit.start_date
