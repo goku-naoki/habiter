@@ -35,7 +35,6 @@ import ModalWrapper from '../global/ModalWrapper'
 export default{
   data(){
     return{
-      // date:this.selected_date,
       date:0,
       isToday:false,
       isFormTouched:false
