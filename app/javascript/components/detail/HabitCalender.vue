@@ -25,7 +25,7 @@ export default {
         dates: new Date(),
       },
       // {
-      //   dot: 'red',
+      //   dot: 'teal',
       //   dates: []
       //   }
       ],
@@ -37,11 +37,12 @@ export default {
     userHabit:Object
   },
   methods: {
+
+    //check済みの日付を取得
     getDates(arr){
-    //  let hash={dot:"teal",dates:[],}
        const dotDate=arr.map((cur)=>{
          const dateArr=cur.done_date.split('-')
-         return  new Date(Number(dateArr[0]),Number(dateArr[1])-1,Number(dateArr[2]))
+         return  new Date(Number(dateArr[0]),Number(dateArr[1])-1,Number(dateArr[2]))  //dataArr[1]に該当する月は0スタートの為,-1
        })
        return dotDate
     }
@@ -68,7 +69,7 @@ export default {
   },
   watch:{
     userHabit(val){   
-      if(this.attributes.length==1){  //分岐させないと、habitUser更新されてた際にドットが重複
+      if(this.attributes.length==1){  //習慣が更新された際に、pushしてdotが重複するのを防ぐ。 一覧か選択された時のみ。
         const dates=this.getDates(val.done_habits)
         this.attributes.push({dot:"teal",dates:dates})
       }

@@ -59,6 +59,7 @@ export default{
       userHabit:Object
     },
   methods:{
+    //icon押下時の処理
     toggleModal(){
       if(!this.isModalTouched){
         this.isModalTouched=true
@@ -66,6 +67,7 @@ export default{
         this.isModalTouched=false
       }
     },
+    //編集ボタン押下時の処理
     toggleForm(){
       if(!this.isFormTouched){
         this. toggleModal()
@@ -82,19 +84,16 @@ export default{
     }
   },
   computed:{
-    habitName(){
-      return this.habit.name
-    },
     getCurrentUser(){
       return this.$store.getters.currentUser
     }
   },
   watch:{
+    //userHabit取得できたらstateのnameを更新
    userHabit(val){
-      this.name=val.habit.name  //propsの取得に時間がかかる？？？？
+      this.name=val.habit.name  
     },
     getCurrentUser(val){
-      
       this.currentUser=val
     }
   },
@@ -107,8 +106,6 @@ export default{
     HabitEdit,
     ModalWrapper,
     ModalWhiteWrapper
-   
-    
   }
   
 }
