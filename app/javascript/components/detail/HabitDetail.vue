@@ -35,6 +35,7 @@ export default{
   
     }
   },
+ 
   created(){
     axios
       .get(`/api/v1/habits/${this.id}`)
@@ -54,9 +55,7 @@ export default{
 
 <style scoped lang="scss">
   .habit-detail__main{
-    height:calc(100vh - 60px - 50px); //footerとheaderがfixedだから
+    height:calc(100vh - 60px - 50px); 
     overflow: scroll;
-  //   padding-top:60px;
-  //  margin-bottom: 50px;
   }
 </style>

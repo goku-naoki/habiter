@@ -2,7 +2,6 @@
   <div id="app">
 
     <router-view></router-view>
-   
 
   </div>
 </template>
@@ -23,17 +22,20 @@ export default{
   beforeCreate(){
     
   },
+
+   watch: {
+     //前回のpathをstoreに
+    '$route'(to, from) {
+      this.$store.commit("setFromPath", from.path)
+    }
+},
   created(){
    
    const that=this
     axios
     .get("/api/v1/users/get_user")
-    .then(response => {
-      
+    .then(response => { 
        that.$store.commit("setCurrentUser", response.data)
-       console.log(that.$store.state.currentUser)
-     
-     
     })
   },
   components:{

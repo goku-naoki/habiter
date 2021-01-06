@@ -47,18 +47,20 @@ export default{
     }
   },
   methods:{
+
+    //習慣一覧とフォロー一覧の切り替え
     touchHabit(){
-     this.isHabitActive==false ? this.isHabitActive=true  :{}
+     this.isHabitActive==false ? this.isHabitActive=true  :{};
     },
     touchFollow(){
-     this.isHabitActive==true ? this.isHabitActive=false  :{}
+     this.isHabitActive==true ? this.isHabitActive=false  :{};
     }
   },
   
   watch:{
     user(val){
       this.user=val;
-      this.isHabitActive==false? this.isHabitActive=true :{}  //他ページに移る際にreset
+      this.isHabitActive==false? this.isHabitActive=true :{}; //他ページに移る際にreset
     }
   },
   created(){

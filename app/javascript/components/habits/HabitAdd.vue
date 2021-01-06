@@ -16,7 +16,7 @@ export default{
     }
   },
   methods:{
-    addHabit:function(val){
+    addHabit(val){
     
       this.setAxiosDefaults();
       return (axios.post('/api/v1/habits', {

@@ -41,6 +41,7 @@ export default{
     userHabit:{}
   },
   methods:{
+    //連続達成をcheck
     checkCont(arr){
       let result=[]
       this.sortDone(arr)
@@ -50,37 +51,42 @@ export default{
     
         //まず、本日以降のdoneは除外
         result=arr.filter((cur,index)=>{
-            return this.today>=new Date(cur.done_date)
+            return this.today>=new Date(cur.done_date)   //todayもしくは、以前の日付のみにフィルター
         })
         .filter((cur,index)=>{
-          return Math.floor((this.today - new Date(cur.done_date))/86400000)==index
+          return Math.floor((this.today - new Date(cur.done_date))/86400000)==index  //1日は86400000ミリ秒 (date2 - date1) / 8640000で差分確認
         })
       }
      return `${result.length}日`
     },
+
+    //今月の達成割合
     getRate:function(arr){
        let resultAr=[]
        this.sortDone(arr)
+
+       //今月checkした物のみ抽出
        resultAr=arr.filter((cur)=>{
-        //  if(this.momentMonth(new Date(cur.done_date))!=this.momentMonth(this.today)){
-           
-        //  }
          return this.momentMonth(new Date(cur.done_date))==this.momentMonth(this.today)
        })
       
        const lastDate=this.getLastDate(this.today)
     
-       return `${Math.round((resultAr.length/lastDate*100) * 10) / 10}%`
+       return `${Math.round((resultAr.length/lastDate*100) * 10) / 10}%`  //少数第一まで出すために、aroundで*10して/10
     },
+
+    //当月の日数を取得,最終日==日数
     getLastDate:function(date){
         
-      const lastDate=new Date(date.getFullYear(),date.getMonth()+1,0).getDate()
+      const lastDate=new Date(date.getFullYear(),date.getMonth()+1,0).getDate()  //当月+1で0指定することで、当月の最終日
       return lastDate
     },
+
+    //日付が新しい順にソートする
     sortDone:function(arr){
       arr.sort((a,b)=>{
         if(a.done_date>b.done_date){
-          return -1
+          return -1   //返り値が負の際に、左に動く
         }else{
           1
         }
@@ -100,7 +106,6 @@ export default{
   watch:{
     userHabit(val){
   
-      
       this.details[1].value=this.beauty(val.start_date)
 
       if(val.done_habits.length!=0){

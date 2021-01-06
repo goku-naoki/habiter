@@ -2,7 +2,7 @@
   <div class="detail-header">
     <div class="detail-header__inner">
       <div class="detail-header__inner-left">
-        <router-link to="/">
+        <router-link :to="`${fromPath}`" v-if="fromPath!=null">
           <v-icon>mdi-arrow-left-bold</v-icon>
         </router-link>
         <p class="detail-header__inner-left__name">
@@ -51,14 +51,15 @@ export default{
       name:"",
       isModalTouched:false,
       isFormTouched:false,
-      currentUser:{}
-      
+      currentUser:{},
+      fromPath:null  //戻るボタンを押した際に適切な場所へ
     }
   },
   props:{
       userHabit:Object
     },
   methods:{
+    //icon押下時の処理
     toggleModal(){
       if(!this.isModalTouched){
         this.isModalTouched=true
@@ -66,6 +67,7 @@ export default{
         this.isModalTouched=false
       }
     },
+    //編集ボタン押下時の処理
     toggleForm(){
       if(!this.isFormTouched){
         this. toggleModal()
@@ -82,33 +84,39 @@ export default{
     }
   },
   computed:{
-    habitName(){
-      return this.habit.name
-    },
     getCurrentUser(){
       return this.$store.getters.currentUser
+    },
+    getFromPath(){  
+      return this.$store.getters.fromPath
     }
   },
   watch:{
+    //userHabit取得できたらstateのnameを更新
    userHabit(val){
-      this.name=val.habit.name  //propsの取得に時間がかかる？？？？
+      this.name=val.habit.name  
     },
     getCurrentUser(val){
-      
       this.currentUser=val
-    }
+    },
+    getFromPath(val){
+      this.fromPath=val
+    },
+    
   },
   created(){
+ 
     if(this.getCurrentUser!=null){
       this.currentUser= this.getCurrentUser
+    }
+    if(this.getFromPath!=null){
+      this.fromPath= this.getFromPath
     }
   },
   components : {
     HabitEdit,
     ModalWrapper,
     ModalWhiteWrapper
-   
-    
   }
   
 }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 export default {
   methods:{
-    getCsrfToken: function(){
+    getCsrfToken(){
      if (!(axios.defaults.headers.common['X-CSRF-Token'])) {
        return (
          document.getElementsByName('csrf-token')[0].getAttribute('content')
@@ -13,12 +13,12 @@ export default {
        )
      }
    },
-   setAxiosDefaults: function(){
+   setAxiosDefaults(){
      axios.defaults.headers.common['X-CSRF-Token'] = this.getCsrfToken();
      axios.defaults.headers.common['Accept'] = 'application/json';
      console.log(axios.defaults.headers.common['X-CSRF-Token']);
    },
-   updateCsrfToken: function(csrf_token){
+   updateCsrfToken(csrf_token){
     axios.defaults.headers.common['X-CSRF-Token'] = csrf_token;
   },
   }

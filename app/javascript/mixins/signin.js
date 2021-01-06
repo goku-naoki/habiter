@@ -6,7 +6,7 @@ export default {
     }
   },
   methods:{
-    logIn:function(event){
+    logIn(event){
       event.preventDefault()
       this.setAxiosDefaults();
       return (axios.post('/users/sign_in', {
