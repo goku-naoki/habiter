@@ -55,7 +55,7 @@ export default{
     },
 
     //日付の整形
-    moment: function (date) {
+    moment(date) {
       return moment(date).format('YYYY-MM-DD');
     },
 
@@ -82,7 +82,7 @@ export default{
   watch: {
 
     //computedで取得出来次第、dateに代入。
-    selected_date:function(date){
+    selected_date(date){
       this.date=date
       this.checkToday()
     },
@@ -96,7 +96,7 @@ export default{
   filters:{
 
      //日付の整形
-    beautyDate: function (date) {
+    beautyDate(date) {
       return moment(date).format('M月D日');
     }
   },

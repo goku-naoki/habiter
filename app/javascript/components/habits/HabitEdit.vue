@@ -20,7 +20,7 @@ export default{
       id:Number
     },
   methods:{
-    editHabit:function(val){
+    editHabit(val){
      
       this.setAxiosDefaults();
       return (axios.patch(`/api/v1/habits/${this.id}`, {

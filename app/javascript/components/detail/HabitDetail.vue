@@ -35,6 +35,7 @@ export default{
   
     }
   },
+ 
   created(){
     axios
       .get(`/api/v1/habits/${this.id}`)

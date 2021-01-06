@@ -58,7 +58,7 @@ export default{
 
     //バリデーション
     checkForm(event){  
-      
+
       event.preventDefault();
 
       if (this.name && this.date) {
@@ -75,7 +75,7 @@ export default{
      
 
     },
-    submit:function(event){
+    submit(event){
       const habit={name:this.name,date:this.date}
       this.$emit('submit',habit)
     },

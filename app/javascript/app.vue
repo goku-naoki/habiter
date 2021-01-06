@@ -22,6 +22,13 @@ export default{
   beforeCreate(){
     
   },
+
+   watch: {
+     //前回のpathをstoreに
+    '$route'(to, from) {
+      this.$store.commit("setFromPath", from.path)
+    }
+},
   created(){
    
    const that=this

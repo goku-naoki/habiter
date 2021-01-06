@@ -31,7 +31,7 @@ export default{
   methods:{
 
     //習慣にcheckをつける
-    doneHabit:function(habit){
+    doneHabit(habit){
     
       this.setAxiosDefaults();
      
