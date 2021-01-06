@@ -55,7 +55,6 @@ export default{
       this.$emit('cancel')
     },
     userUpdate(event){
-      event.preventDefault()
       this.setAxiosDefaults();
       return (axios.put("/users", {
         user: {
@@ -80,12 +79,13 @@ export default{
       }
   
       
-
     },
 
     editImage(){
 
     },
+
+    //画像選択時のプレビューと画像データを取得
     onFileChange() {
       //この引数にevent入れるとonloadで使えない。。すごい謎
       let that=this
@@ -96,22 +96,16 @@ export default{
          
           //  let tmp= this.result
            that.uploadFile=event.target.result
-
-          
           }
         reader.readAsDataURL(file)
-
-        
      },
    
   },
 
   created(){
-    debugger
-      this.nickname=this.user.nickname;
-      this.email=this.user.email;
-  
-      (this.user.photo!=null) ? this.photo=this.user.photo :{}
+    this.nickname=this.user.nickname;
+    this.email=this.user.email;
+    (this.user.photo!=null) ? this.photo=this.user.photo :{}  //画像アップしていれば
   },
 
   mixins:[

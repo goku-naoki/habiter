@@ -12,7 +12,6 @@
       <template v-if="isUserForm">
         <UserEdit :user="user" @userUpdated="userUpdated" @cancel="cancel"/>
         <ModalWrapper @clickModal="toggleForm"/>
-        <!-- <div @click="toggleForm"  class="modal-wrapper"></div> -->
       </template>
       
       <div class="mypage-header__inner__right">
@@ -70,7 +69,7 @@ export default{
         '/api/v1/follows',{user_id:this.user.id}
       )
       .then(response => {
-        this.isFollow=true; //ここで条件変えても見た目変わらない？
+        this.isFollow=true; 
         this.user.followers=response.data  //userのfollowerを最新に
         this.followedCheck()
         //userの配列にぶち込む
@@ -85,29 +84,34 @@ export default{
         `/api/v1/follows/${this.user.id}`,{data:{user_id:this.user.id}}
       )
       .then(response => {
-        this.isFollow=false; //ここで条件変えても見た目変わらない？
+        this.isFollow=false; 
         this.user.followers=response.data  //userのfollowerを最新に
         this.followedCheck()
-        //userの配列にぶち込む
+       
       })
 
      
     },
 
+    //ログインユーザーが該当ユーザーをfollowしているか
     followedCheck(){
-      if(this.user.followers.some((cur)=>cur.id==this.currentUser.id)){
+      if(this.user.followers.some((cur)=>cur.id==this.currentUser.id)){  //該当ユーザーのフォワーにログインユーザーのidがあるか確認
         this.isFollow=true
       }else{
         this.isFollow=false
       }
     },
+
+    //user編集のicon触った時
     toggleForm(){
       (!this.isUserForm) ? this.isUserForm=true: this.isUserForm=false
     },
+    //userが更新された際のemit
     userUpdated(val){
       this.$emit("userUpdated",val)
       this.toggleForm()
     },
+
     cancel(){
       this.toggleForm()
     }
@@ -122,14 +126,12 @@ export default{
   watch:{
     getCurrentUser(val){
       this.currentUser=val
-      if(this.user.id>0){  //currentUsetと該当ユーザーの２つを得てから、followをcheck
-    
-          this.followedCheck()
+      if(this.user.id>0){  //propsでユーザーが渡ってきた事を確認してから
+        this.followedCheck()
       }
     },
     user(val){
-    
-      this.isCurrentAndSelectedUser=false
+      // this.isCurrentAndSelectedUser=false
       this.user=val
       if(this.currentUser.id>0){
           this.followedCheck()
